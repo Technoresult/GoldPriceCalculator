@@ -1,0 +1,8 @@
+/* Add any custom styles here */
+.price-card {
+    transition: transform 0.3s ease-in-out;
+}
+
+.price-card:hover {
+    transform: translateY(-5px);
+}
