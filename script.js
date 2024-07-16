@@ -8,11 +8,11 @@ async function fetchPrices() {
         const data = await response.json();
         console.log('Fetched data:', data);
         
-        goldPrices = data.gold_prices;
+        goldPrices = data.gold_prices; // Ensure correct property access
         console.log('Processed gold prices:', goldPrices);
         
-        populateCityDropdown();
-        calculateAveragePrice();
+        populateCityDropdown(); // Populate the dropdown after fetching data
+        calculateAveragePrice(); // Calculate averages after fetching data
         hideLoadingSpinner();
     } catch (error) {
         console.error('Error fetching prices:', error);
