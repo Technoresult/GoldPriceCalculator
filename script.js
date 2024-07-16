@@ -67,7 +67,7 @@ function createPriceCard(carat, price) {
     const priceCardsContainer = document.getElementById('priceCards');
 
     const card = document.createElement('div');
-    card.className = 'bg-white rounded-xl shadow-2xl p-8 text-center price-card';
+    card.className = 'bg-white rounded-xl shadow-2xl p-8 text-center price-card mb-4 w-full md:w-1/3';
 
     const title = document.createElement('h3');
     title.className = 'text-2xl font-bold text-indigo-800 mb-4';
@@ -119,39 +119,32 @@ function updateCityPriceCard(cityData) {
     const price22K = cityPriceCard.querySelector('.price-22K');
     const price18K = cityPriceCard.querySelector('.price-18K');
 
-    price24K.textContent = `24K: ₹ ${cityData['24K Today'].replace('₹ ', '')}`;
-    price22K.textContent = `22K: ₹ ${cityData['22K Today'].replace('₹ ', '')}`;
-    price18K.textContent = `18K: ₹ ${cityData['18K Today'].replace('₹ ', '')}`;
+    price24K.textContent = `24K: ${cityData['24K Today']}`;
+    price22K.textContent = `22K: ${cityData['22K Today']}`;
+    price18K.textContent = `18K: ${cityData['18K Today']}`;
 }
 
-// Function to create city-wise price card
-function createCityPriceCard() {
-    const cityPriceCard = document.createElement('div');
-    cityPriceCard.id = 'cityPriceCard';
-    cityPriceCard.className = 'bg-white rounded-xl shadow-2xl p-8 text-center price-card lg:w-1/3';
+// Function to calculate custom price
+function calculateCustomPrice() {
+    const city = document.getElementById('citySelect').value;
+    const carat = document.getElementById('caratSelect').value;
+    const grams = parseFloat(document.getElementById('gramInput').value);
 
-    const title = document.createElement('h2');
-    title.className = 'text-2xl font-bold text-indigo-800 mb-4';
-    title.textContent = 'City-wise Gold Prices';
+    if (!city || !carat || isNaN(grams)) {
+        alert('Please fill in all fields correctly.');
+        return;
+    }
 
-    const price24K = document.createElement('p');
-    price24K.className = 'text-xl text-gray-700 price-24K';
-    price24K.textContent = `24K: ₹ 0`;
+    const cityData = goldPrices.find(price => price.City === city);
+    if (!cityData) {
+        alert('City data not found.');
+        return;
+    }
 
-    const price22K = document.createElement('p');
-    price22K.className = 'text-xl text-gray-700 price-22K';
-    price22K.textContent = `22K: ₹ 0`;
+    const pricePerGram = parseIndianPrice(cityData[`${carat}K Today`]);
+    const totalPrice = pricePerGram * grams;
 
-    const price18K = document.createElement('p');
-    price18K.className = 'text-xl text-gray-700 price-18K';
-    price18K.textContent = `18K: ₹ 0`;
-
-    cityPriceCard.appendChild(title);
-    cityPriceCard.appendChild(price24K);
-    cityPriceCard.appendChild(price22K);
-    cityPriceCard.appendChild(price18K);
-
-    document.querySelector('main').appendChild(cityPriceCard);
+    document.getElementById('calculationResult').textContent = `Total Price: ₹ ${totalPrice.toFixed(2)}`;
 }
 
 // Event listener for city selection
@@ -165,6 +158,9 @@ document.getElementById('citySelect').addEventListener('change', (event) => {
 
 // Event listener for refresh button
 document.getElementById('refreshButton').addEventListener('click', fetchPrices);
+
+// Event listener for calculate button
+document.getElementById('calculateButton').addEventListener('click', calculateCustomPrice);
 
 // Function to show loading spinner
 function showLoadingSpinner() {
