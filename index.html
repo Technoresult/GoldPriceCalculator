@@ -6,6 +6,7 @@
     <title>Gold Price Calculator</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -15,10 +16,10 @@
 </head>
 <body class="bg-gray-100 min-h-screen">
     <div class="container mx-auto px-4 py-8 flex flex-wrap">
-        <aside class="hidden lg:block lg:w-1/5 bg-white rounded-xl shadow-2xl p-6 mr-8">
+        <aside class="hidden lg:block lg:w-1/5 sidebar mr-8">
             <!-- Left Sidebar Content -->
-            <h2 class="text-xl font-bold text-indigo-800 mb-4">Sidebar Left</h2>
-            <p class="text-gray-600">You can place any content here like links, ads, etc.</p>
+            <h2>Sidebar Left</h2>
+            <p>You can place any content here like links, ads, etc.</p>
         </aside>
 
         <main class="flex-1 lg:w-3/5">
@@ -61,10 +62,10 @@
             </div>
         </main>
 
-        <aside class="hidden lg:block lg:w-1/5 bg-white rounded-xl shadow-2xl p-6 ml-8">
+        <aside class="hidden lg:block lg:w-1/5 sidebar ml-8">
             <!-- Right Sidebar Content -->
-            <h2 class="text-xl font-bold text-indigo-800 mb-4">Sidebar Right</h2>
-            <p class="text-gray-600">You can place any content here like links, ads, etc.</p>
+            <h2>Sidebar Right</h2>
+            <p>You can place any content here like links, ads, etc.</p>
         </aside>
     </div>
     <div id="loadingSpinner" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 hidden">
