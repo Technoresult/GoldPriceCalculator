@@ -7,6 +7,10 @@ function updateDateTime() {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
     });
     document.getElementById('dateTime').textContent = dateTimeString;
 }
@@ -150,56 +154,17 @@ function createCityPriceCard() {
     document.querySelector('main').appendChild(cityPriceCard);
 }
 
-// Event listener for the city select dropdown
+// Event listener for city selection
 document.getElementById('citySelect').addEventListener('change', (event) => {
     const selectedCity = event.target.value;
     const cityData = goldPrices.find(price => price.City === selectedCity);
-
     if (cityData) {
         updateCityPriceCard(cityData);
     }
 });
 
-// Event listener for the calculate button
-document.getElementById('calculateButton').addEventListener('click', () => {
-    const caratSelect = document.getElementById('caratSelect');
-    const gramInput = document.getElementById('gramInput');
-    const resultDiv = document.getElementById('calculationResult');
-
-    const selectedCarat = caratSelect.value;
-    const grams = parseFloat(gramInput.value);
-
-    if (isNaN(grams) || grams <= 0) {
-        resultDiv.textContent = 'Please enter a valid number of grams.';
-        return;
-    }
-
-    const price = calculateCustomPrice(selectedCarat, grams);
-    if (price) {
-        resultDiv.textContent = `Price for ${grams} grams of ${selectedCarat}K gold: ₹ ${price}`;
-    } else {
-        resultDiv.textContent = 'Unable to calculate. Please select a city.';
-    }
-});
-
-// Function to calculate custom gram price
-function calculateCustomPrice(carat, grams) {
-    const selectedCity = document.getElementById('citySelect').value;
-    const cityData = goldPrices.find(price => price.City === selectedCity);
-    if (cityData) {
-        const pricePerGram = parseIndianPrice(cityData[`${carat}K Today`]);
-        const totalPrice = pricePerGram * grams;
-        return totalPrice.toFixed(2);
-    }
-    return null;
-}
-
-// Function to display error messages
-function displayError(message) {
-    const errorMessageElement = document.getElementById('errorMessage');
-    errorMessageElement.textContent = message;
-    errorMessageElement.classList.remove('hidden');
-}
+// Event listener for refresh button
+document.getElementById('refreshButton').addEventListener('click', fetchPrices);
 
 // Function to show loading spinner
 function showLoadingSpinner() {
@@ -211,15 +176,14 @@ function hideLoadingSpinner() {
     document.getElementById('loadingSpinner').classList.add('hidden');
 }
 
-// Event listener for the refresh button
-document.getElementById('refreshButton').addEventListener('click', fetchPrices);
+// Function to display error messages
+function displayError(message) {
+    const errorMessage = document.getElementById('errorMessage');
+    errorMessage.textContent = message;
+    errorMessage.classList.remove('hidden');
+}
 
-// Initial setup
-document.addEventListener('DOMContentLoaded', () => {
-    fetchPrices();
-    setInterval(updateDateTime, 1000);
-    createCityPriceCard();
-    document.getElementById('GoldPriceCalculator').onclick = function() {
-        window.location.href = 'index.html';
-    }
-});
+// Initial fetch on page load
+fetchPrices();
+updateDateTime();
+setInterval(updateDateTime, 1000); // Update date and time every second
