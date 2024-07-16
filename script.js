@@ -4,23 +4,22 @@ let goldPrices = [];
 async function fetchPrices() {
     showLoadingSpinner();
     try {
-        const response = await fetch('path/to/your/gold_prices.csv');
-        const csvText = await response.text();
-        console.log('Raw CSV data:', csvText);
+        const response = await fetch('path/to/your/gold_prices.json');
+        const data = await response.json();
+        console.log('Fetched data:', data);
         
-        const rows = csvText.trim().split('\n').slice(1); // Skip header row
-        console.log('Parsed rows:', rows);
+        goldPrices = data.cities;
+        console.log('Processed gold prices:', goldPrices);
         
-        goldPrices = rows.map(row => {
-            const [city, gold24K, gold22K, gold18K] = row.split(',');
-            console.log('Parsed row:', { city, gold24K, gold22K, gold18K });
-            return {
-                city,
-                gold24K: parseFloat(gold24K),
-                gold22K: parseFloat(gold22K),
-                gold18K: parseFloat(gold18K)
-            };
-        });
+        populateCityDropdown();
+        calculateAveragePrice();
+        hideLoadingSpinner();
+    } catch (error) {
+        console.error('Error fetching prices:', error);
+        displayError('Failed to fetch prices: ' + error.message);
+        hideLoadingSpinner();
+    }
+}
         
         console.log('Processed gold prices:', goldPrices);
         
@@ -50,7 +49,6 @@ function populateCityDropdown() {
     
     console.log('Dropdown populated. Current options:', Array.from(citySelect.options).map(opt => opt.value));
 }
-
 // Function to calculate average price for India
 function calculateAveragePrice() {
     if (goldPrices.length === 0) {
