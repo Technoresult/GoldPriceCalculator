@@ -120,13 +120,16 @@ select, input[type="number"] {
 }
 
 /* Responsive layout */
-@media (min-width: 768px) {
-    .md\:w-1\/2 {
-        width: 50%;
+@media (max-width: 768px) {
+    #priceCards {
+        flex-direction: column;
     }
-    
-    .md\:w-1\/3 {
-        width: 33.333333%;
+    .price-card {
+        width: 100%;
+        margin: 0 0 20px;
+    }
+    #customCalculator, #cityPriceCard {
+        width: 100%;
     }
 }
 
