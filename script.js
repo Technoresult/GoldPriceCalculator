@@ -11,6 +11,7 @@ async function fetchPrices() {
         goldPrices = data.gold_prices; // Ensure correct property access
         console.log('Processed gold prices:', goldPrices);
         
+        clearPriceCards(); // Clear existing price cards
         populateCityDropdown(); // Populate the dropdown after fetching data
         calculateAveragePrice(); // Calculate averages after fetching data
         hideLoadingSpinner();
@@ -19,6 +20,12 @@ async function fetchPrices() {
         displayError('Failed to fetch prices: ' + error.message);
         hideLoadingSpinner();
     }
+}
+
+// Function to clear existing price cards
+function clearPriceCards() {
+    const priceCardsContainer = document.getElementById('priceCards');
+    priceCardsContainer.innerHTML = ''; // Clear existing cards
 }
 
 // Function to populate the city dropdown
@@ -33,7 +40,6 @@ function populateCityDropdown() {
         citySelect.appendChild(option);
     });
 }
-
 
 // Function to calculate average price for India
 function calculateAveragePrice() {
@@ -55,7 +61,17 @@ function calculateAveragePrice() {
     
     console.log('Calculated averages:', { avg24K, avg22K, avg18K });
     
-    createAveragePriceCard(avg24K, avg22K, avg18K);
+    clearAveragePriceCard(); // Clear existing average price card
+    createAveragePriceCard(avg24K, avg22K, avg18K); // Create new average price card
+}
+
+// Function to clear existing average price card
+function clearAveragePriceCard() {
+    const priceCardsContainer = document.getElementById('priceCards');
+    const existingAverageCard = document.getElementById('averagePriceCard');
+    if (existingAverageCard) {
+        priceCardsContainer.removeChild(existingAverageCard);
+    }
 }
 
 // Function to parse Indian price format to number
@@ -64,10 +80,11 @@ function parseIndianPrice(priceString) {
     const numericString = priceString.replace(/[^\d.]/g, '');
     return parseFloat(numericString);
 }
+
 // Function to create price cards
 function createPriceCards(cityData) {
     const priceCardsContainer = document.getElementById('priceCards');
-    priceCardsContainer.innerHTML = ''; // Clear existing cards
+    clearPriceCards(); // Clear existing cards
 
     const card = document.createElement('div');
     card.className = 'bg-white rounded-xl shadow-xl p-6 text-center transform transition duration-500 hover:scale-105';
@@ -80,11 +97,11 @@ function createPriceCards(cityData) {
     priceCardsContainer.appendChild(card);
 }
 
-
 // Function to create average price card for India
 function createAveragePriceCard(avg24K, avg22K, avg18K) {
     const priceCardsContainer = document.getElementById('priceCards');
     const card = document.createElement('div');
+    card.id = 'averagePriceCard'; // Set an ID to identify the average price card
     card.className = 'bg-white rounded-xl shadow-xl p-6 text-center transform transition duration-500 hover:scale-105';
     card.innerHTML = `
         <h2 class="text-2xl font-bold text-indigo-800 mb-4">Gold Price in India</h2>
