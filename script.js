@@ -4,13 +4,26 @@ let goldPrices = [];
 async function fetchPrices() {
     showLoadingSpinner();
     try {
-        const response = await fetch('https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/blob/main/Goldrates.csv');
+        const response = await fetch('path/to/your/gold_prices.csv');
         const csvText = await response.text();
-        const rows = csvText.split('\n').slice(1); // Skip header row
+        console.log('Raw CSV data:', csvText);
+        
+        const rows = csvText.trim().split('\n').slice(1); // Skip header row
+        console.log('Parsed rows:', rows);
+        
         goldPrices = rows.map(row => {
             const [city, gold24K, gold22K, gold18K] = row.split(',');
-            return { city, gold24K: parseFloat(gold24K), gold22K: parseFloat(gold22K), gold18K: parseFloat(gold18K) };
+            console.log('Parsed row:', { city, gold24K, gold22K, gold18K });
+            return {
+                city,
+                gold24K: parseFloat(gold24K),
+                gold22K: parseFloat(gold22K),
+                gold18K: parseFloat(gold18K)
+            };
         });
+        
+        console.log('Processed gold prices:', goldPrices);
+        
         populateCityDropdown();
         calculateAveragePrice();
         hideLoadingSpinner();
@@ -25,25 +38,39 @@ async function fetchPrices() {
 function populateCityDropdown() {
     const citySelect = document.getElementById('citySelect');
     citySelect.innerHTML = '<option value="">Select City</option>';
+    
+    console.log('Populating dropdown with cities:', goldPrices.map(price => price.city));
+    
     goldPrices.forEach(price => {
         const option = document.createElement('option');
         option.value = price.city;
         option.textContent = price.city;
         citySelect.appendChild(option);
     });
+    
+    console.log('Dropdown populated. Current options:', Array.from(citySelect.options).map(opt => opt.value));
 }
 
 // Function to calculate average price for India
 function calculateAveragePrice() {
+    if (goldPrices.length === 0) {
+        console.error('No gold prices data available');
+        return;
+    }
+    
     const sum24K = goldPrices.reduce((sum, price) => sum + price.gold24K, 0);
     const sum22K = goldPrices.reduce((sum, price) => sum + price.gold22K, 0);
     const sum18K = goldPrices.reduce((sum, price) => sum + price.gold18K, 0);
     const count = goldPrices.length;
-
+    
+    console.log('Sums and count:', { sum24K, sum22K, sum18K, count });
+    
     const avg24K = sum24K / count;
     const avg22K = sum22K / count;
     const avg18K = sum18K / count;
-
+    
+    console.log('Calculated averages:', { avg24K, avg22K, avg18K });
+    
     createAveragePriceCard(avg24K, avg22K, avg18K);
 }
 
@@ -97,12 +124,17 @@ function calculateCustomPrice(carat, grams) {
 // Event listener for the city select dropdown
 document.getElementById('citySelect').addEventListener('change', (event) => {
     const selectedCity = event.target.value;
+    console.log('Selected city:', selectedCity);
+    
     const cityData = goldPrices.find(price => price.city === selectedCity);
+    console.log('City data:', cityData);
+    
     if (cityData) {
         createPriceCards(cityData);
+    } else {
+        console.error('No data found for selected city');
     }
 });
-
 // Event listener for the calculate button
 document.getElementById('calculateButton').addEventListener('click', () => {
     const caratSelect = document.getElementById('caratSelect');
