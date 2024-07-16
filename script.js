@@ -64,7 +64,6 @@ function parseIndianPrice(priceString) {
     const numericString = priceString.replace(/[^\d.]/g, '');
     return parseFloat(numericString);
 }
-
 // Function to create price cards
 function createPriceCards(cityData) {
     const priceCardsContainer = document.getElementById('priceCards');
@@ -74,12 +73,13 @@ function createPriceCards(cityData) {
     card.className = 'bg-white rounded-xl shadow-xl p-6 text-center transform transition duration-500 hover:scale-105';
     card.innerHTML = `
         <h2 class="text-2xl font-bold text-indigo-800 mb-4">${cityData.City}</h2>
-        <p class="text-xl font-semibold text-indigo-600">24K: ${cityData['24K Today']}</p>
-        <p class="text-xl font-semibold text-indigo-600 mt-2">22K: ${cityData['22K Today']}</p>
-        <p class="text-xl font-semibold text-indigo-600 mt-2">18K: ${cityData['18K Today']}</p>
+        <p class="text-xl font-semibold text-indigo-600">24K: ₹ ${cityData['24K Today'].replace('₹ ', '')}</p>
+        <p class="text-xl font-semibold text-indigo-600 mt-2">22K: ₹ ${cityData['22K Today'].replace('₹ ', '')}</p>
+        <p class="text-xl font-semibold text-indigo-600 mt-2">18K: ₹ ${cityData['18K Today'].replace('₹ ', '')}</p>
     `;
     priceCardsContainer.appendChild(card);
 }
+
 
 // Function to create average price card for India
 function createAveragePriceCard(avg24K, avg22K, avg18K) {
