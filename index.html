@@ -13,31 +13,29 @@
             <h1 id="GoldPriceCalculator" class="text-4xl font-bold text-indigo-800 cursor-pointer">Gold Price Calculator</h1>
             <button id="refreshButton" class="bg-indigo-600 text-white px-4 py-2 rounded-lg">Refresh Prices</button>
         </header>
-
         <div id="errorMessage" class="hidden text-red-600 mb-4"></div>
         <div id="lastUpdated" class="text-sm text-gray-600 mb-4"></div>
-
+        <h2 class="text-2xl font-bold text-indigo-800 mb-4">Gold Price in India</h2>
         <section class="mb-4">
-            <div id="priceCards" class="flex flex-wrap justify-between"></div>
+            <div id="priceCards" class="flex flex-wrap justify-between space-x-4"></div>
         </section>
-
-        <section class="flex flex-col lg:flex-row justify-between">
+        <section class="flex flex-col lg:flex-row justify-between space-x-0 lg:space-x-4">
             <div id="customCalculator" class="bg-white rounded-xl shadow-2xl p-8 mb-4 lg:mb-0 lg:w-2/3">
                 <h2 class="text-2xl font-bold text-indigo-800 mb-4">Custom Calculator</h2>
                 <label for="citySelect" class="block text-xl font-semibold text-indigo-800 mb-2">Select City</label>
-                <select id="citySelect" class="w-full mb-4 p-2 border border-gray-300 rounded-lg"></select>
+                <select id="citySelect" class="w-full mb-4 p-2 border border-gray-300 rounded-lg" aria-label="Select City"></select>
                 <label for="caratSelect" class="block text-xl font-semibold text-indigo-800 mb-2">Select Carat</label>
-                <select id="caratSelect" class="w-full mb-4 p-2 border border-gray-300 rounded-lg">
+                <select id="caratSelect" class="w-full mb-4 p-2 border border-gray-300 rounded-lg" aria-label="Select Carat">
                     <option value="24">24K</option>
                     <option value="22">22K</option>
                     <option value="18">18K</option>
                 </select>
                 <label for="gramInput" class="block text-xl font-semibold text-indigo-800 mb-2">Enter Grams</label>
-                <input id="gramInput" type="number" class="w-full mb-4 p-2 border border-gray-300 rounded-lg">
-                <button id="calculateButton" class="bg-indigo-600 text-white px-4 py-2 rounded-lg">Calculate</button>
+                <input id="gramInput" type="number" class="w-full mb-4 p-2 border border-gray-300 rounded-lg" aria-label="Enter Grams">
+                <button id="calculateButton" class="w-full bg-indigo-600 text-white px-4 py-2 rounded-lg" aria-label="Calculate Gold Price">Calculate</button>
                 <div id="calculationResult" class="mt-4 text-xl font-semibold text-indigo-800"></div>
             </div>
-            <div id="cityPriceCard" class="bg-white rounded-xl shadow-2xl p-8 text-center lg:w-1/3">
+            <div id="cityPriceCard" class="bg-gray-50 border border-gray-200 rounded-xl shadow-md p-8 text-center lg:w-1/3">
                 <h2 class="text-2xl font-bold text-indigo-800 mb-4">City-wise Gold Prices</h2>
                 <p class="text-xl text-gray-700 price-24K">24K: ₹ 0</p>
                 <p class="text-xl text-gray-700 price-22K">22K: ₹ 0</p>
@@ -45,13 +43,10 @@
             </div>
         </section>
     </main>
-
     <div id="loadingSpinner" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
+        <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-indigo-500"></div>
+        <span class="sr-only">Loading...</span>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
