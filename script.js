@@ -4,7 +4,7 @@ let goldPrices = [];
 async function fetchPrices() {
     showLoadingSpinner();
     try {
-        const response = await fetch('https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/data/Goldrates.csv');
+        const response = await fetch('https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/blob/main/Goldrates.csv');
         const csvText = await response.text();
         const rows = csvText.split('\n').slice(1); // Skip header row
         goldPrices = rows.map(row => {
