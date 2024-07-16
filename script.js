@@ -7,10 +7,6 @@ function updateDateTime() {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true
     });
     document.getElementById('dateTime').textContent = dateTimeString;
 }
@@ -24,7 +20,7 @@ async function fetchPrices() {
         goldPrices = data.gold_prices;
         clearPriceCards();
         populateCityDropdown();
-        createAveragePriceCard();
+        createAveragePriceCards();
         hideLoadingSpinner();
     } catch (error) {
         console.error('Error fetching prices:', error);
@@ -39,15 +35,12 @@ function clearPriceCards() {
     priceCardsContainer.innerHTML = ''; 
 }
 
-// Function to create average price card
-function createAveragePriceCard() {
+// Function to create average price cards
+function createAveragePriceCards() {
     const priceCardsContainer = document.getElementById('priceCards');
     const avg24K = calculateAverage('24K Today');
     const avg22K = calculateAverage('22K Today');
     const avg18K = calculateAverage('18K Today');
-
-    const card = document.createElement('div');
-    card.className = 'bg-white rounded-xl shadow-2xl p-8 text-center price-card';
 
     const title = document.createElement('h2');
     title.className = 'text-2xl font-bold text-indigo-800 mb-4';
@@ -57,23 +50,31 @@ function createAveragePriceCard() {
     dateElement.id = 'dateTime';
     dateElement.className = 'text-xl font-semibold text-indigo-700 mb-4';
 
-    const price24K = document.createElement('p');
-    price24K.className = 'text-xl text-gray-700';
-    price24K.textContent = `24K: ₹ ${avg24K.toFixed(2)}`;
+    priceCardsContainer.appendChild(title);
+    priceCardsContainer.appendChild(dateElement);
 
-    const price22K = document.createElement('p');
-    price22K.className = 'text-xl text-gray-700';
-    price22K.textContent = `22K: ₹ ${avg22K.toFixed(2)}`;
+    createPriceCard('24K', avg24K);
+    createPriceCard('22K', avg22K);
+    createPriceCard('18K', avg18K);
+}
 
-    const price18K = document.createElement('p');
-    price18K.className = 'text-xl text-gray-700';
-    price18K.textContent = `18K: ₹ ${avg18K.toFixed(2)}`;
+// Function to create individual price cards
+function createPriceCard(carat, price) {
+    const priceCardsContainer = document.getElementById('priceCards');
+
+    const card = document.createElement('div');
+    card.className = 'bg-white rounded-xl shadow-2xl p-8 text-center price-card';
+
+    const title = document.createElement('h3');
+    title.className = 'text-2xl font-bold text-indigo-800 mb-4';
+    title.textContent = `${carat}`;
+
+    const priceElement = document.createElement('p');
+    priceElement.className = 'text-xl text-gray-700';
+    priceElement.textContent = `₹ ${price.toFixed(2)}`;
 
     card.appendChild(title);
-    card.appendChild(dateElement);
-    card.appendChild(price24K);
-    card.appendChild(price22K);
-    card.appendChild(price18K);
+    card.appendChild(priceElement);
 
     priceCardsContainer.appendChild(card);
 }
