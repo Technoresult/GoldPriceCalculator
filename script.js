@@ -4,7 +4,7 @@ let goldPrices = [];
 async function fetchPrices() {
     showLoadingSpinner();
     try {
-        const response = await fetch('https://github.com/Technoresult/GoldPriceCalculator/blob/main/Goldrates.json');
+        const response = await fetch('https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/blob/main/Goldrates.json');
         const data = await response.json();
         console.log('Fetched data:', data);
         
