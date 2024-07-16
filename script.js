@@ -4,7 +4,7 @@ let goldPrices = [];
 async function fetchPrices() {
     showLoadingSpinner();
     try {
-        const response = await fetch('path/to/your/gold_prices.json');
+        const response = await fetch('path/to/your/Goldrates.json');
         const data = await response.json();
         console.log('Fetched data:', data);
         
