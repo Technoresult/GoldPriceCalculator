@@ -87,7 +87,7 @@ function createAveragePriceCard(avg24K, avg22K, avg18K) {
     const card = document.createElement('div');
     card.className = 'bg-white rounded-xl shadow-xl p-6 text-center transform transition duration-500 hover:scale-105';
     card.innerHTML = `
-        <h2 class="text-2xl font-bold text-indigo-800 mb-4">India Average</h2>
+        <h2 class="text-2xl font-bold text-indigo-800 mb-4">Gold Price in India</h2>
         <p class="text-xl font-semibold text-indigo-600">24K: ₹ ${avg24K.toFixed(2)}</p>
         <p class="text-xl font-semibold text-indigo-600 mt-2">22K: ₹ ${avg22K.toFixed(2)}</p>
         <p class="text-xl font-semibold text-indigo-600 mt-2">18K: ₹ ${avg18K.toFixed(2)}</p>
