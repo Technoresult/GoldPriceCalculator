@@ -67,10 +67,9 @@ function calculateAveragePrice() {
 
 // Function to clear existing average price card
 function clearAveragePriceCard() {
-    const priceCardsContainer = document.getElementById('priceCards');
     const existingAverageCard = document.getElementById('averagePriceCard');
     if (existingAverageCard) {
-        priceCardsContainer.removeChild(existingAverageCard);
+        existingAverageCard.remove();
     }
 }
 
