@@ -6,3 +6,22 @@
 .price-card:hover {
     transform: translateY(-5px);
 }
+
+/* Additional custom styles for sidebars */
+.sidebar {
+    padding: 16px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #4f46e5;
+    margin-bottom: 16px;
+}
+
+.sidebar p {
+    color: #6b7280;
+}
