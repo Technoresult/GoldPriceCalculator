@@ -1,85 +1,78 @@
-// Function to fetch prices from the API
-function fetchPrices(callback) {
-    console.log('Fetching prices...');
-    const xhr = new XMLHttpRequest();
+let goldPrices = [];
 
-    xhr.addEventListener('readystatechange', function () {
-        console.log('ReadyState:', this.readyState, 'Status:', this.status);
-        if (this.readyState === this.DONE) {
-            console.log('API Response:', this.responseText);
-            if (this.status === 200) {
-                try {
-                    const data = JSON.parse(this.responseText);
-                    console.log('Parsed data:', data);
-
-                    if (data && data.length > 0) {
-                        callback(null, data);
-                    } else {
-                        callback(new Error('Gold price data not found'), null);
-                    }
-                } catch (error) {
-                    console.error('Error parsing API response:', error);
-                    callback(new Error('Failed to parse API response'), null);
-                }
-            } else {
-                console.error('API request failed with status', this.status);
-                callback(new Error(`API request failed with status ${this.status}`), null);
-            }
-        }
-    });
-
-    xhr.open('GET', `http://localhost:5000/gold-prices`);
-    xhr.send(null);
-}
-
-// Function to fetch extracted data from the server
-async function fetchExtractedData() {
+// Function to fetch prices from the CSV file
+async function fetchPrices() {
     showLoadingSpinner();
     try {
-        const response = await fetch('http://localhost:3000/extract-data', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        const response = await fetch('https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/data/gold_prices.csv');
+        const csvText = await response.text();
+        const rows = csvText.split('\n').slice(1); // Skip header row
+        goldPrices = rows.map(row => {
+            const [city, gold24K, gold22K, gold18K] = row.split(',');
+            return { city, gold24K: parseFloat(gold24K), gold22K: parseFloat(gold22K), gold18K: parseFloat(gold18K) };
         });
-        const data = await response.json();
-        if (response.ok) {
-            createExtractedDataCard(data.extractedText);
-        } else {
-            displayError(data.error);
-        }
+        populateCityDropdown();
+        calculateAveragePrice();
+        hideLoadingSpinner();
     } catch (error) {
-        displayError('Failed to fetch extracted data: ' + error.message);
-    } finally {
+        console.error('Error fetching prices:', error);
+        displayError('Failed to fetch prices: ' + error.message);
         hideLoadingSpinner();
     }
 }
 
-// Function to create price cards
-function createPriceCards(goldPrices) {
-    const priceCardsContainer = document.getElementById('priceCards');
-    priceCardsContainer.innerHTML = ''; // Clear existing cards
-
+// Function to populate the city dropdown
+function populateCityDropdown() {
+    const citySelect = document.getElementById('citySelect');
+    citySelect.innerHTML = '<option value="">Select City</option>';
     goldPrices.forEach(price => {
-        const card = document.createElement('div');
-        card.className = 'bg-white rounded-xl shadow-xl p-6 text-center transform transition duration-500 hover:scale-105';
-        card.innerHTML = `
-            <h2 class="text-2xl font-bold text-indigo-800 mb-4">${price.City}</h2>
-            <p class="text-3xl font-semibold text-indigo-600">1 Gram: ₹ ${formatIndianPrice(Math.round(price['Gold 22K']))}</p>
-            <p class="text-3xl font-semibold text-indigo-600 mt-2">10 Gram: ₹ ${formatIndianPrice(Math.round(price['Gold 24K'] * 10))}</p>
-        `;
-        priceCardsContainer.appendChild(card);
+        const option = document.createElement('option');
+        option.value = price.city;
+        option.textContent = price.city;
+        citySelect.appendChild(option);
     });
 }
 
-// Function to create a card for the extracted data
-function createExtractedDataCard(text) {
+// Function to calculate average price for India
+function calculateAveragePrice() {
+    const sum24K = goldPrices.reduce((sum, price) => sum + price.gold24K, 0);
+    const sum22K = goldPrices.reduce((sum, price) => sum + price.gold22K, 0);
+    const sum18K = goldPrices.reduce((sum, price) => sum + price.gold18K, 0);
+    const count = goldPrices.length;
+
+    const avg24K = sum24K / count;
+    const avg22K = sum22K / count;
+    const avg18K = sum18K / count;
+
+    createAveragePriceCard(avg24K, avg22K, avg18K);
+}
+
+// Function to create price cards
+function createPriceCards(cityData) {
+    const priceCardsContainer = document.getElementById('priceCards');
+    priceCardsContainer.innerHTML = ''; // Clear existing cards
+
+    const card = document.createElement('div');
+    card.className = 'bg-white rounded-xl shadow-xl p-6 text-center transform transition duration-500 hover:scale-105';
+    card.innerHTML = `
+        <h2 class="text-2xl font-bold text-indigo-800 mb-4">${cityData.city}</h2>
+        <p class="text-xl font-semibold text-indigo-600">24K: ₹ ${formatIndianPrice(Math.round(cityData.gold24K))}/g</p>
+        <p class="text-xl font-semibold text-indigo-600 mt-2">22K: ₹ ${formatIndianPrice(Math.round(cityData.gold22K))}/g</p>
+        <p class="text-xl font-semibold text-indigo-600 mt-2">18K: ₹ ${formatIndianPrice(Math.round(cityData.gold18K))}/g</p>
+    `;
+    priceCardsContainer.appendChild(card);
+}
+
+// Function to create average price card for India
+function createAveragePriceCard(avg24K, avg22K, avg18K) {
     const priceCardsContainer = document.getElementById('priceCards');
     const card = document.createElement('div');
     card.className = 'bg-white rounded-xl shadow-xl p-6 text-center transform transition duration-500 hover:scale-105';
     card.innerHTML = `
-        <h2 class="text-2xl font-bold text-indigo-800 mb-4">Extracted Data</h2>
-        <p class="text-3xl font-semibold text-indigo-600">${text}</p>
+        <h2 class="text-2xl font-bold text-indigo-800 mb-4">India Average</h2>
+        <p class="text-xl font-semibold text-indigo-600">24K: ₹ ${formatIndianPrice(Math.round(avg24K))}/g</p>
+        <p class="text-xl font-semibold text-indigo-600 mt-2">22K: ₹ ${formatIndianPrice(Math.round(avg22K))}/g</p>
+        <p class="text-xl font-semibold text-indigo-600 mt-2">18K: ₹ ${formatIndianPrice(Math.round(avg18K))}/g</p>
     `;
     priceCardsContainer.appendChild(card);
 }
@@ -89,44 +82,26 @@ function formatIndianPrice(price) {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-function showLoadingSpinner() {
-    document.getElementById('loadingSpinner').classList.remove('hidden');
-    document.getElementById('priceCards').classList.add('hidden');
-}
-
-function hideLoadingSpinner() {
-    document.getElementById('loadingSpinner').classList.add('hidden');
-    document.getElementById('priceCards').classList.remove('hidden');
-}
-
-function updatePrices() {
-    console.log('Updating prices...');
-    showLoadingSpinner();
-
-    fetchPrices((error, goldPrices) => {
-        hideLoadingSpinner();
-        if (error) {
-            console.error('Error fetching prices:', error);
-            displayError(`Failed to fetch prices: ${error.message}`);
-        } else {
-            console.log('Gold prices fetched successfully:', goldPrices);
-            createPriceCards(goldPrices);
-            document.getElementById('errorMessage').classList.add('hidden');
-        }
-    });
-}
-
-// New function to calculate custom gram price
+// Function to calculate custom gram price
 function calculateCustomPrice(carat, grams) {
-    const priceCards = document.getElementById('priceCards');
-    if (priceCards.children.length > 0) {
-        const card = priceCards.children[0]; // Use the first card for calculation
-        const pricePerGram = parseInt(card.querySelector(`p:nth-child(${carat === '22' ? 2 : 3})`).textContent.split('₹')[1].replace(/,/g, '').trim());
-        const totalPrice = Math.round(pricePerGram * (carat === '22' ? 1 : 10) * grams / (carat === '22' ? 1 : 10));
+    const selectedCity = document.getElementById('citySelect').value;
+    const cityData = goldPrices.find(price => price.city === selectedCity);
+    if (cityData) {
+        const pricePerGram = cityData[`gold${carat}K`];
+        const totalPrice = Math.round(pricePerGram * grams);
         return formatIndianPrice(totalPrice);
     }
     return null;
 }
+
+// Event listener for the city select dropdown
+document.getElementById('citySelect').addEventListener('change', (event) => {
+    const selectedCity = event.target.value;
+    const cityData = goldPrices.find(price => price.city === selectedCity);
+    if (cityData) {
+        createPriceCards(cityData);
+    }
+});
 
 // Event listener for the calculate button
 document.getElementById('calculateButton').addEventListener('click', () => {
@@ -146,7 +121,7 @@ document.getElementById('calculateButton').addEventListener('click', () => {
     if (price) {
         resultDiv.textContent = `Price for ${grams} grams of ${selectedCarat}K gold: ₹ ${price}`;
     } else {
-        resultDiv.textContent = 'Unable to calculate. Please refresh prices.';
+        resultDiv.textContent = 'Unable to calculate. Please select a city.';
     }
 });
 
@@ -157,14 +132,20 @@ function displayError(message) {
     errorMessageElement.classList.remove('hidden');
 }
 
-// Call the updatePrices function when the page loads
+function showLoadingSpinner() {
+    document.getElementById('loadingSpinner').classList.remove('hidden');
+}
+
+function hideLoadingSpinner() {
+    document.getElementById('loadingSpinner').classList.add('hidden');
+}
+
+// Call the fetchPrices function when the page loads
 document.addEventListener('DOMContentLoaded', () => {
-    updatePrices();
-    fetchExtractedData();
+    fetchPrices();
 });
 
-// Call the updatePrices function when the refresh button is clicked
+// Call the fetchPrices function when the refresh button is clicked
 document.getElementById('refreshButton').addEventListener('click', () => {
-    updatePrices();
-    fetchExtractedData();
+    fetchPrices();
 });
