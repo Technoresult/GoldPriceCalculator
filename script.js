@@ -26,17 +26,14 @@ function populateCityDropdown() {
     const citySelect = document.getElementById('citySelect');
     citySelect.innerHTML = '<option value="">Select City</option>';
     
-    console.log('Populating dropdown with cities:', goldPrices.map(price => price.City));
-    
     goldPrices.forEach(price => {
         const option = document.createElement('option');
         option.value = price.City;
         option.textContent = price.City;
         citySelect.appendChild(option);
     });
-    
-    console.log('Dropdown populated. Current options:', Array.from(citySelect.options).map(opt => opt.value));
 }
+
 
 // Function to calculate average price for India
 function calculateAveragePrice() {
@@ -77,9 +74,9 @@ function createPriceCards(cityData) {
     card.className = 'bg-white rounded-xl shadow-xl p-6 text-center transform transition duration-500 hover:scale-105';
     card.innerHTML = `
         <h2 class="text-2xl font-bold text-indigo-800 mb-4">${cityData.City}</h2>
-        <p class="text-xl font-semibold text-indigo-600">24K: ₹ ${cityData['24K Today']}</p>
-        <p class="text-xl font-semibold text-indigo-600 mt-2">22K: ₹ ${cityData['22K Today']}</p>
-        <p class="text-xl font-semibold text-indigo-600 mt-2">18K: ₹ ${cityData['18K Today']}</p>
+        <p class="text-xl font-semibold text-indigo-600">24K: ${cityData['24K Today']}</p>
+        <p class="text-xl font-semibold text-indigo-600 mt-2">22K: ${cityData['22K Today']}</p>
+        <p class="text-xl font-semibold text-indigo-600 mt-2">18K: ${cityData['18K Today']}</p>
     `;
     priceCardsContainer.appendChild(card);
 }
