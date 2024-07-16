@@ -4,7 +4,7 @@ let goldPrices = [];
 async function fetchPrices() {
     showLoadingSpinner();
     try {
-        const response = await fetch('https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/blob/main/Goldrates.json');
+        const response = await fetch('https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/Goldrates.json');
         const data = await response.json();
         console.log('Fetched data:', data);
         
@@ -20,18 +20,7 @@ async function fetchPrices() {
         hideLoadingSpinner();
     }
 }
-        
-        console.log('Processed gold prices:', goldPrices);
-        
-        populateCityDropdown();
-        calculateAveragePrice();
-        hideLoadingSpinner();
-    } catch (error) {
-        console.error('Error fetching prices:', error);
-        displayError('Failed to fetch prices: ' + error.message);
-        hideLoadingSpinner();
-    }
-}
+
 
 // Function to populate the city dropdown
 function populateCityDropdown() {
