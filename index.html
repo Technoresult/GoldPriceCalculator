@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Price Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8 flex flex-wrap">
+        <aside class="hidden lg:block lg:w-1/5 sidebar mr-8">
+            <!-- Left Sidebar Content -->
+            <h2>Sidebar Left</h2>
+            <p>You can place any content here like links, ads, etc.</p>
+        </aside>
+
+        <main class="flex-1 lg:w-3/5">
+            <header class="mb-12 text-center">
+                <h1 class="text-5xl font-bold text-indigo-800 mb-4 cursor-pointer" onclick="window.location.href='index.html'">Gold Price Calculator</h1>
+                <h2 class="text-3xl font-bold text-indigo-800 mb-4">Gold Price in India</h2>
+                <div id="dateTime" class="text-xl font-semibold text-indigo-700 mb-6"></div>
+                <div class="flex justify-center items-center space-x-4">
+                    <select id="citySelect" class="border-2 border-indigo-300 rounded-lg px-4 py-2 focus:outline-none focus:border-indigo-500">
+                        <option value="">Select City</option>
+                    </select>
+                    <button id="refreshButton" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-6 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
+                        Refresh Prices
+                    </button>
+                </div>
+            </header>
+            <div id="priceCards" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Price cards will be dynamically inserted here -->
+            </div>
+            <div id="calculatorCard" class="bg-white rounded-xl shadow-2xl p-8">
+                <h2 class="text-3xl font-bold text-indigo-800 mb-6">Custom Calculator</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label for="caratSelect" class="block text-sm font-medium text-gray-700 mb-2">Select Carat</label>
+                        <select id="caratSelect" class="w-full border-2 border-indigo-300 rounded-lg px-4 py-2 focus:outline-none focus:border-indigo-500">
+                            <option value="24">24K Gold</option>
+                            <option value="22">22K Gold</option>
+                            <option value="18">18K Gold</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="gramInput" class="block text-sm font-medium text-gray-700 mb-2">Enter Grams</label>
+                        <input type="number" id="gramInput" placeholder="Enter grams" class="w-full border-2 border-indigo-300 rounded-lg px-4 py-2 focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <button id="calculateButton" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
+                        Calculate
+                    </button>
+                </div>
+                <div id="calculationResult" class="mt-6 text-2xl font-semibold text-indigo-800"></div>
+            </div>
+        </main>
+
+        <aside class="hidden lg:block lg:w-1/5 sidebar ml-8">
+            <!-- Right Sidebar Content -->
+            <h2>Sidebar Right</h2>
+            <p>You can place any content here like links, ads, etc.</p>
+        </aside>
+    </div>
+    <div id="loadingSpinner" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-white rounded-xl p-8 flex flex-col items-center">
+            <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-indigo-500"></div>
+            <p class="mt-4 text-xl font-semibold text-indigo-800">Loading prices...</p>
+        </div>
+    </div>
+    <div id="errorMessage" class="mt-8 text-red-600 text-center text-xl hidden"></div>
+    <footer class="mt-12 text-center text-gray-500 text-sm">
+        <p>Disclaimer: Prices are indicative and may vary. Please consult with a certified jeweler for accurate rates.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
