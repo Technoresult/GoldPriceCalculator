@@ -24,7 +24,7 @@ async function fetchPrices() {
         goldPrices = data.gold_prices;
         clearPriceCards();
         populateCityDropdown();
-        createPriceCards();
+        createAveragePriceCard();
         hideLoadingSpinner();
     } catch (error) {
         console.error('Error fetching prices:', error);
@@ -39,39 +39,43 @@ function clearPriceCards() {
     priceCardsContainer.innerHTML = ''; 
 }
 
-// Function to create price cards
-function createPriceCards() {
+// Function to create average price card
+function createAveragePriceCard() {
     const priceCardsContainer = document.getElementById('priceCards');
     const avg24K = calculateAverage('24K Today');
     const avg22K = calculateAverage('22K Today');
     const avg18K = calculateAverage('18K Today');
 
-    const card24K = createPriceCard('24K', avg24K);
-    const card22K = createPriceCard('22K', avg22K);
-    const card18K = createPriceCard('18K', avg18K);
-
-    priceCardsContainer.appendChild(card24K);
-    priceCardsContainer.appendChild(card22K);
-    priceCardsContainer.appendChild(card18K);
-}
-
-// Function to create a price card
-function createPriceCard(carat, price) {
     const card = document.createElement('div');
     card.className = 'bg-white rounded-xl shadow-2xl p-8 text-center price-card';
 
-    const title = document.createElement('h3');
+    const title = document.createElement('h2');
     title.className = 'text-2xl font-bold text-indigo-800 mb-4';
-    title.textContent = carat;
+    title.textContent = 'Gold Price in India';
 
-    const priceElement = document.createElement('p');
-    priceElement.className = 'text-xl text-gray-700';
-    priceElement.textContent = `₹ ${price.toFixed(2)}`;
+    const dateElement = document.createElement('div');
+    dateElement.id = 'dateTime';
+    dateElement.className = 'text-xl font-semibold text-indigo-700 mb-4';
+
+    const price24K = document.createElement('p');
+    price24K.className = 'text-xl text-gray-700';
+    price24K.textContent = `24K: ₹ ${avg24K.toFixed(2)}`;
+
+    const price22K = document.createElement('p');
+    price22K.className = 'text-xl text-gray-700';
+    price22K.textContent = `22K: ₹ ${avg22K.toFixed(2)}`;
+
+    const price18K = document.createElement('p');
+    price18K.className = 'text-xl text-gray-700';
+    price18K.textContent = `18K: ₹ ${avg18K.toFixed(2)}`;
 
     card.appendChild(title);
-    card.appendChild(priceElement);
+    card.appendChild(dateElement);
+    card.appendChild(price24K);
+    card.appendChild(price22K);
+    card.appendChild(price18K);
 
-    return card;
+    priceCardsContainer.appendChild(card);
 }
 
 // Function to calculate average price for a specific carat type
@@ -101,30 +105,59 @@ function populateCityDropdown() {
     });
 }
 
+// Function to update city-wise price card
+function updateCityPriceCard(cityData) {
+    const cityPriceCard = document.getElementById('cityPriceCard');
+    if (!cityPriceCard) return;
+
+    const price24K = cityPriceCard.querySelector('.price-24K');
+    const price22K = cityPriceCard.querySelector('.price-22K');
+    const price18K = cityPriceCard.querySelector('.price-18K');
+
+    price24K.textContent = `24K: ₹ ${cityData['24K Today'].replace('₹ ', '')}`;
+    price22K.textContent = `22K: ₹ ${cityData['22K Today'].replace('₹ ', '')}`;
+    price18K.textContent = `18K: ₹ ${cityData['18K Today'].replace('₹ ', '')}`;
+}
+
+// Function to create city-wise price card
+function createCityPriceCard() {
+    const cityPriceCard = document.createElement('div');
+    cityPriceCard.id = 'cityPriceCard';
+    cityPriceCard.className = 'bg-white rounded-xl shadow-2xl p-8 text-center price-card lg:w-1/3';
+
+    const title = document.createElement('h2');
+    title.className = 'text-2xl font-bold text-indigo-800 mb-4';
+    title.textContent = 'City-wise Gold Prices';
+
+    const price24K = document.createElement('p');
+    price24K.className = 'text-xl text-gray-700 price-24K';
+    price24K.textContent = `24K: ₹ 0`;
+
+    const price22K = document.createElement('p');
+    price22K.className = 'text-xl text-gray-700 price-22K';
+    price22K.textContent = `22K: ₹ 0`;
+
+    const price18K = document.createElement('p');
+    price18K.className = 'text-xl text-gray-700 price-18K';
+    price18K.textContent = `18K: ₹ 0`;
+
+    cityPriceCard.appendChild(title);
+    cityPriceCard.appendChild(price24K);
+    cityPriceCard.appendChild(price22K);
+    cityPriceCard.appendChild(price18K);
+
+    document.querySelector('main').appendChild(cityPriceCard);
+}
+
 // Event listener for the city select dropdown
 document.getElementById('citySelect').addEventListener('change', (event) => {
     const selectedCity = event.target.value;
     const cityData = goldPrices.find(price => price.City === selectedCity);
 
     if (cityData) {
-        clearPriceCards();
-        createPriceCardsForCity(cityData);
+        updateCityPriceCard(cityData);
     }
 });
-
-// Function to create price cards for the selected city
-function createPriceCardsForCity(cityData) {
-    const priceCardsContainer = document.getElementById('priceCards');
-    const card = document.createElement('div');
-    card.className = 'bg-white rounded-xl shadow-xl p-6 text-center transform transition duration-500 hover:scale-105';
-    card.innerHTML = `
-        <h2 class="text-2xl font-bold text-indigo-800 mb-4">${cityData.City}</h2>
-        <p class="text-xl font-semibold text-indigo-600">24K: ₹ ${cityData['24K Today'].replace('₹ ', '')}</p>
-        <p class="text-xl font-semibold text-indigo-600 mt-2">22K: ₹ ${cityData['22K Today'].replace('₹ ', '')}</p>
-        <p class="text-xl font-semibold text-indigo-600 mt-2">18K: ₹ ${cityData['18K Today'].replace('₹ ', '')}</p>
-    `;
-    priceCardsContainer.appendChild(card);
-}
 
 // Event listener for the calculate button
 document.getElementById('calculateButton').addEventListener('click', () => {
@@ -184,6 +217,7 @@ document.getElementById('refreshButton').addEventListener('click', fetchPrices);
 document.addEventListener('DOMContentLoaded', () => {
     fetchPrices();
     setInterval(updateDateTime, 1000);
+    createCityPriceCard();
     document.getElementById('GoldPriceCalculator').onclick = function() {
         window.location.href = 'index.html';
     }
