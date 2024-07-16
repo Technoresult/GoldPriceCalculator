@@ -177,6 +177,9 @@ function displayError(message) {
     const errorMessage = document.getElementById('errorMessage');
     errorMessage.textContent = message;
     errorMessage.classList.remove('hidden');
+    setTimeout(() => {
+        errorMessage.classList.add('hidden');
+    }, 5000);
 }
 
 // Initial fetch on page load
