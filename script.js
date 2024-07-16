@@ -1,6 +1,6 @@
 let goldPrices = [];
 
-// Function to fetch prices from the CSV file
+// Function to fetch prices from the JSON file
 async function fetchPrices() {
     showLoadingSpinner();
     try {
@@ -8,7 +8,7 @@ async function fetchPrices() {
         const data = await response.json();
         console.log('Fetched data:', data);
         
-        goldPrices = data.cities;
+        goldPrices = data.gold_prices;
         console.log('Processed gold prices:', goldPrices);
         
         populateCityDropdown();
@@ -21,23 +21,23 @@ async function fetchPrices() {
     }
 }
 
-
 // Function to populate the city dropdown
 function populateCityDropdown() {
     const citySelect = document.getElementById('citySelect');
     citySelect.innerHTML = '<option value="">Select City</option>';
     
-    console.log('Populating dropdown with cities:', goldPrices.map(price => price.city));
+    console.log('Populating dropdown with cities:', goldPrices.map(price => price.City));
     
     goldPrices.forEach(price => {
         const option = document.createElement('option');
-        option.value = price.city;
-        option.textContent = price.city;
+        option.value = price.City;
+        option.textContent = price.City;
         citySelect.appendChild(option);
     });
     
     console.log('Dropdown populated. Current options:', Array.from(citySelect.options).map(opt => opt.value));
 }
+
 // Function to calculate average price for India
 function calculateAveragePrice() {
     if (goldPrices.length === 0) {
@@ -45,9 +45,9 @@ function calculateAveragePrice() {
         return;
     }
     
-    const sum24K = goldPrices.reduce((sum, price) => sum + price.gold24K, 0);
-    const sum22K = goldPrices.reduce((sum, price) => sum + price.gold22K, 0);
-    const sum18K = goldPrices.reduce((sum, price) => sum + price.gold18K, 0);
+    const sum24K = goldPrices.reduce((sum, price) => sum + parseIndianPrice(price['24K Today']), 0);
+    const sum22K = goldPrices.reduce((sum, price) => sum + parseIndianPrice(price['22K Today']), 0);
+    const sum18K = goldPrices.reduce((sum, price) => sum + parseIndianPrice(price['18K Today']), 0);
     const count = goldPrices.length;
     
     console.log('Sums and count:', { sum24K, sum22K, sum18K, count });
@@ -61,6 +61,13 @@ function calculateAveragePrice() {
     createAveragePriceCard(avg24K, avg22K, avg18K);
 }
 
+// Function to parse Indian price format to number
+function parseIndianPrice(priceString) {
+    // Example input format: "₹ 7,451"
+    const numericString = priceString.replace(/[^\d.]/g, '');
+    return parseFloat(numericString);
+}
+
 // Function to create price cards
 function createPriceCards(cityData) {
     const priceCardsContainer = document.getElementById('priceCards');
@@ -69,10 +76,10 @@ function createPriceCards(cityData) {
     const card = document.createElement('div');
     card.className = 'bg-white rounded-xl shadow-xl p-6 text-center transform transition duration-500 hover:scale-105';
     card.innerHTML = `
-        <h2 class="text-2xl font-bold text-indigo-800 mb-4">${cityData.city}</h2>
-        <p class="text-xl font-semibold text-indigo-600">24K: ₹ ${formatIndianPrice(Math.round(cityData.gold24K))}/g</p>
-        <p class="text-xl font-semibold text-indigo-600 mt-2">22K: ₹ ${formatIndianPrice(Math.round(cityData.gold22K))}/g</p>
-        <p class="text-xl font-semibold text-indigo-600 mt-2">18K: ₹ ${formatIndianPrice(Math.round(cityData.gold18K))}/g</p>
+        <h2 class="text-2xl font-bold text-indigo-800 mb-4">${cityData.City}</h2>
+        <p class="text-xl font-semibold text-indigo-600">24K: ₹ ${cityData['24K Today']}</p>
+        <p class="text-xl font-semibold text-indigo-600 mt-2">22K: ₹ ${cityData['22K Today']}</p>
+        <p class="text-xl font-semibold text-indigo-600 mt-2">18K: ₹ ${cityData['18K Today']}</p>
     `;
     priceCardsContainer.appendChild(card);
 }
@@ -84,28 +91,11 @@ function createAveragePriceCard(avg24K, avg22K, avg18K) {
     card.className = 'bg-white rounded-xl shadow-xl p-6 text-center transform transition duration-500 hover:scale-105';
     card.innerHTML = `
         <h2 class="text-2xl font-bold text-indigo-800 mb-4">India Average</h2>
-        <p class="text-xl font-semibold text-indigo-600">24K: ₹ ${formatIndianPrice(Math.round(avg24K))}/g</p>
-        <p class="text-xl font-semibold text-indigo-600 mt-2">22K: ₹ ${formatIndianPrice(Math.round(avg22K))}/g</p>
-        <p class="text-xl font-semibold text-indigo-600 mt-2">18K: ₹ ${formatIndianPrice(Math.round(avg18K))}/g</p>
+        <p class="text-xl font-semibold text-indigo-600">24K: ₹ ${avg24K.toFixed(2)}</p>
+        <p class="text-xl font-semibold text-indigo-600 mt-2">22K: ₹ ${avg22K.toFixed(2)}</p>
+        <p class="text-xl font-semibold text-indigo-600 mt-2">18K: ₹ ${avg18K.toFixed(2)}</p>
     `;
     priceCardsContainer.appendChild(card);
-}
-
-// Function to format price in Indian standard with commas
-function formatIndianPrice(price) {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-// Function to calculate custom gram price
-function calculateCustomPrice(carat, grams) {
-    const selectedCity = document.getElementById('citySelect').value;
-    const cityData = goldPrices.find(price => price.city === selectedCity);
-    if (cityData) {
-        const pricePerGram = cityData[`gold${carat}K`];
-        const totalPrice = Math.round(pricePerGram * grams);
-        return formatIndianPrice(totalPrice);
-    }
-    return null;
 }
 
 // Event listener for the city select dropdown
@@ -113,7 +103,7 @@ document.getElementById('citySelect').addEventListener('change', (event) => {
     const selectedCity = event.target.value;
     console.log('Selected city:', selectedCity);
     
-    const cityData = goldPrices.find(price => price.city === selectedCity);
+    const cityData = goldPrices.find(price => price.City === selectedCity);
     console.log('City data:', cityData);
     
     if (cityData) {
@@ -122,6 +112,7 @@ document.getElementById('citySelect').addEventListener('change', (event) => {
         console.error('No data found for selected city');
     }
 });
+
 // Event listener for the calculate button
 document.getElementById('calculateButton').addEventListener('click', () => {
     const caratSelect = document.getElementById('caratSelect');
@@ -143,6 +134,18 @@ document.getElementById('calculateButton').addEventListener('click', () => {
         resultDiv.textContent = 'Unable to calculate. Please select a city.';
     }
 });
+
+// Function to calculate custom gram price
+function calculateCustomPrice(carat, grams) {
+    const selectedCity = document.getElementById('citySelect').value;
+    const cityData = goldPrices.find(price => price.City === selectedCity);
+    if (cityData) {
+        const pricePerGram = parseIndianPrice(cityData[`${carat}K Today`]);
+        const totalPrice = pricePerGram * grams;
+        return totalPrice.toFixed(2);
+    }
+    return null;
+}
 
 // Function to display error messages
 function displayError(message) {
