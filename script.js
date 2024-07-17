@@ -3,10 +3,10 @@ let goldPrices = [];
 // Function for Date and time
 function updateDateTime() {
     const now = new Date();
-    const dateTimeString = now.toLocaleString('en-IN', {
+    const dateString = now.toLocaleDateString('en-IN', {
         year: 'numeric',
         month: 'long',
-        day: 'numeric',
+        day: 'numeric'
     });
     document.getElementById('lastUpdated').innerHTML = `<span style="font-size: 1.2em; font-weight: bold;">${dateString}</span>`;
 }
@@ -19,7 +19,7 @@ async function fetchPrices() {
         const data = await response.json();
         goldPrices = data.gold_prices;
         clearPriceCards();
-        populateCityDropdown();
+        populateCityDropdowns();
         createAveragePriceCards();
         hideLoadingSpinner();
     } catch (error) {
@@ -42,15 +42,10 @@ function createAveragePriceCards() {
     const avg22K = calculateAverage('22K Today');
     const avg18K = calculateAverage('18K Today');
 
-    const title = document.createElement('h2');
-    title.className = 'text-2xl font-bold text-indigo-800 mb-4';
-    title.textContent = 'Gold Price in India';
-
     const dateElement = document.createElement('div');
     dateElement.id = 'dateTime';
     dateElement.className = 'text-xl font-semibold text-indigo-700 mb-4';
 
-    priceCardsContainer.appendChild(title);
     priceCardsContainer.appendChild(dateElement);
 
     createPriceCard('24K', avg24K);
@@ -93,16 +88,19 @@ function parseIndianPrice(priceString) {
     return parseFloat(numericString);
 }
 
-// Function to populate the city dropdown
-function populateCityDropdown() {
-    const citySelect = document.getElementById('citySelect');
-    citySelect.innerHTML = '<option value="">Select City</option>';
-
-    goldPrices.forEach(price => {
-        const option = document.createElement('option');
-        option.value = price.City;
-        option.textContent = price.City;
-        citySelect.appendChild(option);
+// Function to populate the city dropdowns
+function populateCityDropdowns() {
+    const citySelectCustom = document.getElementById('citySelectCustom');
+    const citySelectPrices = document.getElementById('citySelectPrices');
+    
+    [citySelectCustom, citySelectPrices].forEach(select => {
+        select.innerHTML = '<option value="">Select City</option>';
+        goldPrices.forEach(price => {
+            const option = document.createElement('option');
+            option.value = price.City;
+            option.textContent = price.City;
+            select.appendChild(option);
+        });
     });
 }
 
@@ -122,7 +120,7 @@ function updateCityPriceCard(cityData) {
 
 // Function to calculate custom price
 function calculateCustomPrice() {
-    const city = document.getElementById('citySelect').value;
+    const city = document.getElementById('citySelectCustom').value;
     const carat = document.getElementById('caratSelect').value;
     const grams = parseFloat(document.getElementById('gramInput').value);
 
@@ -143,14 +141,25 @@ function calculateCustomPrice() {
     document.getElementById('calculationResult').textContent = `Total Price: ₹ ${totalPrice.toFixed(2)}`;
 }
 
-// Event listener for city selection
-document.getElementById('citySelect').addEventListener('change', (event) => {
+// Event listeners for city selection
+document.getElementById('citySelectCustom').addEventListener('change', (event) => {
     const selectedCity = event.target.value;
+    document.getElementById('citySelectPrices').value = selectedCity;
+    updateCityPrices(selectedCity);
+});
+
+document.getElementById('citySelectPrices').addEventListener('change', (event) => {
+    const selectedCity = event.target.value;
+    document.getElementById('citySelectCustom').value = selectedCity;
+    updateCityPrices(selectedCity);
+});
+
+function updateCityPrices(selectedCity) {
     const cityData = goldPrices.find(price => price.City === selectedCity);
     if (cityData) {
         updateCityPriceCard(cityData);
     }
-});
+}
 
 // Event listener for refresh button
 document.getElementById('refreshButton').addEventListener('click', fetchPrices);
