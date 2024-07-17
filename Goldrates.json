@@ -1,5 +1,5 @@
 {
-  "prices": [
+  "gold_prices": [
     {"City": "Chennai", "22K Today": "₹ 6,831", "24K Today": "₹ 7,452", "18K Today": "₹ 5,596"},
     {"City": "Mumbai", "22K Today": "₹ 6,786", "24K Today": "₹ 7,403", "18K Today": "₹ 5,553"},
     {"City": "Delhi", "22K Today": "₹ 6,801", "24K Today": "₹ 7,418", "18K Today": "₹ 5,565"},
