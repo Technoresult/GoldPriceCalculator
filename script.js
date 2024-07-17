@@ -7,12 +7,8 @@ function updateDateTime() {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true
     });
-    document.getElementById('lastUpdated').textContent = `Last updated: ${dateTimeString}`;
+    document.getElementById('lastUpdated').innerHTML = `<span style="font-size: 1.2em; font-weight: bold;">${dateString}</span>`;
 }
 
 // Function to fetch prices from the JSON file
