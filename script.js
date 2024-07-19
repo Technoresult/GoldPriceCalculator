@@ -15,7 +15,7 @@ function updateDateTime() {
 async function fetchPrices() {
     showLoadingSpinner();
     try {
-        const response = await fetch('https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/19Jul24.json');
+        const response = await fetch('https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/G_19Jul24.json');
         const data = await response.json();
         goldPrices = data.gold_prices;
         clearPriceCards();
