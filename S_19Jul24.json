@@ -1,916 +1,688 @@
 {
-  "cities": [
-    {
-      "name": "Chennai",
-      "prices": {
-        "10gram": 977.5,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+  "silver_rates": [
+    {
+      "city": "Chennai",
+      "10_gram": "₹ 977.50",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
+    },
+    {
+      "city": "Mumbai",
+      "10_gram": "₹ 932.50",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
+    },
+    {
+      "city": "Delhi",
+      "10_gram": "₹ 932.50",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
+    },
+    {
+      "city": "Kolkata",
+      "10_gram": "₹ 932.50",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
+    },
+    {
+      "city": "Bangalore",
+      "10_gram": "₹ 944",
+      "100_gram": "₹ 9,440",
+      "1_kg": "₹ 94,400"
+    },
+    {
+      "city": "Hyderabad",
+      "10_gram": "₹ 977.50",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
+    },
+    {
+      "city": "Kerala",
+      "10_gram": "₹ 977.50",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
+    },
+    {
+      "city": "Pune",
+      "10_gram": "₹ 932.50",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Mumbai",
-      "prices": {
-        "10gram": 932.5,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Vadodara",
+      "10_gram": "₹ 932.50",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
+    },
+    {
+      "city": "Ahmedabad",
+      "10_gram": "₹ 932.50",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
+    },
+    {
+      "city": "Jaipur",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
+    },
+    {
+      "city": "Lucknow",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
+    },
+    {
+      "city": "Coimbatore",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
+    },
+    {
+      "city": "Madurai",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Delhi",
-      "prices": {
-        "10gram": 932.5,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Vijayawada",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Kolkata",
-      "prices": {
-        "10gram": 932.5,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Patna",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Bangalore",
-      "prices": {
-        "10gram": 944.0,
-        "100gram": 9440.0,
-        "1kg": 94400.0
-      }
+    {
+      "city": "Nagpur",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Hyderabad",
-      "prices": {
-        "10gram": 977.5,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Chandigarh",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Kerala",
-      "prices": {
-        "10gram": 977.5,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Surat",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Pune",
-      "prices": {
-        "10gram": 932.5,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Bhubaneswar",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Vadodara",
-      "prices": {
-        "10gram": 932.5,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Mangalore",
+      "10_gram": "₹ 944",
+      "100_gram": "₹ 9,440",
+      "1_kg": "₹ 94,400"
     },
-    {
-      "name": "Ahmedabad",
-      "prices": {
-        "10gram": 932.5,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Visakhapatnam",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Jaipur",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Nashik",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Lucknow",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Mysore",
+      "10_gram": "₹ 944",
+      "100_gram": "₹ 9,440",
+      "1_kg": "₹ 94,400"
     },
-    {
-      "name": "Coimbatore",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Salem",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Madurai",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Rajkot",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Vijayawada",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Trichy",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Patna",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Ayodhya",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Nagpur",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Cuttack",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Chandigarh",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Davanagere",
+      "10_gram": "₹ 944",
+      "100_gram": "₹ 9,440",
+      "1_kg": "₹ 94,400"
     },
-    {
-      "name": "Surat",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Bellary",
+      "10_gram": "₹ 944",
+      "100_gram": "₹ 9,440",
+      "1_kg": "₹ 94,400"
     },
-    {
-      "name": "Bhubaneswar",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Gurgaon",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Mangalore",
-      "prices": {
-        "10gram": 944.0,
-        "100gram": 9440.0,
-        "1kg": 94400.0
-      }
+    {
+      "city": "Ghaziabad",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Visakhapatnam",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Noida",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Nashik",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Vellore",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Mysore",
-      "prices": {
-        "10gram": 944.0,
-        "100gram": 9440.0,
-        "1kg": 94400.0
-      }
+    {
+      "city": "Amaravati",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Salem",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Guntur",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Rajkot",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Nellore",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Trichy",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Kakinada",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Ayodhya",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Tirupati",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Cuttack",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Kadapa",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Davanagere",
-      "prices": {
-        "10gram": 944.0,
-        "100gram": 9440.0,
-        "1kg": 94400.0
-      }
+    {
+      "city": "Anantapur",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Bellary",
-      "prices": {
-        "10gram": 944.0,
-        "100gram": 9440.0,
-        "1kg": 94400.0
-      }
+    {
+      "city": "Warangal",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Gurgaon",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Nizamabad",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Ghaziabad",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Khammam",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Noida",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Berhampur",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Vellore",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Rourkela",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Amaravati",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Virar",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Guntur",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Aurangabad",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Nellore",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Solapur",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Kakinada",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Bhiwandi",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Tirupati",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Kolhapur",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Kadapa",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Latur",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Anantapur",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Tirupur",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Warangal",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Tirunelveli",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Nizamabad",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Sambalpur",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Khammam",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Amravati",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Berhampur",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Erode",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Rourkela",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Indore",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Virar",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Kanpur",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Aurangabad",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Kochi",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Solapur",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Ludhiana",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Bhiwandi",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Thane",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Kolhapur",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Amritsar",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Latur",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Nagercoil",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Tirupur",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Trivandrum",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Tirunelveli",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Thanjavur",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Sambalpur",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Bhopal",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Amravati",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Varanasi",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Erode",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Goa",
+      "10_gram": "₹ 944",
+      "100_gram": "₹ 9,440",
+      "1_kg": "₹ 94,400"
     },
-    {
-      "name": "Indore",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Karur",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Kanpur",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Kumbakonam",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Kochi",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Namakkal",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Ludhiana",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Agra",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Thane",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Dharmapuri",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Amritsar",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Dindigul",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Nagercoil",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Tuticorin",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Trivandrum",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Cuddalore",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Thanjavur",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Kanchipuram",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Bhopal",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Krishnagiri",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Varanasi",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Villupuram",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Goa",
-      "prices": {
-        "10gram": 944.0,
-        "100gram": 9440.0,
-        "1kg": 94400.0
-      }
+    {
+      "city": "Kovilpatti",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Karur",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Theni",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Kumbakonam",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Tiruvannamalai",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Namakkal",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Hosur",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Agra",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Karaikudi",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Dharmapuri",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Pudukkottai",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Dindigul",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Ramanathapuram",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Tuticorin",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Ambur",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Cuddalore",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Kanyakumari",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Kanchipuram",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Nagapattinam",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Krishnagiri",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Virudhunagar",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Villupuram",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Kallakurichi",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Kovilpatti",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Pollachi",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Theni",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Arcot",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Tiruvannamalai",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Palani",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Hosur",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Ariyalur",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Karaikudi",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Mohali",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Pudukkottai",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Paramakudi",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Ramanathapuram",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Perambalur",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Ambur",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Jayankondam",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Kanyakumari",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Kodaikanal",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Nagapattinam",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Ooty",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Virudhunagar",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Rameswaram",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Kallakurichi",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Sivagangai",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Pollachi",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Tiruvarur",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Arcot",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Meerut",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Palani",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Guwahati",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Ariyalur",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Raipur",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Mohali",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
+    {
+      "city": "Jalgaon",
+      "10_gram": "₹ 932",
+      "100_gram": "₹ 9,325",
+      "1_kg": "₹ 93,250"
     },
-    {
-      "name": "Paramakudi",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Rajahmundry",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Perambalur",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Belgaum",
+      "10_gram": "₹ 944",
+      "100_gram": "₹ 9,440",
+      "1_kg": "₹ 94,400"
     },
-    {
-      "name": "Jayankondam",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Thrissur",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     },
-    {
-      "name": "Kodaikanal",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
-    },
-    {
-      "name": "Ooty",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
-    },
-    {
-      "name": "Rameswaram",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
-    },
-    {
-      "name": "Sivagangai",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
-    },
-    {
-      "name": "Tiruvarur",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
-    },
-    {
-      "name": "Meerut",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
-    },
-    {
-      "name": "Guwahati",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
-    },
-    {
-      "name": "Raipur",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
-    },
-    {
-      "name": "Jalgaon",
-      "prices": {
-        "10gram": 932.0,
-        "100gram": 9325.0,
-        "1kg": 93250.0
-      }
-    },
-    {
-      "name": "Rajahmundry",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
-    },
-    {
-      "name": "Belgaum",
-      "prices": {
-        "10gram": 944.0,
-        "100gram": 9440.0,
-        "1kg": 94400.0
-      }
-    },
-    {
-      "name": "Thrissur",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
-    },
-    {
-      "name": "Pondicherry",
-      "prices": {
-        "10gram": 978.0,
-        "100gram": 9775.0,
-        "1kg": 97750.0
-      }
+    {
+      "city": "Pondicherry",
+      "10_gram": "₹ 978",
+      "100_gram": "₹ 9,775",
+      "1_kg": "₹ 97,750"
     }
   ]
 }
