@@ -8,14 +8,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main class="container mx-auto p-4">
+    <header class="header bg-indigo-800 text-white p-4 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 id="gold-price-calculator" class="logo text-3xl font-bold"><a href="index.html">Gold Price Calculator</a></h1>
+            <nav>
+                <ul class="menu flex space-x-4">
+                    <li><a href="index.html" class="hover:underline">Home</a></li>
+                    <li><a href="#customCalculator" class="hover:underline">Calculator</a></li>
+                    <li><a href="#cityPriceCard" class="hover:underline">City Prices</a></li>
+                    <li><a href="silver_calculator.html" class="hover:underline">Silver</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container mx-auto p-4" role="main">
         <header class="flex justify-between items-center mb-4">
             <h1 id="GoldPriceCalculator" class="text-4xl font-bold text-indigo-800 cursor-pointer">Gold Price Calculator</h1>
             <button id="refreshButton" class="bg-indigo-600 text-white px-4 py-2 rounded-lg">Refresh Prices</button>
         </header>
         <div id="errorMessage" class="hidden text-red-600 mb-4"></div>
-        <h2 id="gold-price-in-india" class="text-2xl font-bold text-indigo-800 mb-4">Gold Price in India</h2>
         <div id="lastUpdated" class="text-sm text-gray-600 mb-4"></div>
+        <h2 id="gold-price-in-india" class="text-2xl font-bold text-indigo-800 mb-4">Gold Price in India</h2>
         <p class="text-gray-600 mb-6">Get real-time gold prices for 24K, 22K, and 18K Gold per gram in INR.</p>
         <section class="mb-4">
             <div id="priceCards" class="flex flex-wrap justify-between"></div>
@@ -45,7 +58,33 @@
                 <p class="text-xl text-gray-700 price-18K">18K: ₹ 0</p>
             </div>
         </section>
+        <div class="mt-8">
+            <h2 class="text-2xl font-bold text-indigo-800 mb-4">Gold Prices by City</h2>
+            <div class="overflow-x-auto">
+                <table id="goldPricesTable" class="w-full bg-white shadow-lg rounded-lg overflow-hidden">
+                    <thead class="bg-indigo-800 text-white">
+                        <tr>
+                            <th class="py-3 px-4 text-left">City</th>
+                            <th class="py-3 px-4 text-left">24K Today</th>
+                            <th class="py-3 px-4 text-left">22K Today</th>
+                            <th class="py-3 px-4 text-left">18K Today</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Table rows will be populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mt-4">
+                <button id="viewMoreBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-300">View More</button>
+            </div>
+        </div>
     </main>
+    <footer class="bg-indigo-800 text-white p-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Gold Price Calculator. All rights reserved.</p>
+        </div>
+    </footer>
     <div id="loadingSpinner" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
         <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-indigo-500"></div>
         <span class="sr-only">Loading...</span>
