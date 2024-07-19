@@ -1,4 +1,6 @@
 let goldPrices = [];
+let displayedItems = 15; // Define globally
+const itemsPerLoad = 15; // Define globally
 
 // Function for Date and time
 function updateDateTime() {
@@ -21,6 +23,7 @@ async function fetchPrices() {
         clearPriceCards();
         populateCityDropdowns();
         createAveragePriceCards();
+        populateGoldPricesTable(); // Added recently for Gold price table
         hideLoadingSpinner();
     } catch (error) {
         console.error('Error fetching prices:', error);
@@ -32,7 +35,7 @@ async function fetchPrices() {
 // Function to clear existing price cards
 function clearPriceCards() {
     const priceCardsContainer = document.getElementById('priceCards');
-    priceCardsContainer.innerHTML = ''; 
+    priceCardsContainer.innerHTML = '';
 }
 
 // Function to create average price cards
@@ -103,6 +106,41 @@ function populateCityDropdowns() {
         });
     });
 }
+
+// Function to populate the gold prices table
+function populateGoldPricesTable() {
+    const tableBody = document.querySelector('#goldPricesTable tbody');
+    tableBody.innerHTML = ''; // Clear existing rows
+
+    goldPrices.slice(0, displayedItems).forEach(price => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td class="py-3 px-4 border-b">${price.City}</td>
+            <td class="py-3 px-4 border-b">${price['24K Today']}</td>
+            <td class="py-3 px-4 border-b">${price['22K Today']}</td>
+            <td class="py-3 px-4 border-b">${price['18K Today']}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+
+    updateViewMoreButton();
+}
+
+// Function to update "View More" button visibility
+function updateViewMoreButton() {
+    const viewMoreBtn = document.getElementById('viewMoreBtn');
+    if (displayedItems >= goldPrices.length) {
+        viewMoreBtn.style.display = 'none';
+    } else {
+        viewMoreBtn.style.display = 'inline-block';
+    }
+}
+
+// Event listener for "View More" button
+document.getElementById('viewMoreBtn').addEventListener('click', () => {
+    displayedItems += itemsPerLoad;
+    populateGoldPricesTable();
+});
 
 // Function to update city-wise price card
 function updateCityPriceCard(cityData) {
