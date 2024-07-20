@@ -2,10 +2,35 @@ let silverPrices = [];
 const initialDisplayCount = 20;
 let currentDisplayCount = initialDisplayCount;
 
+async function getLatestJsonFileName(isSilver = false) {
+    const repoUrl = 'https://api.github.com/repos/Technoresult/GoldPriceCalculator/contents/';
+    try {
+        const response = await fetch(repoUrl);
+        const files = await response.json();
+        const jsonFiles = files.filter(file => file.name.endsWith('.json'));
+        jsonFiles.sort((a, b) => new Date(b.name) - new Date(a.name));
+        
+        if (isSilver && jsonFiles.length > 1) {
+            // Return the second most recent file for silver
+            return jsonFiles[1].name;
+        } else {
+            // Return the most recent file for gold
+            return jsonFiles[0].name;
+        }
+    } catch (error) {
+        console.error('Error fetching latest file name:', error);
+        return null;
+    }
+}
+
 async function fetchSilverPrices() {
     showLoadingSpinner();
     try {
-        const response = await fetch('https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/S_20Jul24.json');
+        const latestFileName = await getLatestJsonFileName(true);
+        if (!latestFileName) {
+            throw new Error('Could not retrieve latest silver file name');
+        }
+        const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/${latestFileName}`);
         const data = await response.json();
         silverPrices = data.silver_rates;
         clearPriceCards();
@@ -20,7 +45,6 @@ async function fetchSilverPrices() {
     }
 }
 
-// Function for silver price table
 function populatePriceTable() {
     const tableBody = document.querySelector('#priceTable tbody');
     tableBody.innerHTML = '';
@@ -192,7 +216,6 @@ function displayError(message) {
     errorMessage.classList.remove('hidden');
 }
 
-// Function for Date and time
 function updateDateTime() {
     const now = new Date();
     const dateString = now.toLocaleDateString('en-IN', {
