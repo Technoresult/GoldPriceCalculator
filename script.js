@@ -1,7 +1,6 @@
-let goldPrices = [];
+
 let displayedItems = 15; // Define globally
 const itemsPerLoad = 15; // Define globally
-let latestFileName;
 
 // Function for Date and time
 function updateDateTime() {
