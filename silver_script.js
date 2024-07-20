@@ -84,11 +84,17 @@ document.getElementById('loadMoreButton').addEventListener('click', () => {
 
 function clearPriceCards() {
     const priceCardsContainer = document.getElementById('priceCards');
-    priceCardsContainer.innerHTML = '';
+    if (priceCardsContainer) {
+        priceCardsContainer.innerHTML = '';
+    }
 }
 
 function createAveragePriceCards() {
     const priceCardsContainer = document.getElementById('priceCards');
+    if (!priceCardsContainer) {
+        console.error('priceCardsContainer is not defined');
+        return;
+    }
     const avg1Gram = calculateAverage('10_gram') / 10;
     const avg10Gram = avg1Gram * 10;
 
@@ -97,6 +103,12 @@ function createAveragePriceCards() {
 }
 
 function createPriceCard(weight, price) {
+    const priceCardsContainer = document.getElementById('priceCards');
+    if (!priceCardsContainer) {
+        console.error('priceCardsContainer is not defined');
+        return;
+    }
+    
     const card = document.createElement('div');
     card.className = 'bg-white rounded-xl shadow-2xl p-8 text-center price-card mb-4 w-full md:w-1/2';
 
