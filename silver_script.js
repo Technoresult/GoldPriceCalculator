@@ -37,10 +37,10 @@ async function fetchSilverPrices() {
         populateCityDropdowns();
         createAveragePriceCards();
         populatePriceTable();
-        hideLoadingSpinner();
     } catch (error) {
         console.error('Error fetching prices:', error);
         displayError('Failed to fetch prices: ' + error.message);
+    } finally {
         hideLoadingSpinner();
     }
 }
@@ -124,7 +124,6 @@ function createPriceCard(weight, price) {
     card.appendChild(title);
     card.appendChild(priceElement);
 
-    const priceCardsContainer = document.getElementById('priceCards');
     priceCardsContainer.appendChild(card);
 }
 
