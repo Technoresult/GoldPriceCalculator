@@ -13,11 +13,26 @@ function updateDateTime() {
     document.getElementById('lastUpdated').innerHTML = `<span style="font-size: 1.2em; font-weight: bold;">${dateString}</span>`;
 }
 
+// THis function find the latest json file from the repo
+async function getLatestJsonFileName() {
+    const repoUrl = 'https://api.github.com/repos/Technoresult/GoldPriceCalculator/contents/';
+    try {
+        const response = await fetch(repoUrl);
+        const files = await response.json();
+        const jsonFiles = files.filter(file => file.name.endsWith('.json'));
+        jsonFiles.sort((a, b) => new Date(b.name) - new Date(a.name));
+        return jsonFiles[0].name;
+    } catch (error) {
+        console.error('Error fetching latest file name:', error);
+        return null;
+    }
+}
+
 // Function to fetch prices from the JSON file
 async function fetchPrices() {
     showLoadingSpinner();
     try {
-        const response = await fetch('https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/G_20Jul24.json');
+        const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/${latestFileName}`);
         const data = await response.json();
         goldPrices = data.gold_prices;
         clearPriceCards();
