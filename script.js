@@ -227,6 +227,7 @@ function displayError(message) {
 async function initializeAndFetchPrices() {
     try {
         latestFileName = await getLatestJsonFileName();
+        console.log('Latest file name:', latestFileName);  // Debug statement
         if (latestFileName) {
             await fetchPrices();
         } else {
