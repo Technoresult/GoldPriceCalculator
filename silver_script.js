@@ -32,6 +32,10 @@ async function fetchSilverPrices() {
         }
         const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/${latestFileName}`);
         const data = await response.json();
+        console.log('Fetched data:', data); // Debugging line
+        if (!data.silver_rates) {
+            throw new Error('No silver rates found in the fetched data');
+        }
         silverPrices = data.silver_rates;
         clearPriceCards();
         populateCityDropdowns();
@@ -48,6 +52,12 @@ async function fetchSilverPrices() {
 function populatePriceTable() {
     const tableBody = document.querySelector('#priceTable tbody');
     tableBody.innerHTML = '';
+
+    if (!silverPrices || silverPrices.length === 0) {
+        console.error('No silver prices available to display'); // Debugging line
+        displayError('No silver prices available to display');
+        return;
+    }
 
     const displayedPrices = silverPrices.slice(0, currentDisplayCount);
 
