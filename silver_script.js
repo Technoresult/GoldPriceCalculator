@@ -6,8 +6,7 @@ async function fetchSilverPrices() {
     showLoadingSpinner();
     try {
         // Manually specify the file name to fetch
-        const fileName = 'S_20Jul24.json'; // Replace with your actual file name
-        const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/${fileName}`);
+        const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/S_20Jul24.json`);
         const data = await response.json();
         console.log('Fetched data:', data); // Debugging line
         if (!data.silver_rates) {
