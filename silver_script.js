@@ -5,7 +5,7 @@ let currentDisplayCount = initialDisplayCount;
 async function fetchSilverPrices() {
     showLoadingSpinner();
     try {
-        const response = await fetch('https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/S_19Jul24.json');
+        const response = await fetch('https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/S_20Jul24.json');
         const data = await response.json();
         silverPrices = data.silver_rates;
         clearPriceCards();
