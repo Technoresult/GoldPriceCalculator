@@ -1,50 +1,16 @@
-let displayedItems = 15;
-const itemsPerLoad = 15;
-let goldPrices = []; // Define goldPrices globally
+let goldPrices = [];
+const initialDisplayCount = 20;
+let currentDisplayCount = initialDisplayCount;
 
-// Function for Date and time
-function updateDateTime() {
-    const now = new Date();
-    const dateString = now.toLocaleDateString('en-IN', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    });
-    document.getElementById('lastUpdated').innerHTML = `<span style="font-size: 1.2em; font-weight: bold;">${dateString}</span>`;
-}
-
-// Function to get the latest JSON file name
-async function getLatestJsonFileName() {
-    const apiUrl = 'https://api.github.com/repos/Technoresult/GoldPriceCalculator/contents/';
-    try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const files = await response.json();
-        const jsonFiles = files.filter(file => file.name.endsWith('.json'));
-        if (jsonFiles.length === 0) {
-            throw new Error('No JSON files found in the repository');
-        }
-        // Sort files by name in descending order and get the first one
-        return jsonFiles.sort((a, b) => b.name.localeCompare(a.name))[0].name;
-    } catch (error) {
-        console.error('Error fetching latest file name:', error);
-        throw error;
-    }
-}
-
-// Function to fetch prices from the JSON file
-async function fetchPrices(fileName) {
+async function fetchGoldPrices() {
     showLoadingSpinner();
     try {
-        const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/${fileName}`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        // Manually specify the file name to fetch
+        const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/G_21Jul24.json`);
         const data = await response.json();
-        if (!data.gold_prices || !Array.isArray(data.gold_prices)) {
-            throw new Error('Invalid data structure');
+        console.log('Fetched data:', data); // Debugging line
+        if (!data.gold_prices) {
+            throw new Error('No gold prices found in the fetched data');
         }
         goldPrices = data.gold_prices;
         clearPriceCards();
@@ -59,40 +25,97 @@ async function fetchPrices(fileName) {
     }
 }
 
-// Function to clear existing price cards
-function clearPriceCards() {
-    const priceCardsContainer = document.getElementById('priceCards');
-    priceCardsContainer.innerHTML = '';
+function populateGoldPricesTable() {
+    const tableBody = document.querySelector('#goldPricesTable tbody');
+    tableBody.innerHTML = '';
+
+    if (!goldPrices || goldPrices.length === 0) {
+        console.error('No gold prices available to display'); // Debugging line
+        displayError('No gold prices available to display');
+        return;
+    }
+
+    const displayedPrices = goldPrices.slice(0, currentDisplayCount);
+
+    displayedPrices.forEach(price => {
+        const row = document.createElement('tr');
+        
+        const cityCell = document.createElement('td');
+        cityCell.className = 'py-3 px-4 border-b';
+        cityCell.textContent = price.City;
+        
+        const price24KCell = document.createElement('td');
+        price24KCell.className = 'py-3 px-4 border-b';
+        price24KCell.textContent = price['24K Today'];
+        
+        const price22KCell = document.createElement('td');
+        price22KCell.className = 'py-3 px-4 border-b';
+        price22KCell.textContent = price['22K Today'];
+        
+        const price18KCell = document.createElement('td');
+        price18KCell.className = 'py-3 px-4 border-b';
+        price18KCell.textContent = price['18K Today'];
+
+        row.appendChild(cityCell);
+        row.appendChild(price24KCell);
+        row.appendChild(price22KCell);
+        row.appendChild(price18KCell);
+
+        tableBody.appendChild(row);
+    });
+
+    updateViewMoreButton();
 }
 
-// Function to create average price cards
+function updateViewMoreButton() {
+    const viewMoreBtn = document.getElementById('viewMoreBtn');
+    if (currentDisplayCount >= goldPrices.length) {
+        viewMoreBtn.style.display = 'none';
+    } else {
+        viewMoreBtn.style.display = 'inline-block';
+    }
+}
+
+document.getElementById('viewMoreBtn').addEventListener('click', () => {
+    currentDisplayCount += initialDisplayCount;
+    populateGoldPricesTable();
+});
+
+function clearPriceCards() {
+    const priceCardsContainer = document.getElementById('priceCards');
+    if (priceCardsContainer) {
+        priceCardsContainer.innerHTML = '';
+    }
+}
+
 function createAveragePriceCards() {
     const priceCardsContainer = document.getElementById('priceCards');
+    if (!priceCardsContainer) {
+        console.error('priceCardsContainer is not defined');
+        return;
+    }
     const avg24K = calculateAverage('24K Today');
     const avg22K = calculateAverage('22K Today');
     const avg18K = calculateAverage('18K Today');
-
-    const dateElement = document.createElement('div');
-    dateElement.id = 'dateTime';
-    dateElement.className = 'text-xl font-semibold text-indigo-700 mb-4';
-
-    priceCardsContainer.appendChild(dateElement);
 
     createPriceCard('24K', avg24K);
     createPriceCard('22K', avg22K);
     createPriceCard('18K', avg18K);
 }
 
-// Function to create individual price cards
 function createPriceCard(carat, price) {
     const priceCardsContainer = document.getElementById('priceCards');
-
+    if (!priceCardsContainer) {
+        console.error('priceCardsContainer is not defined');
+        return;
+    }
+    
     const card = document.createElement('div');
     card.className = 'bg-white rounded-xl shadow-2xl p-8 text-center price-card mb-4 w-full md:w-1/3';
 
     const title = document.createElement('h3');
     title.className = 'text-2xl font-bold text-indigo-800 mb-4';
-    title.textContent = `${carat}`;
+    title.textContent = `${carat} Gold`;
 
     const priceElement = document.createElement('p');
     priceElement.className = 'text-xl text-gray-700';
@@ -104,25 +127,21 @@ function createPriceCard(carat, price) {
     priceCardsContainer.appendChild(card);
 }
 
-// Function to calculate average price for a specific carat type
 function calculateAverage(caratType) {
     if (!goldPrices.length) return 0;
-
     const sum = goldPrices.reduce((acc, price) => acc + parseIndianPrice(price[caratType]), 0);
     return sum / goldPrices.length;
 }
 
-// Function to parse Indian price format to number
 function parseIndianPrice(priceString) {
     const numericString = priceString.replace(/[^\d.]/g, '');
     return parseFloat(numericString);
 }
 
-// Function to populate the city dropdowns
 function populateCityDropdowns() {
     const citySelectCustom = document.getElementById('citySelectCustom');
     const citySelectPrices = document.getElementById('citySelectPrices');
-    
+
     [citySelectCustom, citySelectPrices].forEach(select => {
         select.innerHTML = '<option value="">Select City</option>';
         goldPrices.forEach(price => {
@@ -134,36 +153,6 @@ function populateCityDropdowns() {
     });
 }
 
-// Function to populate the gold prices table
-function populateGoldPricesTable() {
-    const tableBody = document.querySelector('#goldPricesTable tbody');
-    tableBody.innerHTML = ''; // Clear existing rows
-
-    goldPrices.slice(0, displayedItems).forEach(price => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td class="py-3 px-4 border-b">${price.City}</td>
-            <td class="py-3 px-4 border-b">${price['24K Today']}</td>
-            <td class="py-3 px-4 border-b">${price['22K Today']}</td>
-            <td class="py-3 px-4 border-b">${price['18K Today']}</td>
-        `;
-        tableBody.appendChild(row);
-    });
-
-    updateViewMoreButton();
-}
-
-// Function to update "View More" button visibility
-function updateViewMoreButton() {
-    const viewMoreBtn = document.getElementById('viewMoreBtn');
-    if (displayedItems >= goldPrices.length) {
-        viewMoreBtn.style.display = 'none';
-    } else {
-        viewMoreBtn.style.display = 'inline-block';
-    }
-}
-
-// Function to update city-wise price card
 function updateCityPriceCard(cityData) {
     const cityPriceCard = document.getElementById('cityPriceCard');
     if (!cityPriceCard) return;
@@ -177,7 +166,6 @@ function updateCityPriceCard(cityData) {
     price18K.textContent = `18K: ${cityData['18K Today']}`;
 }
 
-// Function to calculate custom price
 function calculateCustomPrice() {
     const city = document.getElementById('citySelectCustom').value;
     const carat = document.getElementById('caratSelect').value;
@@ -200,6 +188,18 @@ function calculateCustomPrice() {
     document.getElementById('calculationResult').textContent = `Total Price: ₹ ${totalPrice.toFixed(2)}`;
 }
 
+document.getElementById('citySelectCustom').addEventListener('change', (event) => {
+    const selectedCity = event.target.value;
+    document.getElementById('citySelectPrices').value = selectedCity;
+    updateCityPrices(selectedCity);
+});
+
+document.getElementById('citySelectPrices').addEventListener('change', (event) => {
+    const selectedCity = event.target.value;
+    document.getElementById('citySelectCustom').value = selectedCity;
+    updateCityPrices(selectedCity);
+});
+
 function updateCityPrices(selectedCity) {
     const cityData = goldPrices.find(price => price.City === selectedCity);
     if (cityData) {
@@ -207,67 +207,34 @@ function updateCityPrices(selectedCity) {
     }
 }
 
-// Function to show loading spinner
 function showLoadingSpinner() {
     document.getElementById('loadingSpinner').classList.remove('hidden');
 }
 
-// Function to hide loading spinner
 function hideLoadingSpinner() {
     document.getElementById('loadingSpinner').classList.add('hidden');
 }
 
-// Function to display error messages
 function displayError(message) {
     const errorMessage = document.getElementById('errorMessage');
     errorMessage.textContent = message;
     errorMessage.classList.remove('hidden');
-    setTimeout(() => {
-        errorMessage.classList.add('hidden');
-    }, 5000);
 }
 
-// New initialization function
-async function initializeAndFetchPrices() {
-    try {
-        const latestFileName = await getLatestJsonFileName();
-        console.log('Latest file name:', latestFileName);  // Debug statement
-        if (latestFileName) {
-            await fetchPrices(latestFileName);
-        } else {
-            throw new Error('Could not retrieve the latest file name');
-        }
-    } catch (error) {
-        console.error('Error initializing:', error);
-        displayError('Failed to initialize: ' + error.message);
-    }
+function updateDateTime() {
+    const now = new Date();
+    const dateString = now.toLocaleDateString('en-IN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    document.getElementById('lastUpdated').innerHTML = `<span style="font-size: 1.2em; font-weight: bold;">${dateString}</span>`;
 }
 
-// Wait for the DOM to be fully loaded before adding event listeners and initializing
-document.addEventListener('DOMContentLoaded', function() {
-    // Event listeners
-    document.getElementById('viewMoreBtn').addEventListener('click', () => {
-        displayedItems += itemsPerLoad;
-        populateGoldPricesTable();
-    });
+document.getElementById('refreshButton').addEventListener('click', fetchGoldPrices);
+document.getElementById('calculateButton').addEventListener('click', calculateCustomPrice);
 
-    document.getElementById('citySelectCustom').addEventListener('change', (event) => {
-        const selectedCity = event.target.value;
-        document.getElementById('citySelectPrices').value = selectedCity;
-        updateCityPrices(selectedCity);
-    });
-
-    document.getElementById('citySelectPrices').addEventListener('change', (event) => {
-        const selectedCity = event.target.value;
-        document.getElementById('citySelectCustom').value = selectedCity;
-        updateCityPrices(selectedCity);
-    });
-
-    document.getElementById('refreshButton').addEventListener('click', initializeAndFetchPrices);
-    document.getElementById('calculateButton').addEventListener('click', calculateCustomPrice);
-
-    // Initial fetch on page load
-    initializeAndFetchPrices();
-    updateDateTime();
-    setInterval(updateDateTime, 1000); // Update date and time every second
-});
+// Initial fetch on page load
+fetchGoldPrices();
+updateDateTime();
+setInterval(updateDateTime, 1000); // Update date and time every second
