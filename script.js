@@ -13,7 +13,11 @@ async function fetchGoldPrices() {
         console.log('Fetched data:', data); // Debugging line
 
         if (data.gold_prices && Array.isArray(data.gold_prices)) {
-            goldPrices = data.gold_prices;
+            goldPrices = data.gold_prices.map(price => ({
+                ...price,
+                '24K Today': price['22K Today'],
+                '22K Today': price['24K Today']
+            }));
         } else {
             throw new Error('Invalid data structure: expected an object with a gold_prices array');
         }
@@ -35,7 +39,6 @@ async function fetchGoldPrices() {
         hideLoadingSpinner();
     }
 }
-
 function populateGoldPricesTable() {
     const tableBody = document.querySelector('#goldPricesTable tbody');
     tableBody.innerHTML = '';
@@ -112,6 +115,12 @@ function createAveragePriceCards() {
     createPriceCard('24K', avg24K);
     createPriceCard('22K', avg22K);
     createPriceCard('18K', avg18K);
+}
+
+function calculateAverage(caratType) {
+    if (!goldPrices.length) return 0;
+    const sum = goldPrices.reduce((acc, price) => acc + parseIndianPrice(price[caratType]), 0);
+    return sum / goldPrices.length;
 }
 
 function createPriceCard(carat, price) {
