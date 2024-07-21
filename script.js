@@ -243,28 +243,31 @@ async function initializeAndFetchPrices() {
     }
 }
 
-// Event listeners
-document.getElementById('viewMoreBtn').addEventListener('click', () => {
-    displayedItems += itemsPerLoad;
-    populateGoldPricesTable();
+// Wait for the DOM to be fully loaded before adding event listeners and initializing
+document.addEventListener('DOMContentLoaded', function() {
+    // Event listeners
+    document.getElementById('viewMoreBtn').addEventListener('click', () => {
+        displayedItems += itemsPerLoad;
+        populateGoldPricesTable();
+    });
+
+    document.getElementById('citySelectCustom').addEventListener('change', (event) => {
+        const selectedCity = event.target.value;
+        document.getElementById('citySelectPrices').value = selectedCity;
+        updateCityPrices(selectedCity);
+    });
+
+    document.getElementById('citySelectPrices').addEventListener('change', (event) => {
+        const selectedCity = event.target.value;
+        document.getElementById('citySelectCustom').value = selectedCity;
+        updateCityPrices(selectedCity);
+    });
+
+    document.getElementById('refreshButton').addEventListener('click', initializeAndFetchPrices);
+    document.getElementById('calculateButton').addEventListener('click', calculateCustomPrice);
+
+    // Initial fetch on page load
+    initializeAndFetchPrices();
+    updateDateTime();
+    setInterval(updateDateTime, 1000); // Update date and time every second
 });
-
-document.getElementById('citySelectCustom').addEventListener('change', (event) => {
-    const selectedCity = event.target.value;
-    document.getElementById('citySelectPrices').value = selectedCity;
-    updateCityPrices(selectedCity);
-});
-
-document.getElementById('citySelectPrices').addEventListener('change', (event) => {
-    const selectedCity = event.target.value;
-    document.getElementById('citySelectCustom').value = selectedCity;
-    updateCityPrices(selectedCity);
-});
-
-document.getElementById('refreshButton').addEventListener('click', initializeAndFetchPrices);
-document.getElementById('calculateButton').addEventListener('click', calculateCustomPrice);
-
-// Initial fetch on page load
-initializeAndFetchPrices();
-updateDateTime();
-setInterval(updateDateTime, 1000); // Update date and time every second
