@@ -5,14 +5,25 @@ let currentDisplayCount = initialDisplayCount;
 async function fetchGoldPrices() {
     showLoadingSpinner();
     try {
-        // Manually specify the file name to fetch
         const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/G_21Jul24.json`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
         console.log('Fetched data:', data); // Debugging line
-        if (!data.gold_prices) {
+
+        if (data.gold_prices && Array.isArray(data.gold_prices)) {
+            goldPrices = data.gold_prices;
+        } else {
+            throw new Error('Invalid data structure: expected an object with a gold_prices array');
+        }
+
+        console.log('Processed goldPrices:', goldPrices); // Debugging line
+
+        if (goldPrices.length === 0) {
             throw new Error('No gold prices found in the fetched data');
         }
-        goldPrices = data.gold_prices;
+
         clearPriceCards();
         populateCityDropdowns();
         createAveragePriceCards();
@@ -30,7 +41,7 @@ function populateGoldPricesTable() {
     tableBody.innerHTML = '';
 
     if (!goldPrices || goldPrices.length === 0) {
-        console.error('No gold prices available to display'); // Debugging line
+        console.error('No gold prices available to display');
         displayError('No gold prices available to display');
         return;
     }
