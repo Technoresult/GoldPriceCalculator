@@ -1,6 +1,6 @@
-
-let displayedItems = 15; // Define globally
-const itemsPerLoad = 15; // Define globally
+let displayedItems = 15;
+const itemsPerLoad = 15;
+let goldPrices = []; // Define goldPrices globally
 
 // Function for Date and time
 function updateDateTime() {
@@ -13,17 +13,36 @@ function updateDateTime() {
     document.getElementById('lastUpdated').innerHTML = `<span style="font-size: 1.2em; font-weight: bold;">${dateString}</span>`;
 }
 
-
-// Function to fetch prices from the JSON file
-async function fetchPrices() {
-    showLoadingSpinner();
+// Function to get the latest JSON file name
+async function getLatestJsonFileName() {
+    const apiUrl = 'https://api.github.com/repos/Technoresult/GoldPriceCalculator/contents/';
     try {
-        const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/G_20Jul24.json`);
+        const response = await fetch(apiUrl);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const text = await response.text();
-        const data = JSON.parse(text);
+        const files = await response.json();
+        const jsonFiles = files.filter(file => file.name.endsWith('.json'));
+        if (jsonFiles.length === 0) {
+            throw new Error('No JSON files found in the repository');
+        }
+        // Sort files by name in descending order and get the first one
+        return jsonFiles.sort((a, b) => b.name.localeCompare(a.name))[0].name;
+    } catch (error) {
+        console.error('Error fetching latest file name:', error);
+        throw error;
+    }
+}
+
+// Function to fetch prices from the JSON file
+async function fetchPrices(fileName) {
+    showLoadingSpinner();
+    try {
+        const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/${fileName}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
         if (!data.gold_prices || !Array.isArray(data.gold_prices)) {
             throw new Error('Invalid data structure');
         }
@@ -211,10 +230,10 @@ function displayError(message) {
 // New initialization function
 async function initializeAndFetchPrices() {
     try {
-        latestFileName = await getLatestJsonFileName();
+        const latestFileName = await getLatestJsonFileName();
         console.log('Latest file name:', latestFileName);  // Debug statement
         if (latestFileName) {
-            await fetchPrices();
+            await fetchPrices(latestFileName);
         } else {
             throw new Error('Could not retrieve the latest file name');
         }
