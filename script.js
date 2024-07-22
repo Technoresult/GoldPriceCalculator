@@ -2,19 +2,19 @@ let goldPrices = [];
 const initialDisplayCount = 20;
 let currentDisplayCount = initialDisplayCount;
 
-async function fetchPrices() {
+async function fetchGoldPrices() {
     showLoadingSpinner();
     try {
         const response = await fetch('https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/G_21Jul24.json');
         const data = await response.json();
         console.log('Fetched data:', data);
         
-        goldPrices = data.gold_prices; // Ensure correct property access
+        goldPrices = data.gold_prices;
         console.log('Processed gold prices:', goldPrices);
         
-        clearPriceCards(); // Clear existing price cards
-        populateCityDropdown(); // Populate the dropdown after fetching data
-        calculateAveragePrice(); // Calculate averages after fetching data
+        clearPriceCards();
+        populateCityDropdowns();
+        createAveragePriceCards();
         populateGoldPricesTable();
         hideLoadingSpinner();
     } catch (error) {
@@ -39,26 +39,12 @@ function populateGoldPricesTable() {
     displayedPrices.forEach(price => {
         const row = document.createElement('tr');
         
-        const cityCell = document.createElement('td');
-        cityCell.className = 'py-3 px-4 border-b';
-        cityCell.textContent = price.City;
-        
-        const price24KCell = document.createElement('td');
-        price24KCell.className = 'py-3 px-4 border-b';
-        price24KCell.textContent = price['24K Today'];
-        
-        const price22KCell = document.createElement('td');
-        price22KCell.className = 'py-3 px-4 border-b';
-        price22KCell.textContent = price['22K Today'];
-        
-        const price18KCell = document.createElement('td');
-        price18KCell.className = 'py-3 px-4 border-b';
-        price18KCell.textContent = price['18K Today'];
-
-        row.appendChild(cityCell);
-        row.appendChild(price24KCell);
-        row.appendChild(price22KCell);
-        row.appendChild(price18KCell);
+        ['City', '24K Today', '22K Today', '18K Today'].forEach((key, index) => {
+            const cell = document.createElement('td');
+            cell.className = 'py-3 px-4 border-b';
+            cell.textContent = price[key];
+            row.appendChild(cell);
+        });
 
         tableBody.appendChild(row);
     });
@@ -93,19 +79,22 @@ function createAveragePriceCards() {
         console.error('priceCardsContainer is not defined');
         return;
     }
-    const avg24K = calculateAverage('24K Today');
-    const avg22K = calculateAverage('22K Today');
-    const avg18K = calculateAverage('18K Today');
 
-    createPriceCard('24K', avg24K);
-    createPriceCard('22K', avg22K);
-    createPriceCard('18K', avg18K);
+    ['24K', '22K', '18K'].forEach(carat => {
+        const avgPrice = calculateAverage(`${carat} Today`);
+        createPriceCard(carat, avgPrice);
+    });
 }
 
 function calculateAverage(caratType) {
     if (!goldPrices.length) return 0;
     const sum = goldPrices.reduce((acc, price) => acc + parseIndianPrice(price[caratType]), 0);
     return sum / goldPrices.length;
+}
+
+function parseIndianPrice(priceString) {
+    const numericString = priceString.replace(/[^\d.]/g, '');
+    return parseFloat(numericString);
 }
 
 function createPriceCard(carat, price) {
@@ -132,17 +121,6 @@ function createPriceCard(carat, price) {
     priceCardsContainer.appendChild(card);
 }
 
-function calculateAverage(caratType) {
-    if (!goldPrices.length) return 0;
-    const sum = goldPrices.reduce((acc, price) => acc + parseIndianPrice(price[caratType]), 0);
-    return sum / goldPrices.length;
-}
-
-function parseIndianPrice(priceString) {
-    const numericString = priceString.replace(/[^\d.]/g, '');
-    return parseFloat(numericString);
-}
-
 function populateCityDropdowns() {
     const citySelectCustom = document.getElementById('citySelectCustom');
     const citySelectPrices = document.getElementById('citySelectPrices');
@@ -162,13 +140,10 @@ function updateCityPriceCard(cityData) {
     const cityPriceCard = document.getElementById('cityPriceCard');
     if (!cityPriceCard) return;
 
-    const price24K = cityPriceCard.querySelector('.price-24K');
-    const price22K = cityPriceCard.querySelector('.price-22K');
-    const price18K = cityPriceCard.querySelector('.price-18K');
-
-    price24K.textContent = `24K: ${cityData['24K Today']}`;
-    price22K.textContent = `22K: ${cityData['22K Today']}`;
-    price18K.textContent = `18K: ${cityData['18K Today']}`;
+    ['24K', '22K', '18K'].forEach(carat => {
+        const priceElement = cityPriceCard.querySelector(`.price-${carat}`);
+        priceElement.textContent = `${carat}: ${cityData[`${carat} Today`]}`;
+    });
 }
 
 function calculateCustomPrice() {
