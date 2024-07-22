@@ -14,7 +14,7 @@ async function fetchGoldPrices() {
     showLoadingSpinner();
     try {
         const dateString = getTodayDateString();
-        const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/Folder/G_${dateString}.json`);
+        const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/tree/main/Folder/G_${dateString}.json`);
         const data = await response.json();
         console.log('Fetched data:', data);
         
