@@ -2,43 +2,28 @@ let goldPrices = [];
 const initialDisplayCount = 20;
 let currentDisplayCount = initialDisplayCount;
 
-async function fetchGoldPrices() {
-    showLoadingSpinner();
-    try {
-        const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/G_21Jul24.json`);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log('Fetched data:', data); // Debugging line
+#function to convert the gold price data to json 22k first
 
-        if (data.gold_prices && Array.isArray(data.gold_prices)) {
-            goldPrices = data.gold_prices.map(price => ({
-                ...price,
-                '24K Today': price['22K Today'],
-                '22K Today': price['24K Today']
-            }));
-        } else {
-            throw new Error('Invalid data structure: expected an object with a gold_prices array');
-        }
+def table_to_json(table_data, metal_type):
+    if metal_type == "Gold":
+        parts = re.findall(r'(\w+)\s+(₹\s*[\d,.]+)\s+(₹\s*[\d,.]+)\s+(₹\s*[\d,.]+)', table_data)
+        
+        gold_prices = []
+        
+        for city, price_24k, price_22k, price_18k in parts:
+            try:
+                city_dict = {
+                    "City": city,
+                    "24K Today": price_24k.strip(),
+                    "22K Today": price_22k.strip(),
+                    "18K Today": price_18k.strip()
+                }
+                gold_prices.append(city_dict)
+            except ValueError:
+                st.warning(f"Skipping invalid data for city: {city}, prices: {price_24k}, {price_22k}, {price_18k}")
+        
+        return {"gold_prices": gold_prices}
 
-        console.log('Processed goldPrices:', goldPrices); // Debugging line
-
-        if (goldPrices.length === 0) {
-            throw new Error('No gold prices found in the fetched data');
-        }
-
-        clearPriceCards();
-        populateCityDropdowns();
-        createAveragePriceCards();
-        populateGoldPricesTable();
-    } catch (error) {
-        console.error('Error fetching prices:', error);
-        displayError('Failed to fetch prices: ' + error.message);
-    } finally {
-        hideLoadingSpinner();
-    }
-}
 function populateGoldPricesTable() {
     const tableBody = document.querySelector('#goldPricesTable tbody');
     tableBody.innerHTML = '';
