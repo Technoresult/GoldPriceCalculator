@@ -4,10 +4,10 @@ let currentDisplayCount = initialDisplayCount;
 
 function getTodayDateString() {
     const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
     const day = String(today.getDate()).padStart(2, '0');
-    const month = today.toLocaleString('default', { month: 'short' });
-    const year = today.getFullYear().toString().substr(-2);
-    return `${day}${month}${year}`;
+    return `${year}-${month}-${day}`;
 }
 
 async function fetchSilverPrices() {
