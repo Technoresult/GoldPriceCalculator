@@ -14,9 +14,12 @@ async function fetchGoldPrices() {
     showLoadingSpinner();
     try {
         const dateString = getTodayDateString();
-        const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/tree/main/Folder/G_${dateString}.json`);
-        const data = await response.json();
-        console.log('Fetched data:', data);
+        const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/Folder/G_${dateString}.json`);
+        const textData = await response.text(); // Get raw text
+        console.log('Fetched text data:', textData);
+        
+        const data = JSON.parse(textData); // Parse JSON from text
+        console.log('Parsed data:', data);
         
         goldPrices = data.gold_prices;
         console.log('Processed gold prices:', goldPrices);
@@ -32,6 +35,7 @@ async function fetchGoldPrices() {
         hideLoadingSpinner();
     }
 }
+
 
 function populateGoldPricesTable() {
     const tableBody = document.querySelector('#goldPricesTable tbody');
