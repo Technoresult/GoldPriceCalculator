@@ -5,7 +5,7 @@ let currentDisplayCount = initialDisplayCount;
 function getTodayDateString() {
     const today = new Date();
     const day = String(today.getDate()).padStart(2, '0');
-    const month = today.toLocaleString('default', { month: 'short' });
+    const month = today.toLocaleString('default', { month: 'long' });
     const year = today.getFullYear().toString().substr(-2);
     return `${day}${month}${year}`;
 }
