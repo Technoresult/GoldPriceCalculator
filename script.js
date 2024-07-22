@@ -4,34 +4,41 @@ let currentDisplayCount = initialDisplayCount;
 
 function getTodayDateString() {
     const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
     const day = String(today.getDate()).padStart(2, '0');
-    const month = today.toLocaleString('default', { month: 'long' });
-    const year = today.getFullYear().toString().substr(-2);
-    return `${day}${month}${year}`;
+    return `${year}-${month}-${day}`;
 }
 
 async function fetchGoldPrices() {
     showLoadingSpinner();
     try {
         const dateString = getTodayDateString();
-        const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/Folder/G_${dateString}.json`);
+        const url = `https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/Folder/G_${dateString}.json`;
+        console.log('Fetching URL:', url);
+        const response = await fetch(url);
         const textData = await response.text(); // Get raw text
         console.log('Fetched text data:', textData);
-        
-        const data = JSON.parse(textData); // Parse JSON from text
-        console.log('Parsed data:', data);
-        
-        goldPrices = data.gold_prices;
-        console.log('Processed gold prices:', goldPrices);
-        
-        clearPriceCards();
-        populateCityDropdowns();
-        createAveragePriceCards();
-        populateGoldPricesTable();
-        hideLoadingSpinner();
-    } catch (error) {
-        console.error('Error fetching prices:', error);
-        displayError('Failed to fetch prices: ' + error.message);
+
+        try {
+            const data = JSON.parse(textData); // Parse JSON from text
+            console.log('Parsed data:', data);
+            goldPrices = data.gold_prices;
+            console.log('Processed gold prices:', goldPrices);
+            
+            clearPriceCards();
+            populateCityDropdowns();
+            createAveragePriceCards();
+            populateGoldPricesTable();
+            hideLoadingSpinner();
+        } catch (jsonError) {
+            console.error('Error parsing JSON:', jsonError);
+            displayError('Failed to parse JSON: ' + jsonError.message);
+            hideLoadingSpinner();
+        }
+    } catch (fetchError) {
+        console.error('Error fetching prices:', fetchError);
+        displayError('Failed to fetch prices: ' + fetchError.message);
         hideLoadingSpinner();
     }
 }
