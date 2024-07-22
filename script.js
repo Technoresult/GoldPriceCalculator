@@ -2,10 +2,19 @@ let goldPrices = [];
 const initialDisplayCount = 20;
 let currentDisplayCount = initialDisplayCount;
 
+function getTodayDateString() {
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = today.toLocaleString('default', { month: 'short' });
+    const year = today.getFullYear().toString().substr(-2);
+    return `${day}${month}${year}`;
+}
+
 async function fetchGoldPrices() {
     showLoadingSpinner();
     try {
-        const response = await fetch('https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/G_21Jul24.json');
+        const dateString = getTodayDateString();
+        const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/Folder/G_${dateString}.json`);
         const data = await response.json();
         console.log('Fetched data:', data);
         
