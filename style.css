@@ -19,3 +19,10 @@ body {
     font-weight: 600; /* Slightly bold */
     font-family: 'League Spartan', sans-serif;
 }
+.footer {
+    background-color: #2C3E50;
+    color: #FFF;
+}
+.footer a {
+    color: #FEBE67;
+}
