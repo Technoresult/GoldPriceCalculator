@@ -17,14 +17,11 @@ async function fetchGoldPrices() {
         const url = `https://stormy-hamlet-07077-2f9633159b11.herokuapp.com/data/gold_${dateString}.json`;
         console.log('Fetching URL:', url);
         const response = await fetch(url);
-        const textData = await response.text(); // Get raw text
-        console.log('Fetched text data:', textData);
+        const textData = await response.text(); 
 
         try {
-            const data = JSON.parse(textData); // Parse JSON from text
-            console.log('Parsed data:', data);
+            const data = JSON.parse(textData); 
             goldPrices = data.gold_prices;
-            console.log('Processed gold prices:', goldPrices);
             
             clearPriceCards();
             populateCityDropdowns();
