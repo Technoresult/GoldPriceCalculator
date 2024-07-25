@@ -6,6 +6,7 @@
     <title>Silver Price Calculator</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500&display=swap" rel="stylesheet">
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-H0JJN0PY9H"></script>
@@ -24,10 +25,10 @@
             </a>
             <nav>
                 <div class="hidden md:flex space-x-4">
-                    <a href="index.html" class="hover:underline text-menu-color">Home</a>
-                    <a href="#customCalculatorSection" class="hover:underline text-menu-color">Calculator</a>
-                    <a href="#cityPriceCardSection" class="hover:underline text-menu-color">City Prices</a>
+                    <a href="index.html" class="hover:underline text-menu-color">Gold</a>
                     <a href="silver_calculator.html" class="hover:underline text-menu-color">Silver</a>
+                    <a href="HowCalculatorWorks.html" class="hover:underline text-menu-color">How It Works</a>
+                    <a href="Aboutus.html" class="hover:underline text-menu-color">About Us</a>
                     <a href="contact.html" class="hover:underline text-menu-color">Contact Us</a>
                 </div>
                 <div class="md:hidden">
@@ -40,21 +41,21 @@
             </nav>
         </div>
         <div id="mobileMenu" class="hidden md:hidden text-menu-color">
-            <a href="index.html" class="block px-4 py-2 hover:bg-indigo-600">Home</a>
-            <a href="#customCalculatorSection" class="block px-4 py-2 hover:bg-indigo-600">Calculator</a>
-            <a href="#cityPriceCardSection" class="block px-4 py-2 hover:bg-indigo-600">City Prices</a>
+            <a href="index.html" class="block px-4 py-2 hover:bg-indigo-600">Gold</a>
             <a href="silver_calculator.html" class="block px-4 py-2 hover:bg-indigo-600">Silver</a>
+            <a href="HowCalculatorWorks.html" class="block px-4 py-2 hover:bg-indigo-600">How It Works</a>
+            <a href="Aboutus.html" class="block px-4 py-2 hover:bg-indigo-600">About Us</a>
             <a href="contact.html" class="block px-4 py-2 hover:bg-indigo-600">Contact Us</a>
         </div>
     </header>
     <main class="container mx-auto p-4" role="main">
         <header class="flex justify-between items-center mb-4">
-            <h1 class="text-4xl font-bold text-indigo-800 cursor-pointer">Silver Price Calculator</h1>
+            <h1 class="text-3xl font-bold cursor-pointer title-color">Silver Price Calculator</h1>
             <button id="refreshButton" class="bg-indigo-600 text-white px-4 py-2 rounded-lg">Refresh Prices</button>
         </header>
         <div id="errorMessage" class="hidden text-red-600 mb-4"></div>
         <div id="lastUpdated" class="text-sm text-gray-600 mb-4"></div>
-        <h2 class="text-2xl font-bold text-indigo-800 mb-4">Silver Price in India</h2>
+        <h2 class="text-2xl font-bold cursor-pointer title-color mb-4">Silver Price in India</h2>
         <p class="text-gray-600 mb-6">Get real-time silver prices for 999 purity per gram in INR.</p>
         <div id="priceCards" class="flex flex-wrap justify-between mb-4">
             <!-- Average price cards will be inserted here -->
@@ -97,10 +98,11 @@
             </div>
         </section>
     </main>
-    <footer class="footer text-white p-4 mt-8">
+    <footer class="p-4 mt-8 footer">
         <div class="container mx-auto text-center">
             <p>&copy; 2024 Gold Price Calculator. All rights reserved.</p>
             <a href="contact.html" class="text-white hover:underline">Contact Us</a> | 
+            <a href="Aboutus.html" class="text-white hover:underline">About Us</a> |
             <a href="https://goldcalculatorindia.in/sitemap.xml" class="text-white hover:underline">Sitemap</a>
         </div>
     </footer>
