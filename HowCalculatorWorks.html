@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How This Calculator Works</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H0JJN0PY9H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-H0JJN0PY9H');
+</script>
+<body>
+    <header class="header bg-indigo-800 text-white p-4 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html">
+                <img src="logo.png" alt="Logo" class="h-10">
+            </a>
+            <nav>
+                <div class="hidden md:flex space-x-4">
+                    <a href="index.html" class="hover:underline text-menu-color">Gold</a>
+                    <a href="silver_calculator.html" class="hover:underline text-menu-color">Silver</a>
+                    <a href="HowCalculatorWorks.html" class="hover:underline text-menu-color">How It Works</a>
+                    <a href="Aboutus.html" class="hover:underline text-menu-color">About Us</a>
+                    <a href="contact.html" class="hover:underline text-menu-color">Contact Us</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menuButton" class="focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden text-menu-color">
+            <a href="index.html" class="block px-4 py-2 hover:bg-indigo-600">Gold</a>
+            <a href="silver_calculator.html" class="block px-4 py-2 hover:bg-indigo-600">Silver</a>
+            <a href="HowCalculatorWorks.html" class="block px-4 py-2 hover:bg-indigo-600">How It Works</a>
+            <a href="Aboutus.html" class="block px-4 py-2 hover:bg-indigo-600">About Us</a>
+            <a href="contact.html" class="block px-4 py-2 hover:bg-indigo-600">Contact Us</a>
+        </div>
+    </header>
+    <main class="container mx-auto p-4" role="main">
+        <header class="flex justify-between items-center mb-4">
+            <h1 class="text-3xl font-bold cursor-pointer title-color">How This Calculator Works</h1>
+        </header>
+        <section>
+            <h2 class="text-2xl font-bold text-indigo-800 mb-4">Introduction</h2>
+            <p class="text-gray-600 mb-6">Welcome to Gold Calculator India! Our calculator helps you estimate the current gold and silver prices based on daily market data.</p>
+        </section>
+        <section>
+            <h2 class="text-2xl font-bold text-indigo-800 mb-4">Data Sources</h2>
+            <p class="text-gray-600 mb-6">We source our data from reputable market sources that update daily prices for gold and silver.</p>
+        </section>
+        <section>
+            <h2 class="text-2xl font-bold text-indigo-800 mb-4">Calculation Method</h2>
+            <p class="text-gray-600 mb-6">Our calculator uses the following formula to determine the price:</p>
+            <p class="text-gray-600 mb-6"><code>Price = (Weight in grams) × (Current Price per gram)</code></p>
+        </section>
+        <section>
+            <h2 class="text-2xl font-bold text-indigo-800 mb-4">How Gold Price is Calculated in India?</h2>
+            <p class="text-gray-600 mb-4">Gold prices in India are determined by a combination of several factors:</p>
+
+            <h3 class="text-xl font-semibold text-indigo-800 mb-2">International Market Prices</h3>
+            <p class="text-gray-600 mb-4">A major factor affecting gold prices in India is the international gold market. Prices are influenced by global demand and supply, geopolitical events, and economic data from major economies.</p>
+
+            <h3 class="text-xl font-semibold text-indigo-800 mb-2">Currency Exchange Rates</h3>
+            <p class="text-gray-600 mb-4">Since gold is traded in USD worldwide, the exchange rate between the US Dollar and the Indian Rupee (INR) plays an important role. If the INR weakens against the USD, gold prices appreciate in India, and vice versa.</p>
+
+            <h3 class="text-xl font-semibold text-indigo-800 mb-2">Import Duties</h3>
+            <p class="text-gray-600 mb-4">India imports a large portion of its gold. The government levies an import duty on gold, which directly affects the sale price. Higher import duties increase the price of gold in the domestic market.</p>
+
+            <h3 class="text-xl font-semibold text-indigo-800 mb-2">Goods and Services Tax (GST)</h3>
+            <p class="text-gray-600 mb-4">GST on gold in India is another factor that adds to the final price. Currently, the GST rate on gold purchases is 3%.</p>
+
+            <h3 class="text-xl font-semibold text-indigo-800 mb-2">Local Demand and Supply</h3>
+            <p class="text-gray-600 mb-4">Household demand for gold, influenced by cultural factors, festivals, and wedding seasons, can affect prices. High demand can cause prices to rise, while low demand can cause prices to fall.</p>
+
+            <h3 class="text-xl font-semibold text-indigo-800 mb-2">Central Bank Policies</h3>
+            <p class="text-gray-600 mb-4">The policies and actions of the Reserve Bank of India (RBI) and other central banks can affect gold prices. For example, changes in interest rates and gold reserve policies can affect market sentiment and prices.</p>
+
+            <h3 class="text-xl font-semibold text-indigo-800 mb-2">Market Speculation</h3>
+            <p class="text-gray-600 mb-4">Speculative activities such as trading and investing in the gold market can cause prices to rise.</p>
+
+            <h3 class="text-xl font-semibold text-indigo-800 mb-2">Inflation</h3>
+            <p class="text-gray-600 mb-4">Inflation usually causes the price of gold to rise as people buy gold as a hedge against inflation.</p>
+
+            <p class="text-gray-600 mb-4">Together, these factors determine the daily gold prices in India. Prices are generally updated twice a day by the Indian Bullion and Jewellers Association (IBJA) and are used by jewellers and traders across the country.</p>
+
+            
+        </section>
+        <section>
+            <h2 class="text-2xl font-bold text-indigo-800 mb-4">User Guide</h2>
+            <ol class="list-decimal list-inside text-gray-600 mb-6">
+                <li>Enter the weight of gold or silver you want to calculate.</li>
+                <li>Select the purity level (24K, 22K, 18K, etc.).</li>
+                <li>Click "Calculate" to see the current price.</li>
+            </ol>
+        </section>
+        <section>
+            <h2 class="text-2xl font-bold text-indigo-800 mb-4">Disclaimer</h2>
+            <p class="text-gray-600 mb-6">The prices displayed are for informational purposes only and are not guaranteed to be accurate. Always consult with a professional before making any financial decisions.</p>
+        </section>
+    </main>
+    <footer class="p-4 mt-8 footer">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Gold Calculator India. All rights reserved.</p>
+            <a href="contact.html" class="text-white hover:underline">Contact Us</a> | 
+            <a href="Aboutus.html" class="text-white hover:underline">About Us</a> |
+            <a href="https://goldcalculatorindia.in/sitemap.xml" class="text-white hover:underline">Sitemap</a>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('menuButton').addEventListener('click', function() {
+            var mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
