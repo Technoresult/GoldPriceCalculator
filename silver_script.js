@@ -14,7 +14,7 @@ async function fetchSilverPrices() {
     showLoadingSpinner();
     try {
         const dateString = getTodayDateString();
-        const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/Folder/S_${dateString}.json`);
+        const response = await fetch(`https://stormy-hamlet-07077-2f9633159b11.herokuapp.com/data/silver_${dateString}.json`);
         const data = await response.json();
         console.log('Fetched data:', data);
         if (!data.silver_rates) {
