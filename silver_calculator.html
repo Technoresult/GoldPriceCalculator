@@ -57,7 +57,7 @@
         <div id="lastUpdated" class="text-sm text-gray-600 mb-4"></div>
         <h2 class="text-2xl font-bold cursor-pointer title-color mb-4">Silver Price in India</h2>
         <p class="text-gray-600 mb-6">Get real-time silver prices for 999 purity per gram in INR.</p>
-        <div id="priceCards" class="flex flex-wrap justify-between mb-4">
+        <div id="priceCards" class="flex flex-wrap justify-between">
             <!-- Average price cards will be inserted here -->
         </div>
         <section id="customCalculatorSection" class="flex flex-col lg:flex-row justify-between space-x-0 lg:space-x-4 mb-4">
@@ -78,6 +78,11 @@
                 <p class="text-xl text-gray-700 price-999">999: ₹ 0</p>
             </div>
         </section>
+        <section id="priceComparison" class="bg-white rounded-xl shadow-2xl p-8 mt-8">
+            <h2 class="text-2xl font-bold text-indigo-800 mb-4">Average Price Comparison</h2>
+            <!-- The comparison table will be inserted here -->
+        </section>
+    
         <section id="silverPriceTable" class="mt-8">
             <h2 class="text-2xl font-bold text-indigo-800 mb-4">Silver Prices by City</h2>
             <table id="priceTable" class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
@@ -120,6 +125,6 @@
         <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-indigo-500"></div>
         <span class="sr-only">Loading...</span>
     </div>
-    <script src="silver_script.js"></script>
+    <script src="silver_script1.js"></script>
 </body>
 </html>
