@@ -14,7 +14,7 @@ async function fetchGoldPrices() {
     showLoadingSpinner();
     try {
         const dateString = getTodayDateString();
-        const url = `https://stormy-hamlet-07077-2f9633159b11.herokuapp.com/data/gold_${dateString}.json`;
+        const url = `https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/Folder/G_${dateString}.json`;
         console.log('Fetching URL:', url);
         const response = await fetch(url);
         const textData = await response.text(); 
