@@ -19,6 +19,22 @@ function getYesterdayDateString() {
     return `${year}-${month}-${day}`;
 }
 
+async function fetchSilverPrices(dateString) {
+    try {
+        const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/Folder/S_${dateString}.json`);
+        const data = await response.json();
+        console.log('Fetched data:', data);
+        if (!data.silver_rates) {
+            throw new Error('No silver rates found in the fetched data');
+        }
+        return data.silver_rates;
+    } catch (error) {
+        console.error('Error fetching prices:', error);
+        displayError('Failed to fetch prices: ' + error.message);
+        return null;
+    }
+}
+
 async function fetchAndComparePrices() {
     showLoadingSpinner();
     const todayDateString = getTodayDateString();
@@ -40,28 +56,13 @@ async function fetchAndComparePrices() {
             displayAveragePriceComparison(todayAvg, yesterdayAvg);
             populateCityDropdowns();
             populatePriceTable();
+            populateSilverSidebar();
         }
     } catch (error) {
         console.error('Error fetching or comparing prices:', error);
         displayError('Failed to fetch or compare prices: ' + error.message);
     } finally {
         hideLoadingSpinner();
-    }
-}
-
-async function fetchSilverPrices(dateString) {
-    try {
-        const response = await fetch(`https://raw.githubusercontent.com/Technoresult/GoldPriceCalculator/main/Folder/S_${dateString}.json`);
-        const data = await response.json();
-        console.log('Fetched data:', data);
-        if (!data.silver_rates) {
-            throw new Error('No silver rates found in the fetched data');
-        }
-        return data.silver_rates;
-    } catch (error) {
-        console.error('Error fetching prices:', error);
-        displayError('Failed to fetch prices: ' + error.message);
-        return null;
     }
 }
 
@@ -113,6 +114,71 @@ function createPriceCard(weight, price, difference) {
 
     priceCardsContainer.appendChild(card);
 }
+
+// In gold_script.js
+
+// Function to populate the sidebar with silver prices in top cities
+function populateSilverSidebar() {
+    const topCitiesList = document.getElementById('topCitiesList');
+    if (!topCitiesList) return;
+
+    // Customize this list of top cities
+    const topCities = ['Mumbai', 'Delhi', 'Bangalore', 'Chennai', 'Kolkata', 'Hyderabad', 'Kerala', 'Pune'];
+
+    topCitiesList.innerHTML = '';
+    topCities.forEach(city => {
+        const cityData = silverPrices.find(price => price.city === city);
+        if (cityData) {
+            const li = document.createElement('li');
+            li.className = 'mb-4';
+            
+            const cityHeader = document.createElement('h3');
+            cityHeader.className = 'text-lg font-semibold text-indigo-800 mb-2';
+            cityHeader.textContent = `Silver Price in ${city}`;
+            li.appendChild(cityHeader);
+
+            const priceList = document.createElement('ul');
+            priceList.className = 'list-none pl-0';
+
+            ['10_gram', '100_gram', '1_kg'].forEach(weight => {
+                const priceLi = document.createElement('li');
+                priceLi.className = 'text-sm text-gray-600';
+                priceLi.textContent = `${weight.replace('_', ' ')}: ${cityData[weight]}`;
+                priceList.appendChild(priceLi);
+            });
+
+            li.appendChild(priceList);
+            topCitiesList.appendChild(li);
+        }
+    });
+}
+
+// Call populateSilverSidebar() after fetching the data
+// fetchSilverPrices() should be a function that fetches the silverPrices data and then calls populateSilverSidebar()
+
+function displayCitySilverPrices(city) {
+    const cityData = silverPrices.find(price => price.city === city);
+    if (!cityData) {
+        console.error(`No data found for city: ${city}`);
+        return;
+    }
+
+    const citySilverPrices = document.getElementById('citySilverPrices');
+    const selectedCityName = document.getElementById('selectedCityName');
+    const price10Gram = document.getElementById('price10Gram');
+    const price100Gram = document.getElementById('price100Gram');
+    const price1Kg = document.getElementById('price1Kg');
+
+    selectedCityName.textContent = `Silver Price in ${city}`;
+    price10Gram.textContent = `10g: ${cityData['10_gram']}`;
+    price100Gram.textContent = `100g: ${cityData['100_gram']}`;
+    price1Kg.textContent = `1kg: ${cityData['1_kg']}`;
+
+    citySilverPrices.classList.remove('hidden');
+}
+
+
+
 
 function displayAveragePriceComparison(todayAvg, yesterdayAvg) {
     const comparisonContainer = document.getElementById('priceComparison');
@@ -307,5 +373,6 @@ document.getElementById('citySelectPrices').addEventListener('change', (event) =
 
 // Initial fetch on page load
 fetchAndComparePrices();
+populateSilverSidebar();
 updateDateTime();
 setInterval(updateDateTime, 1000); // Update date and time every second
