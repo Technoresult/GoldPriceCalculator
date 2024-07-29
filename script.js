@@ -52,6 +52,7 @@ async function fetchAndComparePrices() {
             displayAveragePriceComparison(todayPrices, yesterdayPrices);
             populateCityDropdowns();
             populateGoldPricesTable();
+            populateGoldSidebar();
         }
     } catch (error) {
         console.error('Error fetching or comparing prices:', error);
@@ -109,6 +110,68 @@ function createPriceCard(carat, price, difference) {
 
     priceCardsContainer.appendChild(card);
 }
+
+function populateGoldSidebar() {
+    const topCitiesList = document.getElementById('topGoldCitiesList');
+    if (!topCitiesList) return;
+
+    const topCities = ['Mumbai', 'Delhi', 'Bangalore', 'Chennai', 'Kolkata', 'Hyderabad', 'Kerala', 'Pune'];
+
+    topCitiesList.innerHTML = '';
+    topCities.forEach(city => {
+        const cityData = goldPrices.find(price => price.City === city);
+        if (cityData) {
+            const li = document.createElement('li');
+            li.className = 'mb-4';
+            
+            const cityHeader = document.createElement('h3');
+            cityHeader.className = 'sidebar-city-name';
+            cityHeader.textContent = `Gold Price in ${city}`;
+            li.appendChild(cityHeader);
+
+            const priceList = document.createElement('ul');
+            priceList.className = 'sidebar-price-list';
+
+            ['24K', '22K', '18K'].forEach(carat => {
+                const priceLi = document.createElement('li');
+                priceLi.className = 'sidebar-price-item';
+                priceLi.textContent = `${carat}: ${cityData[`${carat} Today`]}`;
+                priceList.appendChild(priceLi);
+            });
+
+            li.appendChild(priceList);
+            topCitiesList.appendChild(li);
+        }
+    });
+}
+
+
+
+
+// This function will display Gold Prices
+
+function displayCityGoldPrices(city) {
+    const cityData = goldPrices.find(price => price.City === city);
+    if (!cityData) {
+        console.error(`No data found for city: ${city}`);
+        return;
+    }
+
+    const cityGoldPrices = document.getElementById('cityGoldPrices');
+    const selectedCityName = document.getElementById('selectedCityName');
+    const price24K = document.getElementById('price24K');
+    const price22K = document.getElementById('price22K');
+    const price18K = document.getElementById('price18K');
+
+    selectedCityName.textContent = `Gold Price in ${city}`;
+    price24K.textContent = `24K: ${cityData['24K Today']}`;
+    price22K.textContent = `22K: ${cityData['22K Today']}`;
+    price18K.textContent = `18K: ${cityData['18K Today']}`;
+
+    cityGoldPrices.classList.remove('hidden');
+}
+
+
 
 function displayAveragePriceComparison(todayPrices, yesterdayPrices) {
     const comparisonContainer = document.getElementById('priceComparison');
@@ -336,6 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchAndComparePrices();
     updateDateTime();
     setInterval(updateDateTime, 1000);
+    populateGoldSidebar();
 });
 
 function updateCityPrices(selectedCity) {
