@@ -69,13 +69,10 @@ async function fetchAndComparePrices() {
         ]);
 
         if (todayPrices && yesterdayPrices) {
-            const todayAvg = calculateAveragePrice(todayPrices);
-            const yesterdayAvg = calculateAveragePrice(yesterdayPrices);
-            
             silverPrices = todayPrices;
             clearPriceCards();
-            createAveragePriceCards(todayAvg, yesterdayAvg);
-            displayAveragePriceComparison(todayAvg, yesterdayAvg);
+            createMumbaiPriceCards(todayPrices, yesterdayPrices);
+            displayMumbaiPriceComparison(todayPrices, yesterdayPrices);
             populateCityDropdowns();
             populatePriceTable();
             populateSilverSidebar();
@@ -89,26 +86,33 @@ async function fetchAndComparePrices() {
     }
 }
 
-function calculateAveragePrice(prices) {
-    const sum = prices.reduce((acc, price) => acc + parseIndianPrice(price['10_gram']), 0);
-    return sum / prices.length / 10; // Average price per gram
-}
-
-function createAveragePriceCards(todayAvg, yesterdayAvg) {
+function createMumbaiPriceCards(todayPrices, yesterdayPrices) {
     const priceCardsContainer = document.getElementById('priceCards');
     if (!priceCardsContainer) {
         console.error('priceCardsContainer is not defined');
         return;
     }
     
-    const weights = [1, 8, 10];
+    const todayMumbaiPrices = todayPrices.find(price => price.city === 'Mumbai');
+    const yesterdayMumbaiPrices = yesterdayPrices.find(price => price.city === 'Mumbai');
+    
+    if (!todayMumbaiPrices || !yesterdayMumbaiPrices) {
+        console.error('Mumbai prices not found');
+        return;
+    }
+    
+    const weights = [
+        { label: '1 Gram', value: 1 },
+        { label: '10 Gram', value: 10 },
+        { label: '1 Kg', value: 1000 }
+    ];
     
     weights.forEach(weight => {
-        const todayPrice = todayAvg * weight;
-        const yesterdayPrice = yesterdayAvg * weight;
+        const todayPrice = parseIndianPrice(todayMumbaiPrices['10_gram']) / 10 * weight.value;
+        const yesterdayPrice = parseIndianPrice(yesterdayMumbaiPrices['10_gram']) / 10 * weight.value;
         const difference = todayPrice - yesterdayPrice;
         
-        createPriceCard(weight, todayPrice, difference);
+        createPriceCard(weight.label, todayPrice, difference);
     });
 }
 
@@ -203,9 +207,17 @@ function displayCitySilverPrices(city) {
 
 
 
-function displayAveragePriceComparison(todayAvg, yesterdayAvg) {
+function displayMumbaiPriceComparison(todayPrices, yesterdayPrices) {
     const comparisonContainer = document.getElementById('priceComparison');
     comparisonContainer.innerHTML = ''; // Clear previous content
+
+    const todayMumbaiPrices = todayPrices.find(price => price.city === 'Mumbai');
+    const yesterdayMumbaiPrices = yesterdayPrices.find(price => price.city === 'Mumbai');
+
+    if (!todayMumbaiPrices || !yesterdayMumbaiPrices) {
+        console.error('Mumbai prices not found');
+        return;
+    }
 
     const table = document.createElement('table');
     table.className = 'w-full bg-white shadow-lg rounded-lg overflow-hidden';
@@ -213,6 +225,7 @@ function displayAveragePriceComparison(todayAvg, yesterdayAvg) {
     const thead = document.createElement('thead');
     thead.innerHTML = `
         <tr class="bg-indigo-800 text-white">
+            <th class="py-3 px-4 text-left">Weight</th>
             <th class="py-3 px-4 text-left">Today's Price</th>
             <th class="py-3 px-4 text-left">Yesterday's Price</th>
             <th class="py-3 px-4 text-left">Change</th>
@@ -220,18 +233,23 @@ function displayAveragePriceComparison(todayAvg, yesterdayAvg) {
     `;
 
     const tbody = document.createElement('tbody');
-    const row = document.createElement('tr');
-    const difference = todayAvg - yesterdayAvg;
+    ['10_gram', '100_gram', '1_kg'].forEach(weight => {
+        const row = document.createElement('tr');
+        const todayPrice = parseIndianPrice(todayMumbaiPrices[weight]);
+        const yesterdayPrice = parseIndianPrice(yesterdayMumbaiPrices[weight]);
+        const difference = todayPrice - yesterdayPrice;
 
-    row.innerHTML = `
-        <td class="py-3 px-4 border-b">₹ ${todayAvg.toFixed(2)}</td>
-        <td class="py-3 px-4 border-b">₹ ${yesterdayAvg.toFixed(2)}</td>
-        <td class="py-3 px-4 border-b ${difference > 0 ? 'text-green-600' : 'text-red-600'}">
-            ${difference > 0 ? '↑' : '↓'} ${Math.abs(difference).toFixed(2)}
-        </td>
-    `;
+        row.innerHTML = `
+            <td class="py-3 px-4 border-b">${weight.replace('_', ' ')}</td>
+            <td class="py-3 px-4 border-b">₹ ${todayPrice.toFixed(2)}</td>
+            <td class="py-3 px-4 border-b">₹ ${yesterdayPrice.toFixed(2)}</td>
+            <td class="py-3 px-4 border-b ${difference > 0 ? 'text-green-600' : 'text-red-600'}">
+                ${difference > 0 ? '↑' : '↓'} ${Math.abs(difference).toFixed(2)}
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
 
-    tbody.appendChild(row);
     table.appendChild(thead);
     table.appendChild(tbody);
     comparisonContainer.appendChild(table);
