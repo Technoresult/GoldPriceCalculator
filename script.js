@@ -79,11 +79,7 @@ async function fetchAndComparePrices() {
         } else {
             throw new Error('Failed to fetch gold prices for today or yesterday');
         }
-        if (usGoldRate) {
-            displayUSGoldRate(usGoldRate);
-          } else {
-            console.error('Failed to fetch US gold rate');
-          }
+      
     } catch (error) {
         displayError('Failed to fetch or compare prices: ' + error.message);
     } finally {
