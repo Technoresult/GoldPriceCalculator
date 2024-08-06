@@ -71,14 +71,19 @@ async function fetchAndComparePrices() {
         if (todayPrices && yesterdayPrices) {
             goldPrices = todayPrices;
             clearPriceCards();
-            createAveragePriceCards(todayPrices, yesterdayPrices);
-            displayAveragePriceComparison(todayPrices, yesterdayPrices);
+            createMumbaiPriceCards(todayPrices, yesterdayPrices);
+            displayMumbaiPriceComparison(todayPrices, yesterdayPrices);
             populateCityDropdowns();
             populateGoldPricesTable();
             populateGoldSidebar();
         } else {
             throw new Error('Failed to fetch gold prices for today or yesterday');
         }
+        if (usGoldRate) {
+            displayUSGoldRate(usGoldRate);
+          } else {
+            console.error('Failed to fetch US gold rate');
+          }
     } catch (error) {
         displayError('Failed to fetch or compare prices: ' + error.message);
     } finally {
@@ -86,12 +91,7 @@ async function fetchAndComparePrices() {
     }
 }
 
-function calculateAveragePrice(prices, carat) {
-    const sum = prices.reduce((acc, price) => acc + parseIndianPrice(price[`${carat} Today`]), 0);
-    return sum / prices.length;
-}
-
-function createAveragePriceCards(todayPrices, yesterdayPrices) {
+function createMumbaiPriceCards(todayPrices, yesterdayPrices) {
     const priceCardsContainer = document.getElementById('priceCards');
     if (!priceCardsContainer) {
         console.error('priceCardsContainer is not defined');
@@ -100,12 +100,20 @@ function createAveragePriceCards(todayPrices, yesterdayPrices) {
     
     const carats = ['24K', '22K', '18K'];
     
+    const todayMumbaiPrices = todayPrices.find(price => price.City === 'Mumbai');
+    const yesterdayMumbaiPrices = yesterdayPrices.find(price => price.City === 'Mumbai');
+    
+    if (!todayMumbaiPrices || !yesterdayMumbaiPrices) {
+        console.error('Mumbai prices not found');
+        return;
+    }
+    
     carats.forEach(carat => {
-        const todayAvg = calculateAveragePrice(todayPrices, carat);
-        const yesterdayAvg = calculateAveragePrice(yesterdayPrices, carat);
-        const difference = todayAvg - yesterdayAvg;
+        const todayPrice = parseIndianPrice(todayMumbaiPrices[`${carat} Today`]);
+        const yesterdayPrice = parseIndianPrice(yesterdayMumbaiPrices[`${carat} Today`]);
+        const difference = todayPrice - yesterdayPrice;
         
-        createPriceCard(carat, todayAvg, difference);
+        createPriceCard(carat, todayPrice, difference);
     });
 }
 
@@ -169,6 +177,44 @@ function populateGoldSidebar() {
     });
 }
 
+// Function to display us gold rate
+async function fetchUSGoldRate() {
+    var myHeaders = new Headers();
+    myHeaders.append("x-access-token", "goldapi-rh6ogslyfnhegs-io");
+    myHeaders.append("Content-Type", "application/json");
+  
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+  
+    try {
+      const response = await fetch("https://www.goldapi.io/api/XAU/USD", requestOptions);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.error('Error fetching US gold rate:', error);
+      return null;
+    }
+  }
+  
+  function displayUSGoldRate(data) {
+    const priceElement = document.getElementById('usGoldPrice');
+    const lastUpdatedElement = document.getElementById('usGoldLastUpdated');
+  
+    if (data && data.price !== undefined) {
+      priceElement.textContent = `$${data.price.toFixed(2)} per oz`;
+      const lastUpdated = new Date(data.timestamp * 1000);
+      lastUpdatedElement.textContent = `Last updated: ${lastUpdated.toLocaleString()}`;
+    } else {
+      priceElement.textContent = 'Failed to load';
+      lastUpdatedElement.textContent = '';
+    }
+  }
 
 
 
@@ -197,13 +243,21 @@ function displayCityGoldPrices(city) {
 
 
 
-function displayAveragePriceComparison(todayPrices, yesterdayPrices) {
+function displayMumbaiPriceComparison(todayPrices, yesterdayPrices) {
     const comparisonContainer = document.getElementById('priceComparison');
     if (!comparisonContainer) {
         console.error('priceComparison element not found');
         return;
     }
     comparisonContainer.innerHTML = ''; // Clear previous content
+
+    const todayMumbaiPrices = todayPrices.find(price => price.City === 'Mumbai');
+    const yesterdayMumbaiPrices = yesterdayPrices.find(price => price.City === 'Mumbai');
+
+    if (!todayMumbaiPrices || !yesterdayMumbaiPrices) {
+        console.error('Mumbai prices not found');
+        return;
+    }
 
     const table = document.createElement('table');
     table.className = 'w-full bg-white shadow-lg rounded-lg overflow-hidden';
@@ -221,15 +275,15 @@ function displayAveragePriceComparison(todayPrices, yesterdayPrices) {
     const tbody = document.createElement('tbody');
 
     ['24K', '22K', '18K'].forEach(carat => {
-        const todayAvg = calculateAveragePrice(todayPrices, carat);
-        const yesterdayAvg = calculateAveragePrice(yesterdayPrices, carat);
-        const difference = todayAvg - yesterdayAvg;
+        const todayPrice = parseIndianPrice(todayMumbaiPrices[`${carat} Today`]);
+        const yesterdayPrice = parseIndianPrice(yesterdayMumbaiPrices[`${carat} Today`]);
+        const difference = todayPrice - yesterdayPrice;
 
         const row = document.createElement('tr');
         row.innerHTML = `
             <td class="py-3 px-4 border-b">${carat}</td>
-            <td class="py-3 px-4 border-b">₹ ${todayAvg.toFixed(2)}</td>
-            <td class="py-3 px-4 border-b">₹ ${yesterdayAvg.toFixed(2)}</td>
+            <td class="py-3 px-4 border-b">₹ ${todayPrice.toFixed(2)}</td>
+            <td class="py-3 px-4 border-b">₹ ${yesterdayPrice.toFixed(2)}</td>
             <td class="py-3 px-4 border-b ${difference > 0 ? 'text-green-600' : 'text-red-600'}">
                 ${difference > 0 ? '↑' : '↓'} ${Math.abs(difference).toFixed(2)}
             </td>
