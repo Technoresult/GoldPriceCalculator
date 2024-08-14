@@ -22,6 +22,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1210424325925839"
      crossorigin="anonymous"></script>
     <meta name="google-adsense-account" content="ca-pub-1210424325925839">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-100">
     <header class="header bg-indigo-800 text-white p-4 shadow-lg sticky top-0 z-50">
@@ -55,7 +56,7 @@
         </div>
     </header>
     <div class="container mx-auto p-4 flex flex-col md:flex-row">
-        <main class="w-full md:w-3/4 flex-1 p-4 bg-white rounded-xl shadow-2xl">
+        <main role="main" class="w-full md:w-3/4 flex-1 p-4 bg-white rounded-xl shadow-2xl">
             <header class="flex justify-between items-center mb-4">
                 <h1 id="GoldPriceCalculator" class="text-3xl font-bold cursor-pointer title-color">Gold Price Calculator</h1>
                 <button id="refreshButton" class="bg-indigo-600 text-white px-4 py-2 rounded-lg">Refresh Prices</button>
@@ -93,6 +94,7 @@
                     <p class="text-xl text-gray-700 price-18K">18K: ₹ 0</p>
                 </div>
             </section>
+            
             <div class="mt-8">
                 <h2 class="text-2xl font-bold text-indigo-800 mb-4">Gold Prices by City</h2>
                 <div class="overflow-x-auto">
@@ -122,6 +124,7 @@
                     <!-- Top cities gold prices will be populated here -->
                 </ul>
             </div>
+            
             <div id="cityGoldPrices" class="mt-4 bg-gray-50 rounded-xl shadow-md p-4 hidden">
                 <h3 id="selectedGoldCityName" class="text-lg font-bold text-indigo-800 mb-2"></h3>
                 <ul class="space-y-2">
@@ -130,7 +133,26 @@
                     <li id="goldPrice18K" class="text-gray-700"></li>
                 </ul>
             </div>
-            
+        
+            <!-- New Section for Historical Price Chart Navigation -->
+            <div class="mt-8 bg-gray-50 rounded-xl shadow-md p-4">
+                <h2 class="sidebar-section-title">Historical Gold Price Charts</h2>
+                <ul class="space-y-4">
+                    <li>
+                        <a href="#historicalPriceChart" id="historicalChartNav" class="text-indigo-600 hover:text-indigo-800">View Historical Prices</a>
+                    </li>
+                
+                </ul>
+            </div>
+            <div class="mt-8 bg-gray-50 rounded-xl shadow-md p-4">
+                <h2 class="sidebar-section-title">Silver Price Today</h2>
+                <ul class="space-y-4">
+                    <li>
+                        <a href="silver_calculator.html" class="text-indigo-600 hover:text-indigo-800">View Silver Rate in India</a>
+                    </li>
+                
+                </ul>
+            </div>
         </aside>
     </div>
     <footer class="bg-indigo-800 text-white py-4 footer">
@@ -154,5 +176,6 @@
         <span class="sr-only">Loading...</span>
     </div>
     <script src="script.js"></script>
+    
 </body>
 </html>
