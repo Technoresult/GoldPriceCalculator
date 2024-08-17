@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silver Price Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H0JJN0PY9H"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-H0JJN0PY9H');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1210424325925839"
+     crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-1210424325925839">
+    
+</head>
+<body class="bg-gray-100">
+    <header class="header bg-indigo-800 text-white p-4 shadow-lg z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html">
+                <img src="logo.png" alt="Logo" class="h-10">
+            </a>
+            <nav>
+                <div class="hidden md:flex space-x-4">
+                    <a href="index.html" class="hover:underline text-menu-color">Gold</a>
+                    <a href="silver_calculator.html" class="hover:underline text-menu-color">Silver</a>
+                    <a href="HowCalculatorWorks.html" class="hover:underline text-menu-color">How It Works</a>
+                    <a href="Aboutus.html" class="hover:underline text-menu-color">About Us</a>
+                    <a href="contact.html" class="hover:underline text-menu-color">Contact Us</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menuButton" class="focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden text-menu-color">
+            <a href="index.html" class="block px-4 py-2 hover:bg-indigo-600">Gold</a>
+            <a href="silver_calculator.html" class="block px-4 py-2 hover:bg-indigo-600">Silver</a>
+            <a href="HowCalculatorWorks.html" class="block px-4 py-2 hover:bg-indigo-600">How It Works</a>
+            <a href="Aboutus.html" class="block px-4 py-2 hover:bg-indigo-600">About Us</a>
+            <a href="contact.html" class="block px-4 py-2 hover:bg-indigo-600">Contact Us</a>
+        </div>
+    </header>
+    <div class="container mx-auto p-4 flex flex-col md:flex-row">
+        <main role="main" class="w-full md:w-3/4 flex-1 p-4 bg-white rounded-xl shadow-2xl">
+            <header class="flex justify-between items-center mb-4">
+                <h1 id="cityTitle" class="text-3xl font-bold cursor-pointer title-color">City Silver Prices</h1>
+            </header>
+            <div id="silverPrices" class="bg-white rounded-xl shadow-2xl p-8">
+                <!-- City-specific silver prices content will go here -->
+            </div>
+        </main>
+        <aside class="w-full md:w-1/4 p-4 md:mt-4 bg-white rounded-xl shadow-2xl md:ml-6">
+            <div class="mb-8">
+                <h2 class="sidebar-section-title">Silver Price in Top Cities</h2>
+                <ul id="topCitiesList" class="space-y-4">
+                    <!-- Top cities silver prices will be populated here -->
+                </ul>
+            </div>
+            <div id="citySilverPrices" class="mt-4 bg-gray-50 rounded-xl shadow-md p-4 hidden">
+                <h3 id="selectedCityName" class="text-lg font-bold text-indigo-800 mb-2"></h3>
+                <ul class="space-y-2">
+                    <li id="price10Gram" class="text-gray-700"></li>
+                    <li id="price100Gram" class="text-gray-700"></li>
+                    <li id="price1Kg" class="text-gray-700"></li>
+                </ul>
+            </div>
+
+            <div class="mt-8 bg-gray-50 rounded-xl shadow-md p-4">
+                <h2 class="sidebar-section-title">Historical Silver Price Charts</h2>
+                <ul class="space-y-4">
+                    <li>
+                        <a href="#historicalSilverPriceChart" id="historicalsilverChartNav" class="text-indigo-600 hover:text-indigo-800">View Historical Silver Prices</a>
+                    </li>
+                
+                </ul>
+            </div>
+            <div class="mt-8 bg-gray-50 rounded-xl shadow-md p-4">
+                <h2 class="sidebar-section-title">Silver Price Today</h2>
+                <ul class="space-y-4">
+                    <li>
+                        <a href="index.html" class="text-indigo-600 hover:text-indigo-800">View Gold Rate in India</a>
+                    </li>
+                
+                </ul>
+            </div>
+        </aside>
+    </div>    
+    <footer class="bg-indigo-800 text-white py-4 footer">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Gold Price Calculator. All rights reserved.</p>
+            <div class="mt-2">
+                <a href="contact.html" class="text-white hover:underline">Contact Us</a> | 
+                <a href="Aboutus.html" class="text-white hover:underline">About Us</a> |
+                <a href="https://goldcalculatorindia.in/sitemap.xml" class="text-white hover:underline">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('menuButton').addEventListener('click', function() {
+            var mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+    <div id="loadingSpinner" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-indigo-500"></div>
+        <span class="sr-only">Loading...</span>
+    </div>
+    <script src="silver_script.js"></script>
+</body>
+</html>
