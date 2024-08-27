@@ -264,23 +264,27 @@ function createPriceCard(carat, price, difference) {
 }
 // TOday gold price details
 function handleCityGoldPricesPage() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const city = urlParams.get('city');
+    const cityName = document.location.pathname.split('/').pop().replace('Gold-rate-', '').replace('.html', '');
+    const formattedCityName = cityName.charAt(0).toUpperCase() + cityName.slice(1);
     
-    if (city) {
-        document.getElementById('cityTitle').textContent = `Gold Prices in ${city}`;
-        fetchAndDisplayCityGoldPrices(city);
+    if (formattedCityName) {
+        document.getElementById('cityTitle').textContent = `Gold Prices in ${formattedCityName}`;
+        fetchAndDisplayCityGoldPrices(formattedCityName);
     } else {
         document.getElementById('cityTitle').textContent = 'City Not Specified';
     }
 }
+// change todays
+
+
+///
 
 async function fetchAndDisplayCityGoldPrices(city) {
     showLoadingSpinner();
     try {
         const todayPrices = await fetchGoldPrices(getTodayDateString());
-        const cityData = todayPrices.find(price => price.City === city);
-        
+        const cityData = todayPrices.find(price => price.City.toLowerCase() === city.toLowerCase());
+
         if (cityData) {
             const goldPricesDiv = document.getElementById('goldPrices');
             goldPricesDiv.innerHTML = `
@@ -310,11 +314,11 @@ async function fetchAndDisplayCityGoldPrices(city) {
 }
 
 
+
 function populateGoldSidebar() {
     const topCitiesList = document.getElementById('topGoldCitiesList');
     if (!topCitiesList) return;
 
-    
     const topCities = ['Mumbai', 'Delhi', 'Bangalore', 'Chennai', 'Kolkata', 'Hyderabad', 'Pune', 'Ahmedabad', 'Jaipur', 'Lucknow', 'Patna', 'Surat', 'Kanpur', 'Kochi', 'Indore', 'Bhopal', 'Varanasi', 'Goa', 'Ludhiana', 'Amritsar', 'Meerut', 'Raipur', 'Guwahati', 'Nagpur'];
 
     topCitiesList.innerHTML = '';
@@ -323,9 +327,12 @@ function populateGoldSidebar() {
         li.className = 'mb-4';
         
         const cityLink = document.createElement('a');
-        cityLink.href = `city_gold_prices.html?city=${encodeURIComponent(city)}`;
+        // Convert the city name to lowercase and replace spaces with hyphens for the URL
+        const citySlug = city.toLowerCase().replace(/\s+/g, '-');
+        cityLink.href = `Gold-rate-${citySlug}.html`;
         cityLink.target = '_blank'; // Opens in a new tab
         cityLink.className = 'sidebar-city-name text-indigo-600 hover:text-indigo-800';
+        cityLink.className = 'text-indigo-600 hover:text-indigo-800';
         cityLink.textContent = `Gold Price in ${city}`;
         li.appendChild(cityLink);
 

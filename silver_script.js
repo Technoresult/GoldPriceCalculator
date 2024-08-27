@@ -236,12 +236,12 @@ function createPriceCard(weight, price, difference) {
 
 // Today script edit for silver sidebar
 function handleCitySilverPricesPage() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const city = urlParams.get('city');
+    const cityName = document.location.pathname.split('/').pop().replace('Silver-rate-', '').replace('.html', '');
+    const formattedCityName = cityName.charAt(0).toUpperCase() + cityName.slice(1);
     
-    if (city) {
-        document.getElementById('cityTitle').textContent = `Silver Prices in ${city}`;
-        fetchAndDisplayCitySilverPrices(city);
+    if (formattedCityName) {
+        document.getElementById('cityTitle').textContent = `Silver Prices in ${formattedCityName}`;
+        fetchAndDisplayCitySilverPrices(formattedCityName);
     } else {
         document.getElementById('cityTitle').textContent = 'City Not Specified';
     }
@@ -296,11 +296,13 @@ function populateSilverSidebar() {
     topCities.forEach(city => {
         const li = document.createElement('li');
         li.className = 'mb-4';
-        
+
         const cityLink = document.createElement('a');
-        cityLink.href = `city_silver_prices.html?city=${encodeURIComponent(city)}`;
+        const citySlug = city.toLowerCase().replace(/\s+/g, '-');
+        cityLink.href = `Silver-rate-${citySlug}.html`;
         cityLink.target = '_blank'; // Opens in a new tab
         cityLink.className = 'sidebar-city-name text-indigo-600 hover:text-indigo-800';
+        cityLink.className = 'text-indigo-600 hover:text-indigo-800';
         cityLink.textContent = `Silver Price in ${city}`;
         li.appendChild(cityLink);
 
@@ -528,22 +530,14 @@ function updateDateTime() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("Script loaded and DOM content fully loaded.");
-    
     const mainContainer = document.querySelector('[role="main"]');
-    if (mainContainer) {
-        const chartSection = document.createElement('div');
-        chartSection.className = 'mt-8';
-        chartSection.innerHTML = `
-            <h2 class="text-2xl font-bold text-indigo-800 mb-4">Historical Silver Prices (Last 10 Days)</h2>
-            <div class="bg-white rounded-xl shadow-2xl p-4">
-                <canvas id="historicalSilverPriceChart" style="height: 300px;"></canvas>
-            </div>`;
-        mainContainer.appendChild(chartSection);
-        console.log("Chart section added successfully.");
-    } else {
-        console.error("Main container not found. Chart section could not be added.");
-    }
+    const chartSection = document.createElement('div');
+    chartSection.className = 'mt-8';
+    chartSection.innerHTML = `<h2 class="text-2xl font-bold text-indigo-800 mb-4">Historical Silver Prices (Last 10 Days)</h2>
+    <div class="bg-white rounded-xl shadow-2xl p-4">
+        <canvas id="historicalSilverPriceChart" style="height: 300px;"></canvas>
+    </div>`;
+    mainContainer.appendChild(chartSection);
 
     const calculateButton = document.getElementById('calculateButton');
     if (calculateButton) calculateButton.addEventListener('click', calculateCustomPrice);
