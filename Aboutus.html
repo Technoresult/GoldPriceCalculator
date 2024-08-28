@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="p:domain_verify" content="0c6e8e31fa7e19baaae4a3e91f26e1e3"/>
+    <title>About Us</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H0JJN0PY9H"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-H0JJN0PY9H');
+    </script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <header class="header bg-indigo-800 text-white p-4 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html">
+                <img src="logo.png" alt="Logo" class="h-10">
+            </a>
+            <nav>
+                <div class="hidden md:flex space-x-4">
+                    <a href="index.html" class="hover:underline text-menu-color">Gold</a>
+                    <a href="silver_calculator.html" class="hover:underline text-menu-color">Silver</a>
+                    <a href="HowCalculatorWorks.html" class="hover:underline text-menu-color">How It Works</a>
+                    <a href="Aboutus.html" class="hover:underline text-menu-color">About Us</a>
+                    <a href="contact.html" class="hover:underline text-menu-color">Contact Us</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menuButton" class="focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden text-menu-color">
+            <a href="index.html" class="block px-4 py-2 hover:bg-indigo-600">Gold</a>
+            <a href="silver_calculator.html" class="block px-4 py-2 hover:bg-indigo-600">Silver</a>
+            <a href="HowCalculatorWorks.html" class="block px-4 py-2 hover:bg-indigo-600">How It Works</a>
+            <a href="Aboutus.html" class="block px-4 py-2 hover:bg-indigo-600">About Us</a>
+            <a href="contact.html" class="block px-4 py-2 hover:bg-indigo-600">Contact Us</a>
+        </div>
+    </header>
+    <main class="container mx-auto p-4" role="main">
+        <header class="flex justify-between items-center mb-4">
+            <h1 class="text-3xl font-bold cursor-pointer title-color">About Us</h1>
+        </header>
+        <section class="mb-4">
+            <h2 class="text-2xl font-bold text-indigo-800 mb-4">Introduction</h2>
+            <p>Gold Calculator India is your go-to source for daily gold and silver prices. We aim to provide accurate and up-to-date information to help you make informed decisions.</p>
+        </section>
+        <section class="mb-4">
+            <h2 class="text-2xl font-bold text-indigo-800 mb-4">Our Mission</h2>
+            <p>Our mission is to make gold and silver price information accessible to everyone. We strive to provide a seamless and reliable user experience.</p>
+        </section>
+        <section class="mb-4">
+            <h2 class="text-2xl font-bold text-indigo-800 mb-4">Our Team</h2>
+            <p>We are a dedicated team of financial experts, developers, and data analysts working together to deliver the best experience for our users.</p>
+        </section>
+        <section class="mb-4">
+            <h2 class="text-2xl font-bold text-indigo-800 mb-4">Contact Us</h2>
+            <p>If you have any questions or feedback, feel free to reach out to us at <a href="mailto:support@goldcalculatorindia.in" class="text-indigo-600 hover:underline">support@goldcalculatorindia.in</a>.</p>
+        </section>
+    </main>
+    <footer class="p-4 mt-8 footer">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Gold Price Calculator. All rights reserved.</p>
+            <a href="contact.html" class="text-white hover:underline">Contact Us</a> | 
+            <a href="Aboutus.html" class="text-white hover:underline">About Us</a> |
+            <a href="https://goldcalculatorindia.in/sitemap.xml" class="text-white hover:underline">Sitemap</a>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('menuButton').addEventListener('click', function() {
+            var mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

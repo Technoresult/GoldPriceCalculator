@@ -1,0 +1,688 @@
+{
+  "gold_prices": [
+    {
+      "City": "Chennai",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Mumbai",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Delhi",
+      "24K Today": "₹ 7,100",
+      "22K Today": "₹ 6,509",
+      "18K Today": "₹ 5,326"
+    },
+    {
+      "City": "Kolkata",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Bangalore",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Hyderabad",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Kerala",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Pune",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Vadodara",
+      "24K Today": "₹ 7,090",
+      "22K Today": "₹ 6,499",
+      "18K Today": "₹ 5,319"
+    },
+    {
+      "City": "Ahmedabad",
+      "24K Today": "₹ 7,090",
+      "22K Today": "₹ 6,499",
+      "18K Today": "₹ 5,319"
+    },
+    {
+      "City": "Jaipur",
+      "24K Today": "₹ 7,100",
+      "22K Today": "₹ 6,509",
+      "18K Today": "₹ 5,326"
+    },
+    {
+      "City": "Lucknow",
+      "24K Today": "₹ 7,100",
+      "22K Today": "₹ 6,509",
+      "18K Today": "₹ 5,326"
+    },
+    {
+      "City": "Coimbatore",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Madurai",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Vijayawada",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Patna",
+      "24K Today": "₹ 7,090",
+      "22K Today": "₹ 6,499",
+      "18K Today": "₹ 5,317"
+    },
+    {
+      "City": "Nagpur",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Chandigarh",
+      "24K Today": "₹ 7,100",
+      "22K Today": "₹ 6,509",
+      "18K Today": "₹ 5,326"
+    },
+    {
+      "City": "Surat",
+      "24K Today": "₹ 7,090",
+      "22K Today": "₹ 6,499",
+      "18K Today": "₹ 5,319"
+    },
+    {
+      "City": "Bhubaneswar",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Mangalore",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Visakhapatnam",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Nashik",
+      "24K Today": "₹ 7,088",
+      "22K Today": "₹ 6,497",
+      "18K Today": "₹ 5,316"
+    },
+    {
+      "City": "Mysore",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Salem",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Rajkot",
+      "24K Today": "₹ 7,090",
+      "22K Today": "₹ 6,499",
+      "18K Today": "₹ 5,319"
+    },
+    {
+      "City": "Trichy",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Ayodhya",
+      "24K Today": "₹ 7,100",
+      "22K Today": "₹ 6,509",
+      "18K Today": "₹ 5,326"
+    },
+    {
+      "City": "Cuttack",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Davanagere",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Bellary",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Gurgaon",
+      "24K Today": "₹ 7,100",
+      "22K Today": "₹ 6,509",
+      "18K Today": "₹ 5,326"
+    },
+    {
+      "City": "Ghaziabad",
+      "24K Today": "₹ 7,100",
+      "22K Today": "₹ 6,509",
+      "18K Today": "₹ 5,326"
+    },
+    {
+      "City": "Noida",
+      "24K Today": "₹ 7,100",
+      "22K Today": "₹ 6,509",
+      "18K Today": "₹ 5,326"
+    },
+    {
+      "City": "Vellore",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Amaravati",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Guntur",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Nellore",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Kakinada",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Tirupati",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Kadapa",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Anantapur",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Warangal",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Nizamabad",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Khammam",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Berhampur",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Rourkela",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Virar",
+      "24K Today": "₹ 7,088",
+      "22K Today": "₹ 6,497",
+      "18K Today": "₹ 5,316"
+    },
+    {
+      "City": "Aurangabad",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Solapur",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Bhiwandi",
+      "24K Today": "₹ 7,088",
+      "22K Today": "₹ 6,497",
+      "18K Today": "₹ 5,316"
+    },
+    {
+      "City": "Kolhapur",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Latur",
+      "24K Today": "₹ 7,088",
+      "22K Today": "₹ 6,497",
+      "18K Today": "₹ 5,316"
+    },
+    {
+      "City": "Tirupur",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Tirunelveli",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Sambalpur",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Amravati",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Erode",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Indore",
+      "24K Today": "₹ 7,090",
+      "22K Today": "₹ 6,501",
+      "18K Today": "₹ 5,319"
+    },
+    {
+      "City": "Kanpur",
+      "24K Today": "₹ 7,100",
+      "22K Today": "₹ 6,509",
+      "18K Today": "₹ 5,326"
+    },
+    {
+      "City": "Kochi",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Ludhiana",
+      "24K Today": "₹ 7,100",
+      "22K Today": "₹ 6,511",
+      "18K Today": "₹ 5,328"
+    },
+    {
+      "City": "Thane",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Amritsar",
+      "24K Today": "₹ 7,100",
+      "22K Today": "₹ 6,511",
+      "18K Today": "₹ 5,328"
+    },
+    {
+      "City": "Nagercoil",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Trivandrum",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Thanjavur",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Bhopal",
+      "24K Today": "₹ 7,090",
+      "22K Today": "₹ 6,501",
+      "18K Today": "₹ 5,319"
+    },
+    {
+      "City": "Varanasi",
+      "24K Today": "₹ 7,100",
+      "22K Today": "₹ 6,509",
+      "18K Today": "₹ 5,326"
+    },
+    {
+      "City": "Goa",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Karur",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Kumbakonam",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Namakkal",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Agra",
+      "24K Today": "₹ 7,100",
+      "22K Today": "₹ 6,509",
+      "18K Today": "₹ 5,326"
+    },
+    {
+      "City": "Dharmapuri",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Dindigul",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Tuticorin",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Cuddalore",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Kanchipuram",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Krishnagiri",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Villupuram",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Kovilpatti",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Theni",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Tiruvannamalai",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Hosur",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Karaikudi",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Pudukkottai",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Ramanathapuram",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Ambur",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Kanyakumari",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Nagapattinam",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Virudhunagar",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Kallakurichi",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Pollachi",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Arcot",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Palani",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Ariyalur",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Mohali",
+      "24K Today": "₹ 7,100",
+      "22K Today": "₹ 6,511",
+      "18K Today": "₹ 5,328"
+    },
+    {
+      "City": "Paramakudi",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Perambalur",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Jayankondam",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Kodaikanal",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Ooty",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Rameswaram",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Sivagangai",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Tiruvarur",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    },
+    {
+      "City": "Meerut",
+      "24K Today": "₹ 7,100",
+      "22K Today": "₹ 6,509",
+      "18K Today": "₹ 5,326"
+    },
+    {
+      "City": "Guwahati",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Raipur",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Jalgaon",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Rajahmundry",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Belgaum",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Thrissur",
+      "24K Today": "₹ 7,085",
+      "22K Today": "₹ 6,494",
+      "18K Today": "₹ 5,313"
+    },
+    {
+      "City": "Pondicherry",
+      "24K Today": "₹ 7,079",
+      "22K Today": "₹ 6,489",
+      "18K Today": "₹ 5,315"
+    }
+  ]
+}

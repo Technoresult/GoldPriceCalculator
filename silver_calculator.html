@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="p:domain_verify" content="0c6e8e31fa7e19baaae4a3e91f26e1e3"/>
+    <title>Silver Price Calculator - Gold Calculator India</title>
+    <meta name="description" content="Gold Calculator India provides real-time gold and silver prices across different states in India. Easily calculate the value of gold and Silver based on the latest rates. Stay updated with the current market prices.">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H0JJN0PY9H"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-H0JJN0PY9H');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1210424325925839"
+     crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-1210424325925839">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+    <header class="header bg-indigo-800 text-white p-4 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html">
+                <img src="logo.png" alt="Logo" class="h-10">
+            </a>
+            <nav>
+                <div class="hidden md:flex space-x-4">
+                    <a href="index.html" class="hover:underline text-menu-color">Gold</a>
+                    <a href="silver_calculator.html" class="hover:underline text-menu-color">Silver</a>
+                    <a href="HowCalculatorWorks.html" class="hover:underline text-menu-color">How It Works</a>
+                    <a href="Aboutus.html" class="hover:underline text-menu-color">About Us</a>
+                    <a href="contact.html" class="hover:underline text-menu-color">Contact Us</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menuButton" class="focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden text-menu-color">
+            <a href="index.html" class="block px-4 py-2 hover:bg-indigo-600">Gold</a>
+            <a href="silver_calculator.html" class="block px-4 py-2 hover:bg-indigo-600">Silver</a>
+            <a href="HowCalculatorWorks.html" class="block px-4 py-2 hover:bg-indigo-600">How It Works</a>
+            <a href="Aboutus.html" class="block px-4 py-2 hover:bg-indigo-600">About Us</a>
+            <a href="contact.html" class="block px-4 py-2 hover:bg-indigo-600">Contact Us</a>
+        </div>
+    </header>
+    <div class="container mx-auto p-4 flex flex-col md:flex-row">
+        <main role="main" class="w-full md:w-3/4 flex-1 p-4 bg-white rounded-xl shadow-2xl">
+            <header class="flex justify-between items-center mb-4">
+                <h1 class="text-3xl font-bold cursor-pointer title-color">Silver Price Calculator</h1>
+                <button id="refreshButton" class="bg-indigo-600 text-white px-4 py-2 rounded-lg">Refresh Prices</button>
+            </header>
+            <div id="errorMessage" class="hidden text-red-600 mb-4"></div>
+            <div id="lastUpdated" class="text-sm text-gray-600 mb-4"></div>
+            <h2 class="text-2xl font-bold cursor-pointer title-color mb-4">Silver Price in India</h2>
+            <p class="text-gray-600 mb-6">Get real-time silver prices for 999 purity per gram in INR.</p>
+            <div id="priceCards" class="flex flex-wrap justify-between">
+                <!-- Average price cards will be inserted here -->
+            </div>
+            <section id="customCalculatorSection" class="flex flex-col lg:flex-row justify-between space-x-0 lg:space-x-4 mb-4">
+                <div class="bg-white rounded-xl shadow-2xl p-8 mb-4 lg:mb-0 lg:w-2/3">
+                    <h2 class="text-2xl font-bold text-indigo-800 mb-4">Custom Calculator</h2>
+                    <select id="citySelectCustom" class="w-full p-2 mb-4 border rounded">
+                        <option value="">Select City</option>
+                    </select>
+                    <input type="number" id="gramInput" placeholder="Enter Grams" class="w-full p-2 mb-4 border rounded">
+                    <button id="calculateButton" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Calculate</button>
+                    <div id="calculationResult" class="mt-4 text-xl font-semibold text-indigo-800"></div>
+                </div>
+                <div id="cityPriceCardSection" class="bg-gray-50 border border-gray-200 rounded-xl shadow-md p-8 text-center lg:w-1/3">
+                    <h2 class="text-2xl font-bold text-indigo-800 mb-4">City-wise Silver Prices</h2>
+                    <select id="citySelectPrices" class="w-full p-2 mb-4 border rounded">
+                        <option value="">Select City</option>
+                    </select>
+                    <p class="text-xl text-gray-700 price-999">999: ₹ 0</p>
+                </div>
+            </section>
+            <section id="priceComparison" class="bg-white rounded-xl shadow-2xl p-8 mt-8">
+                <h2 class="text-2xl font-bold text-indigo-800 mb-4">Average Price Comparison</h2>
+                <!-- The comparison table will be inserted here -->
+            </section>
+            <section id="silverPriceTable" class="mt-8">
+                <h2 class="text-2xl font-bold text-indigo-800 mb-4">Silver Prices by City</h2>
+                <table id="priceTable" class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+                    <thead>
+                        <tr class="bg-gray-100 border-b">
+                            <th class="p-4 text-left text-indigo-800">City</th>
+                            <th class="p-4 text-left text-indigo-800">10 Gram</th>
+                            <th class="p-4 text-left text-indigo-800">100 Gram</th>
+                            <th class="p-4 text-left text-indigo-800">1 Kg</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Table rows will be inserted here -->
+                    </tbody>
+                </table>
+                <div id="loadMoreContainer" class="mt-4 text-center">
+                    <button id="loadMoreButton" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 mx-auto">See More</button>
+                </div>
+            </section>
+        </main>
+        <aside class="w-full md:w-1/4 p-4 md:mt-4 bg-white rounded-xl shadow-2xl md:ml-6">
+            <div class="mt-1 bg-gray-50 rounded-xl shadow-md p-4">
+                <h2 class="sidebar-section-title">Silver Price in Top Cities</h2>
+                <ul id="topCitiesList" class="space-y-4">
+                    <!-- Top cities silver prices will be populated here -->
+                </ul>
+            </div>
+            
+
+            <div class="mt-8 bg-gray-50 rounded-xl shadow-md p-4">
+                <h2 class="sidebar-section-title">Historical Silver Price Charts</h2>
+                <ul class="space-y-4">
+                    <li>
+                        <a href="#historicalSilverPriceChart" id="historicalsilverChartNav" class="text-indigo-600 hover:text-indigo-800">View Historical Silver Prices</a>
+                    </li>
+                
+                </ul>
+            </div>
+            <div class="mt-8 bg-gray-50 rounded-xl shadow-md p-4">
+                <h2 class="sidebar-section-title">Gold Price Today</h2>
+                <ul class="space-y-4">
+                    <li>
+                        <a href="index.html" class="text-indigo-600 hover:text-indigo-800">View Gold Rate in India</a>
+                    </li>
+                
+                </ul>
+            </div>
+        </aside>
+    </div>    
+    <footer class="p-4 mt-8 footer">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Gold Price Calculator. All rights reserved.</p>
+            <a href="contact.html" class="text-white hover:underline">Contact Us</a> | 
+            <a href="Aboutus.html" class="text-white hover:underline">About Us</a> |
+            <a href="https://goldcalculatorindia.in/sitemap.xml" class="text-white hover:underline">Sitemap</a>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('menuButton').addEventListener('click', function() {
+            var mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    </script>
+    <div id="loadingSpinner" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-indigo-500"></div>
+        <span class="sr-only">Loading...</span>
+    </div>
+    <script src="silver_script.js"></script>
+</body>
+</html>

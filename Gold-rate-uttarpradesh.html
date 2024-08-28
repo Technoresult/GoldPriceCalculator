@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Price in UttarPradesh - Gold Calculator India</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H0JJN0PY9H"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+
+     gtag('config', 'G-H0JJN0PY9H');
+     </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1210424325925839"
+     crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-1210424325925839">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+    <header class="header bg-indigo-800 text-white p-4 shadow-lg z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html">
+                <img src="logo.png" alt="Logo" class="h-10">
+            </a>
+            <nav>
+                <div class="hidden md:flex space-x-4">
+                    <a href="index.html" class="hover:underline text-menu-color">Gold</a>
+                    <a href="silver_calculator.html" class="hover:underline text-menu-color">Silver</a>
+                    <a href="HowCalculatorWorks.html" class="hover:underline text-menu-color">How It Works</a>
+                    <a href="Aboutus.html" class="hover:underline text-menu-color">About Us</a>
+                    <a href="contact.html" class="hover:underline text-menu-color">Contact Us</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menuButton" class="focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden text-menu-color">
+            <a href="index.html" class="block px-4 py-2 hover:bg-indigo-600">Gold</a>
+            <a href="silver_calculator.html" class="block px-4 py-2 hover:bg-indigo-600">Silver</a>
+            <a href="HowCalculatorWorks.html" class="block px-4 py-2 hover:bg-indigo-600">How It Works</a>
+            <a href="Aboutus.html" class="block px-4 py-2 hover:bg-indigo-600">About Us</a>
+            <a href="contact.html" class="block px-4 py-2 hover:bg-indigo-600">Contact Us</a>
+        </div>
+    </header>
+    <div class="container mx-auto p-4 flex flex-col md:flex-row">
+        <main role="main" class="container mx-auto p-4">
+            <h1 id="cityTitle" class="text-2xl font-bold text-indigo-800 mb-4"></h1>
+            <div id="goldPricesUttar"></div>
+
+            <section class="flex flex-col lg:flex-row justify-between space-x-0 lg:space-x-4">
+                <div id="customCalculator" class="bg-white rounded-xl shadow-2xl p-8 mb-4 mt-4 lg:mb-0 lg:w-2/3">
+                    <h2 class="text-2xl font-bold text-indigo-800 mb-4">Custom Calculator</h2>
+                    <label for="citySelectCustom" class="block text-xl font-semibold text-indigo-800 mb-2">Select City</label>
+                    <select id="citySelectCustom" class="w-full mb-4 p-2 border border-gray-300 rounded-lg" aria-label="Select City"></select>
+                    <label for="caratSelect" class="block text-xl font-semibold text-indigo-800 mb-2">Select Carat</label>
+                    <select id="caratSelect" class="w-full mb-4 p-2 border border-gray-300 rounded-lg" aria-label="Select Carat">
+                        <option value="24K">24K</option>
+                        <option value="22K">22K</option>
+                        <option value="18K">18K</option>
+                    </select>
+                    <label for="gramInput" class="block text-xl font-semibold text-indigo-800 mb-2">Enter Grams</label>
+                    <input id="gramInput" type="number" class="w-full mb-4 p-2 border border-gray-300 rounded-lg" aria-label="Enter Grams">
+                    <button id="calculateButton" class="w-full bg-indigo-600 text-white px-4 py-2 rounded-lg" aria-label="Calculate Gold Price">Calculate</button>
+                    <div id="calculationResult" class="mt-4 text-xl font-semibold text-indigo-800"></div>
+                </div>
+                <div id="cityPriceCard" class="bg-gray-50 border border-gray-200 mt-4 rounded-xl shadow-2xl p-8 text-center lg:w-1/3">
+                    <h2 class="text-2xl font-bold text-indigo-800 mb-4">City-wise Gold Prices</h2>
+                    <label for="citySelectCustomAndhra" class="block text-xl font-semibold text-indigo-800 mb-2">Select City</label>
+                    <select id="citySelectPrices" class="w-full mb-4 p-2 border border-gray-300 rounded-lg" aria-label="Select City"></select>
+                    <p class="text-xl text-gray-700 price-24K">24K: ₹ 0</p>
+                    <p class="text-xl text-gray-700 price-22K">22K: ₹ 0</p>
+                    <p class="text-xl text-gray-700 price-18K">18K: ₹ 0</p>
+                </div>
+            </section>
+            
+            <div class="mt-7">
+                <h2 class="text-2xl font-bold text-indigo-800 mb-4">Gold Prices by City</h2>
+                <div class="overflow-x-auto">
+                    <table id="goldPricesTable" class="w-full bg-white shadow-lg rounded-lg overflow-hidden">
+                        <thead class="bg-indigo-800 text-white">
+                            <tr>
+                                <th class="py-3 px-4 text-left">City</th>
+                                <th class="py-3 px-4 text-left">24K Today</th>
+                                <th class="py-3 px-4 text-left">22K Today</th>
+                                <th class="py-3 px-4 text-left">18K Today</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table rows will be populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center mt-4">
+                    <button id="viewMoreBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-300">View More</button>
+                </div>
+            </div>
+        </main>
+        <aside class="w-full md:w-1/4 p-4 md:mt-4 bg-white rounded-xl shadow-2xl md:ml-6">
+            <div class="mt-1 bg-gray-50 rounded-xl shadow-md p-4">
+                <h2 class="sidebar-section-title">UttarPradesh Top Cities</h2>
+                <ul id="topGoldCitiesList" class="space-y-4">
+                    <!-- Top cities gold prices will be populated here -->
+                </ul>
+            </div>
+
+            <div class="mt-8 bg-gray-50 rounded-xl shadow-md p-4">
+                <h2 class="sidebar-section-title">Gold Price-State Wise</h2>
+                <ul class="space-y-4">
+                    <li><a href="Gold-rate-andhra.html" class="hover:text-indigo-600">Andhra Pradesh</a></li>
+                    <li><a href="Gold-rate-karnataka.html" class="hover:text-indigo-600">Karnataka</a></li>
+                    <li><a href="Gold-rate-maharashtra.html" class="hover:text-indigo-600">Maharashtra</a></li>
+                    <li><a href="Gold-rate-tamilnadu.html" class="hover:text-indigo-600">TamilNadu</a></li>
+                    <li><a href="Gold-rate-uttarpradesh.html" class="hover:text-indigo-600">Uttar Pradesh</a></li>
+                    <li><a href="Gold-rate-punjab.html" class="hover:text-indigo-600">Punjab</a></li>
+                    <li><a href="Gold-rate-jaipur.html" class="hover:text-indigo-600">Rajasthan</a></li>
+                    <li><a href="Gold-rate-delhi.html" class="hover:text-indigo-600">Delhi</a></li>
+                    <li><a href="Gold-rate-gujarat.html" class="hover:text-indigo-600">Gujarat</a></li>
+                    <li><a href="Gold-rate-odisha.html" class="hover:text-indigo-600">Odisha</a></li>
+                    <li><a href="Gold-rate-kolkata.html" class="hover:text-indigo-600">West Bengal</a></li>
+                    <li><a href="Gold-rate-goa.html" class="hover:text-indigo-600">Goa</a></li>
+                    <li><a href="Gold-rate-gurgaon.html" class="hover:text-indigo-600">Haryana</a></li>
+                    <li><a href="Gold-rate-kerala.html" class="hover:text-indigo-600">Kerala</a></li>
+                    <li><a href="Gold-rate-telangana.html" class="hover:text-indigo-600">Telangana</a></li>
+                    <li><a href="Gold-rate-assam.html" class="hover:text-indigo-600">Assam</a></li>
+                    <li><a href="Gold-rate-raipur.html" class="hover:text-indigo-600">Chhattisgarh</a></li>
+                    <li><a href="Gold-rate-madhyapradesh.html" class="hover:text-indigo-600">Madhya Pradesh</a></li>
+                    <li><a href="Gold-rate-patna.html" class="hover:text-indigo-600">Bihar</a></li>
+                </ul>
+            </div> 
+        
+            <!-- New Section for Historical Price Chart Navigation -->
+            <div class=" bg-gray-50 rounded-xl shadow-md p-4">
+                <h2 class="sidebar-section-title">Historical Gold Price Charts</h2>
+                <ul class="space-y-4">
+                    <li>
+                        <a href="#historicalPriceChart" id="historicalChartNav" class="text-indigo-600 hover:text-indigo-800">View Historical Prices</a>
+                    </li>
+                
+                </ul>
+            </div>
+            <div class="mt-8 bg-gray-50 rounded-xl shadow-md p-4">
+                <h2 class="sidebar-section-title">Silver Price Today</h2>
+                <ul class="space-y-4">
+                    <li>
+                        <a href="silver_calculator.html" class="text-indigo-600 hover:text-indigo-800">View Silver Rate in India</a>
+                    </li>
+                
+                </ul>
+            </div>
+        </aside>
+    </div>
+    <footer class="bg-indigo-800 text-white py-4 footer">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Gold Price Calculator. All rights reserved.</p>
+            <div class="mt-2">
+                <a href="contact.html" class="text-white hover:underline">Contact Us</a> | 
+                <a href="Aboutus.html" class="text-white hover:underline">About Us</a> |
+                <a href="https://goldcalculatorindia.in/sitemap.xml" class="text-white hover:underline">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('menuButton').addEventListener('click', function() {
+            var mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+    <div id="loadingSpinner" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-indigo-500"></div>
+        <span class="sr-only">Loading...</span>
+    </div>
+    <script src="script.js"></script>
+    <script src="Uttarpradesh.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', handleCityGoldPricesPage);
+    </script>
+    
+</body>
+</html>

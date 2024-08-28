@@ -1,0 +1,69 @@
+/* style.css */
+body {
+    font-family: 'League Spartan', sans-serif;
+}
+
+.h1, h2, h3, h4, h5, h6 {
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 700; /* Slightly bold */
+    
+    
+}
+.header{
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 700; /* Slightly bold */
+    background-color: #2C3E50;
+    color: #FFF;
+}
+.text-menu-color {
+    color: #FEBE67;
+    font-weight: 600; /* Slightly bold */
+    font-family: 'League Spartan', sans-serif;
+}
+
+.footer {
+    background-color: #2C3E50;
+    color: #FFF;
+}
+.footer a {
+    color: #FEBE67;
+}
+.title-color {
+    color: #4056a1;
+    font-family: 'League Spartan', sans-serif;
+     /* Adjust the color as per your preference */
+}
+/* Additional styles for sidebar */
+.sidebar-city-name {
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 600;
+    color: #4056a1;
+    font-size: 1.1em;
+    margin-bottom: 0.5em;
+}
+
+.sidebar-price-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.sidebar-price-item {
+    font-family: 'League Spartan', sans-serif;
+    color: #2C3E50;
+    font-size: 0.9em;
+    margin-bottom: 0.3em;
+}
+
+.sidebar-section-title {
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 700;
+    color: #4056a1;
+    font-size: 1.3em;
+    margin-bottom: 1em;
+    border-bottom: 2px solid #FEBE67;
+    padding-bottom: 0.5em;
+}
+
+
+
+
