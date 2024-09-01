@@ -19,8 +19,8 @@ function getYesterdayDateString() {
     return `${year}-${month}-${day}`;
 }
 
-async function fetchGoldPrices(dateString) {
-    const url = `https://gold-price-api-c095eaf86dce.herokuapp.com/api/gold/date/${dateString}?cache_buster=${Date.now()}`;
+async function fetchGoldPrices() {
+    const url = `https://gold-price-api-c095eaf86dce.herokuapp.com/api/gold/most-recent?cache_buster=${Date.now()}`;
     
     try {
         const response = await fetch(url, {
@@ -50,12 +50,30 @@ async function fetchGoldPrices(dateString) {
             throw new Error('Invalid data structure: gold_prices is missing or not an array');
         }
         
-        return goldPrices;
+        // Ensure lastUpdated is a valid date string
+        const lastUpdated = data.lastUpdated || data.timestamp || new Date().toISOString();
+        
+        return { goldPrices, lastUpdated };
     } catch (error) {
-        displayError('Failed to fetch or parse prices: ' + error.message);
+        console.error('Failed to fetch or parse prices:', error.message);
+        displayError('Failed to fetch prices: ' + error.message);
         return null;
     }
 }
+
+async function fetchMostRecentData() {
+    try {
+        const response = await fetch('https://gold-price-api-c095eaf86dce.herokuapp.com/api/gold/most-recent');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Failed to fetch most recent data:', error.message);
+        return null;
+    }
+}
+
 
 //Function to fetch the historical price rates from server
 
@@ -77,26 +95,25 @@ async function fetchHistoricalPrices(days = 10) {
 
   async function fetchAndComparePrices() {
     showLoadingSpinner();
-    const todayDateString = getTodayDateString();
-    const yesterdayDateString = getYesterdayDateString();
 
     try {
-        const [todayPrices, yesterdayPrices, historicalPrices] = await Promise.all([
-            fetchGoldPrices(todayDateString),
-            fetchGoldPrices(yesterdayDateString),
+        const [todayData, yesterdayData, historicalPrices] = await Promise.all([
+            fetchGoldPrices(),
+            fetchGoldPrices(),
             fetchHistoricalPrices(20)
         ]);
 
-        if (todayPrices && yesterdayPrices && historicalPrices) {
-            goldPrices = todayPrices;
+        if (todayData && yesterdayData && historicalPrices) {
+            goldPrices = todayData.goldPrices;
             clearPriceCards();
-            createMumbaiPriceCards(todayPrices, yesterdayPrices);
-            displayMumbaiPriceComparison(todayPrices, yesterdayPrices);
-            populateGoldPriceComparison(todayPrices, yesterdayPrices);
+            createMumbaiPriceCards(todayData.goldPrices, yesterdayData.goldPrices);
+            displayMumbaiPriceComparison(todayData.goldPrices, yesterdayData.goldPrices);
+            populateGoldPriceComparison(todayData.goldPrices, yesterdayData.goldPrices);
             populateCityDropdowns();
             populateGoldPricesTable();
             populateGoldSidebar();
             createHistoricalPriceChart(historicalPrices);
+            updateDateTime(todayData.lastUpdated);
         } else {
             throw new Error('Failed to fetch gold prices for today, yesterday, or historical data');
         }
@@ -615,18 +632,40 @@ function displayError(message) {
     }
 }
 
-function updateDateTime() {
+function updateDateTime(lastUpdated) {
     const now = new Date();
-    const dateString = now.toLocaleDateString('en-IN', {
+    const currentDateString = now.toLocaleDateString('en-IN', {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
     });
-    const lastUpdated = document.getElementById('lastUpdated');
-    if (lastUpdated) {
-        lastUpdated.innerHTML = `<span style="font-size: 1.2em; font-weight: bold;">${dateString}</span>`;
+    const lastUpdatedElement = document.getElementById('lastUpdated');
+    if (lastUpdatedElement) {
+        let lastUpdateDate;
+        try {
+            // Try to parse the lastUpdated string
+            lastUpdateDate = new Date(lastUpdated);
+            if (isNaN(lastUpdateDate.getTime())) {
+                throw new Error('Invalid date');
+            }
+        } catch (error) {
+            console.error('Error parsing lastUpdated date:', error);
+            lastUpdateDate = now; // Fallback to current date if parsing fails
+        }
+
+        const lastUpdateDateString = lastUpdateDate.toLocaleDateString('en-IN', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        lastUpdatedElement.innerHTML = `
+            <span style="font-size: 1.2em; font-weight: bold;">${currentDateString}</span><br>
+            <span style="font-size: 0.8em;">Data last updated: ${lastUpdateDateString}</span>
+        `;
     }
 }
+
 
 function clearPriceCards() {
     const priceCardsContainer = document.getElementById('priceCards');
