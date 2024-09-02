@@ -20,8 +20,8 @@ function getYesterdayDateString() {
 }
 
 async function fetchSilverPrices(dateString) {
-    const url = `https://gold-price-api-c095eaf86dce.herokuapp.com/api/silver/most-recent?cache_buster=${Date.now()}`;
-    
+    const url = `https://gold-price-api-c095eaf86dce.herokuapp.com/api/silver/date/${dateString}?cache_buster=${Date.now()}`;
+
     try {
         const response = await fetch(url, {
             headers: {
@@ -34,13 +34,13 @@ async function fetchSilverPrices(dateString) {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
+
         const data = await response.json();
-        
+
         if (!data || typeof data !== 'object') {
             throw new Error('Invalid response: not an object');
         }
-        
+
         let silverPrices;
         if (Array.isArray(data.silver_rates)) {
             silverPrices = data.silver_rates;
@@ -50,30 +50,13 @@ async function fetchSilverPrices(dateString) {
             throw new Error('Invalid data structure: silver_rates is missing or not an array');
         }
 
-        // Ensure lastUpdated is a valid date string
-        const lastUpdated = data.lastUpdated || data.timestamp || new Date().toISOString();
-        
-        return { silverPrices, lastUpdated };
+        return silverPrices;
     } catch (error) {
-        console.error('Failed to fetch or parse prices:', error.message);
-        displayError('Failed to fetch prices: ' + error.message);
+        displayError('Failed to fetch or parse prices: ' + error.message);
         return null;
     }
 }
 
-async function fetchMostRecentData() {
-    try {
-        const response = await fetch('https://gold-price-api-c095eaf86dce.herokuapp.com/api/silver/most-recent');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Failed to fetch most recent data:', error.message);
-        return null;
-    }
-}
-        
 //fetch silver historical data
 async function fetchHistoricalSilverPrices(days = 10) {
     const url = `https://gold-price-api-c095eaf86dce.herokuapp.com/api/silver/history/${days}`;
@@ -93,25 +76,26 @@ async function fetchHistoricalSilverPrices(days = 10) {
 
 async function fetchAndComparePrices() {
     showLoadingSpinner();
+    const todayDateString = getTodayDateString();
+    const yesterdayDateString = getYesterdayDateString();
 
     try {
-        const [todayData, yesterdayData, historicalSilverPrices] = await Promise.all([
-            fetchSilverPrices(),
-            fetchSilverPrices(),
+        const [todayPrices, yesterdayPrices, historicalSilverPrices] = await Promise.all([
+            fetchSilverPrices(todayDateString),
+            fetchSilverPrices(yesterdayDateString),
             fetchHistoricalSilverPrices(20)
-    
+
         ]);
 
-        if (todayData && yesterdayData && historicalSilverPrices) {
-            silverPrices = todayData.silverPrices;
+        if (todayPrices && yesterdayPrices && historicalSilverPrices) {
+            silverPrices = todayPrices;
             clearPriceCards();
-            createMumbaiPriceCards(todayData.silverPrices, yesterdayData.silverPrices);
-            displayMumbaiPriceComparison(todayData.silverPrices, yesterdayData.silverPrices);
+            createMumbaiPriceCards(todayPrices, yesterdayPrices);
+            displayMumbaiPriceComparison(todayPrices, yesterdayPrices);
             populateCityDropdowns();
             populatePriceTable();
             populateSilverSidebar();
             createHistoricalSilverPriceChart(historicalSilverPrices);
-            updateDateTime(todayData.lastUpdated);
         } else {
             throw new Error('Failed to fetch silver prices for today or yesterday');
         }
@@ -130,26 +114,26 @@ function createMumbaiPriceCards(todayPrices, yesterdayPrices) {
         console.error('priceCardsContainer is not defined');
         return;
     }
-    
+
     const todayMumbaiPrices = todayPrices.find(price => price.city === 'Mumbai');
     const yesterdayMumbaiPrices = yesterdayPrices.find(price => price.city === 'Mumbai');
-    
+
     if (!todayMumbaiPrices || !yesterdayMumbaiPrices) {
         console.error('Mumbai prices not found');
         return;
     }
-    
+
     const weights = [
         { label: '1', value: 1 },
         { label: '10', value: 10 },
         { label: '1 Kg', value: 1000 }
     ];
-    
+
     weights.forEach(weight => {
         const todayPrice = parseIndianPrice(todayMumbaiPrices['10_gram']) / 10 * weight.value;
         const yesterdayPrice = parseIndianPrice(yesterdayMumbaiPrices['10_gram']) / 10 * weight.value;
         const difference = todayPrice - yesterdayPrice;
-        
+
         createPriceCard(weight.label, todayPrice, difference);
     });
 }
@@ -158,10 +142,10 @@ function createMumbaiPriceCards(todayPrices, yesterdayPrices) {
 
 function createHistoricalSilverPriceChart(historicalData) {
     const ctx = document.getElementById('historicalSilverPriceChart').getContext('2d');
-    
+
     // Prepare data for the chart
     const dates = historicalData.map(item => new Date(item.timestamp).toLocaleDateString());
-    
+
     // Extract Mumbai silver prices
     const prices = historicalData.map(item => {
         const silverRates = item.data.silver_rates;
@@ -226,7 +210,7 @@ function parseIndianPrice(priceString) {
 
 function createPriceCard(weight, price, difference) {
     const priceCardsContainer = document.getElementById('priceCards');
-    
+
     const card = document.createElement('div');
     card.className = 'bg-white rounded-xl shadow-2xl p-8 text-center price-card mb-4 w-full md:w-1/3';
 
@@ -254,7 +238,7 @@ function createPriceCard(weight, price, difference) {
 function handleCitySilverPricesPage() {
     const cityName = document.location.pathname.split('/').pop().replace('Silver-rate-', '').replace('.html', '');
     const formattedCityName = cityName.charAt(0).toUpperCase() + cityName.slice(1);
-    
+
     if (formattedCityName) {
         document.getElementById('cityTitle').textContent = `Silver Prices in ${formattedCityName}`;
         fetchAndDisplayCitySilverPrices(formattedCityName);
@@ -268,7 +252,7 @@ async function fetchAndDisplayCitySilverPrices(city) {
     try {
         const todayPrices = await fetchSilverPrices(getTodayDateString());
         const cityData = todayPrices.find(price => price.city === city);
-        
+
         if (cityData) {
             const silverPricesDiv = document.getElementById('silverPrices');
             if (silverPricesDiv) {
@@ -459,7 +443,7 @@ function populatePriceTable() {
 
     displayedPrices.forEach(price => {
         const row = document.createElement('tr');
-        
+
         // Create the city cell with a link
         const cityCell = document.createElement('td');
         cityCell.className = 'p-4 border-b';
@@ -468,16 +452,16 @@ function populatePriceTable() {
         cityLink.textContent = price.city;
         cityLink.className = 'text-indigo-600 hover:text-indigo-800';
         cityCell.appendChild(cityLink);
-        
+
         // Create the other cells for silver prices
         const tenGramCell = document.createElement('td');
         tenGramCell.className = 'p-4 border-b';
         tenGramCell.textContent = price['10_gram'];
-        
+
         const hundredGramCell = document.createElement('td');
         hundredGramCell.className = 'p-4 border-b';
         hundredGramCell.textContent = price['100_gram'];
-        
+
         const oneKgCell = document.createElement('td');
         oneKgCell.className = 'p-4 border-b';
         oneKgCell.textContent = price['1_kg'];
@@ -541,37 +525,16 @@ function displayError(message) {
     }
 }
 
-function updateDateTime(lastUpdated) {
+function updateDateTime() {
     const now = new Date();
-    const currentDateString = now.toLocaleDateString('en-IN', {
+    const dateString = now.toLocaleDateString('en-IN', {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
     });
-    const lastUpdatedElement = document.getElementById('lastUpdated');
-    if (lastUpdatedElement) {
-        let lastUpdateDate;
-        try {
-            // Try to parse the lastUpdated string
-            lastUpdateDate = new Date(lastUpdated);
-            if (isNaN(lastUpdateDate.getTime())) {
-                throw new Error('Invalid date');
-            }
-        } catch (error) {
-            console.error('Error parsing lastUpdated date:', error);
-            lastUpdateDate = now; // Fallback to current date if parsing fails
-        }
-
-        const lastUpdateDateString = lastUpdateDate.toLocaleDateString('en-IN', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-
-        lastUpdatedElement.innerHTML = `
-            <span style="font-size: 1.2em; font-weight: bold;">${currentDateString}</span><br>
-            <span style="font-size: 0.8em;">Data last updated: ${lastUpdateDateString}</span>
-        `;
+    const lastUpdated = document.getElementById('lastUpdated');
+    if (lastUpdated) {
+        lastUpdated.innerHTML = `<span style="font-size: 1.2em; font-weight: bold;">${dateString}</span>`;
     }
 }
 
@@ -630,6 +593,3 @@ function updateCityPrices(selectedCity) {
         updateCityPriceCard(cityData);
     }
 }
-
-
-
