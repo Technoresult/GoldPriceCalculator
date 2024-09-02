@@ -6,7 +6,7 @@ function handleCityGoldPricesPage() {
     const cityName = document.location.pathname.split('/').pop().replace('Gold-rate-', '').replace('.html', '');
     const formattedCityName = cityName.charAt(0).toUpperCase() + cityName.slice(1);
     const cityMappings = {
-        'Andhra': 'Amaravati'
+        'Andhra': 'Vijayawada'
     };
     const actualCityName = cityMappings[formattedCityName] || formattedCityName;
 
