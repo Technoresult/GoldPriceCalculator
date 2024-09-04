@@ -645,6 +645,42 @@ document.addEventListener('DOMContentLoaded', () => {
       <canvas id="historicalPriceChart" style="height: 300px;"></canvas>
     </div>`;
     mainContainer.appendChild(chartSection);
+
+    // FAQ Section
+    const faqSection = document.createElement('section');
+    faqSection.className = 'mt-8 bg-white rounded-xl shadow-2xl p-8';
+    faqSection.innerHTML = `
+        <h2 class="text-2xl font-bold text-indigo-800 mb-4">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+            <div>
+                <h3 class="text-xl font-semibold text-indigo-700">1. About Gold Calculator</h3>
+                <p class="text-gray-700">A Gold Rate Calculator, also referred to as a Gold Price Calculator, is a user-friendly online tool designed to help you determine the current market value of your gold holdings. Whether you own gold jewelry, coins, or bars, this calculator provides an accurate estimate of your gold's worth based on the latest gold prices.</p>
+                <p class="text-gray-700 mb-4">The tool works by taking into account several key factors:</p>
+                <ul class="list-disc list-inside text-gray-700 mb-4">
+                    <li><strong>Current Gold Rate per Gram:</strong> The calculator uses the most up-to-date market prices for gold, typically available in various carats like 24K, 22K, and 18K, to calculate the value of your gold.</li>
+                    <li><strong>Weight of the Gold Item:</strong> You can input the exact weight of your gold item in grams. Whether it's a gold necklace, ring, or any other piece of jewelry, the calculator can handle it.</li>
+                    <li><strong>Purity of Gold:</strong> Different gold items have varying levels of purity, usually indicated by the carat value. The calculator considers this to provide an accurate valuation.</li>
+                    <li><strong>Currency Conversion:</strong> The calculator typically provides the estimated value in the local currency, which, in the case of India, is the Indian Rupee (INR).</li>
+                </ul>
+                <p class="text-gray-700">By inputting these details, the Gold Rate Calculator quickly provides you with an approximate value of your gold. This tool is particularly useful for those looking to sell or insure their gold, as it offers a reliable estimate of what their gold is currently worth in the market.</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold text-indigo-700">2. How Gold Calculator Works</h3>
+                <p class="text-gray-700">The calculator fetches the latest gold prices from reliable sources and allows you to input the weight of your gold in grams and select the purity (Carat) to calculate its current value.</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold text-indigo-700">3. What is Gold Carat?</h3>
+                <p class="text-gray-700">Gold carat (or Karat) measures the purity of gold. 24K gold is 100% pure, 22K gold contains 22 parts gold and 2 parts other metals, and 18K gold contains 18 parts gold and 6 parts other metals.</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-semibold text-indigo-700">4. Formula for Gold Value Calculation</h3>
+                <p class="text-gray-700">The value of gold is calculated using the formula: <br>
+                <strong>Gold Value (₹) = (Weight in grams) × (Gold Rate per gram) × (Purity / 24) + Making Charges per Gram + GST on (Jewellery Price + Making Charges)</strong></p>
+            </div>
+        </div>`;
+    mainContainer.appendChild(faqSection);
+
+    
     const calculateButton = document.getElementById('calculateButton');
     if (calculateButton) calculateButton.addEventListener('click', calculateCustomPrice);
 
